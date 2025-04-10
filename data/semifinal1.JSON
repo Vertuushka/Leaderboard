@@ -1,0 +1,164 @@
+[
+    {
+        "country": "Iceland",
+        "show_name": "SF1",
+        "order": 1,
+        "points": 0,
+        "passed": false,
+        "jury": 0,
+        "votes": 0
+    },
+    {
+        "country": "Poland",
+        "show_name": "SF1",
+        "order": 2,
+        "points": 0,
+        "passed": false,
+        "jury": 0,
+        "votes": 0
+    },
+    {
+        "country": "Slovenia",
+        "show_name": "SF1",
+        "order": 3,
+        "points": 0,
+        "passed": false,
+        "jury": 0,
+        "votes": 0
+    },
+    {
+        "country": "Estonia",
+        "show_name": "SF1",
+        "order": 4,
+        "points": 0,
+        "passed": false,
+        "jury": 0,
+        "votes": 0
+    },
+    {
+        "country": "Spain",
+        "show_name": "SF1",
+        "order": -5,
+        "points": 0,
+        "passed": true,
+        "jury": 0,
+        "votes": 0
+    },
+    {
+        "country": "Ukraine",
+        "show_name": "SF1",
+        "order": 5,
+        "points": 0,
+        "passed": false,
+        "jury": 0,
+        "votes": 0
+    },
+    {
+        "country": "Sweden",
+        "show_name": "SF1",
+        "order": 6,
+        "points": 0,
+        "passed": false,
+        "jury": 0,
+        "votes": 0
+    },
+    {
+        "country": "Portugal",
+        "show_name": "SF1",
+        "order": 7,
+        "points": 0,
+        "passed": false,
+        "jury": 0,
+        "votes": 0
+    },
+    {
+        "country": "Norway",
+        "show_name": "SF1",
+        "order": 8,
+        "points": 0,
+        "passed": false,
+        "jury": 0,
+        "votes": 0
+    },
+    {
+        "country": "Belgium",
+        "show_name": "SF1",
+        "order": 9,
+        "points": 0,
+        "passed": false,
+        "jury": 0,
+        "votes": 0
+    },
+    {
+        "country": "Italy",
+        "show_name": "SF1",
+        "order": -10,
+        "points": 0,
+        "passed": true,
+        "jury": 0,
+        "votes": 0
+    },
+    {
+        "country": "Azerbaijan",
+        "show_name": "SF1",
+        "order": 10,
+        "points": 0,
+        "passed": false,
+        "jury": 0,
+        "votes": 0
+    },
+    {
+        "country": "San Marino",
+        "show_name": "SF1",
+        "order": 11,
+        "points": 0,
+        "passed": false,
+        "jury": 0,
+        "votes": 0
+    },
+    {
+        "country": "Albania",
+        "show_name": "SF1",
+        "order": 12,
+        "points": 0,
+        "passed": false,
+        "jury": 0,
+        "votes": 0
+    },
+    {
+        "country": "Netherlands",
+        "show_name": "SF1",
+        "order": 13,
+        "points": 0,
+        "passed": false,
+        "jury": 0,
+        "votes": 0
+    },
+    {
+        "country": "Croatia",
+        "show_name": "SF1",
+        "order": 14,
+        "points": 0,
+        "passed": false,
+        "jury": 0,
+        "votes": 0
+    },
+    {
+        "country": "Switzerland",
+        "show_name": "SF1",
+        "order": -15,
+        "points": 0,
+        "passed": false,
+        "jury": 0,
+        "votes": 0
+    },
+    {
+        "country": "Cyprus",
+        "show_name": "SF1",
+        "order": 15,
+        "points": 0,
+        "passed": false,
+        "jury": 0,
+        "votes": 0
+    }    
+]
