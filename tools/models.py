@@ -25,11 +25,11 @@ class Performance(models.Model):
     show = models.ForeignKey(Show, on_delete=models.CASCADE)
     order = models.IntegerField()
     # semi-final only
-    points = models.IntegerField(null=True, blank=True)
-    passed = models.BooleanField(null=True, blank=True) 
+    points = models.IntegerField(null=True, blank=True, default=0)
+    passed = models.BooleanField(null=True, blank=True, default=False) 
     # grand final only
-    jury = models.IntegerField(null=True, blank=True)
-    votes = models.IntegerField(null=True, blank=True)
+    jury = models.IntegerField(null=True, blank=True, default=0)
+    votes = models.IntegerField(null=True, blank=True, default=0)
 
     class Meta:
         unique_together = ('participant', 'show')

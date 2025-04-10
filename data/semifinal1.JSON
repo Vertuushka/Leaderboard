@@ -148,7 +148,7 @@
         "show_name": "SF1",
         "order": -15,
         "points": 0,
-        "passed": false,
+        "passed": true,
         "jury": 0,
         "votes": 0
     },
