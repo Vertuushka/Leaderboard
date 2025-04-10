@@ -4,13 +4,14 @@ from .models import Account
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 
-# Create your views here.
+# main login page
 def user_login(request):
     if request.user.is_authenticated:
         return HttpResponse("User already logged in")
     return render(request,'login.html')
 
-def user_auth(request):
+# this function handles user creation
+def user_create(request):
     if request.user.is_authenticated:
         return HttpResponse("User already logged in")
     if request.method == "POST":
@@ -28,6 +29,7 @@ def user_auth(request):
     else:
         return redirect('login')
 
+# this function allow user to login to their account via link/qr code
 def new_session(request, token):
     try:
         account = Account.objects.get(auth_token=token)
