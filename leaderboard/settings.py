@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +43,8 @@ INSTALLED_APPS = [
     'main',
     'tools',
 ]
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -71,7 +75,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'leaderboard.wsgi.application'
-
+ASGI_APPLICATION = 'leaderboard.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
