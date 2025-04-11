@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="{% url 'auth' %}" method="post">
+    <form action="{% url 'create' %}" method="post">
         {% csrf_token %}
         <input type="text" name="username" id="">
         <input type="submit" value="Enter!">
