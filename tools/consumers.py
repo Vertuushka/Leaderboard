@@ -9,14 +9,14 @@ from . import models
 EU_TZ = ZoneInfo('Europe/Stockholm')
 
 EVENTS = {
-    "LIVE: start": {"handler": "handle_start", "args": ["show"]},
-    "LIVE: next": {"handler": "handle_next"},
-    "LIVE: prev": {"handler": "handle_prev"},
-    "LIVE: score_update": {"handler": "handle_score_update"},
-    "LIVE: switch_mode_stop": {"handler": "handle_switch_mode", "args": ["mode"], "defaults": {"mode": "stop"}},
-    "LIVE: switch_mode_timer": {"handler": "handle_switch_mode", "args": ["mode"], "defaults": {"mode": "timer"}},
-    "LIVE: switch_mode_score": {"handler": "handle_switch_mode", "args": ["mode"], "defaults": {"mode": "score"}},
-    "LIVE: switch_mode_play": {"handler": "handle_switch_mode", "args": ["mode"], "defaults": {"mode": "play"}},
+    "LIVE: start": {"handler": "handle_start", "args": ["show"], "protected": True},
+    "LIVE: next": {"handler": "handle_next", "protected": True},
+    "LIVE: prev": {"handler": "handle_prev", "protected": True},
+    "LIVE: score_update": {"handler": "handle_score_update", "protected": True},
+    "LIVE: switch_mode_stop": {"handler": "handle_switch_mode", "args": ["mode"], "defaults": {"mode": "stop"}, "protected": True},
+    "LIVE: switch_mode_timer": {"handler": "handle_switch_mode", "args": ["mode"], "defaults": {"mode": "timer"}, "protected": True},
+    "LIVE: switch_mode_score": {"handler": "handle_switch_mode", "args": ["mode"], "defaults": {"mode": "score"}, "protected": True},
+    "LIVE: switch_mode_play": {"handler": "handle_switch_mode", "args": ["mode"], "defaults": {"mode": "play"}, "protected": True},
 }
 
 class MessageConsumer(WebsocketConsumer):
@@ -30,12 +30,18 @@ class MessageConsumer(WebsocketConsumer):
 
 
     def send_message(self, prefix, message=""):
+        """
+        Send a message to the specific user whose action triggered this function
+        """
         self.send(text_data=json.dumps({
             "prefix": prefix,
             "message": message
         }))
 
     def broadcast_message(self, prefix, message=""):
+        """
+        Send a message all users in current channel
+        """
         async_to_sync(self.channel_layer.group_send)(
         self.room_group_name, json.dumps({
             "prefix": prefix,
@@ -47,6 +53,10 @@ class MessageConsumer(WebsocketConsumer):
         config = EVENTS.get(prefix)
         if not config:
             self.send_message('LIVE: error', f'[Error]: unknown event {prefix}')
+            return
+
+        if config.get("protected", False) and not self.scope['user'].is_staff:
+            self.send_message('LIVE: error', '[Error]: only staff users allowed')
             return
 
         handler_name = config["handler"]
@@ -94,9 +104,6 @@ class MessageConsumer(WebsocketConsumer):
 
 
     def receive(self, text_data):
-        if not self.scope['user'].is_staff:
-            return
-
         try:
             data = json.loads(text_data)
         except json.JSONDecodeError:
