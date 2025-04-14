@@ -3,6 +3,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 from channels.generic.websocket import WebsocketConsumer
 from asgiref.sync import async_to_sync
+from channels.db import database_sync_to_async
 from django.contrib.auth.models import User
 from . import models
 
@@ -17,6 +18,8 @@ EVENTS = {
     "LIVE: switch_mode_timer": {"handler": "handle_switch_mode", "args": ["mode"], "defaults": {"mode": "timer"}, "protected": True},
     "LIVE: switch_mode_score": {"handler": "handle_switch_mode", "args": ["mode"], "defaults": {"mode": "score"}, "protected": True},
     "LIVE: switch_mode_play": {"handler": "handle_switch_mode", "args": ["mode"], "defaults": {"mode": "play"}, "protected": True},
+
+    "USER: vote": {"handler": "handle_vote", "args": ["performance_id", "grade"]},
 }
 
 class MessageConsumer(WebsocketConsumer):
@@ -30,18 +33,12 @@ class MessageConsumer(WebsocketConsumer):
 
 
     def send_message(self, prefix, message=""):
-        """
-        Send a message to the specific user whose action triggered this function
-        """
         self.send(text_data=json.dumps({
             "prefix": prefix,
             "message": message
         }))
 
     def broadcast_message(self, prefix, message=""):
-        """
-        Send a message all users in current channel
-        """
         async_to_sync(self.channel_layer.group_send)(
         self.room_group_name, json.dumps({
             "prefix": prefix,
@@ -101,6 +98,7 @@ class MessageConsumer(WebsocketConsumer):
         )
         self.accept()
         self.sync_state_with_user()
+        self.broadcast_message('LIVE: join', user.username)
 
 
     def receive(self, text_data):
@@ -115,6 +113,7 @@ class MessageConsumer(WebsocketConsumer):
 
 
     def disconnect(self, close_code):
+        self.broadcast_message('LIVE: leave', self.scope['user'].username)
         self.channel_layer.group_discard(self.room_group_name, self.channel_name)
 
 
@@ -150,3 +149,31 @@ class MessageConsumer(WebsocketConsumer):
     def handle_switch_mode(self, mode):
         self.state = f'LIVE: {mode}'
         self.broadcast_message(f'LIVE: switch_mode_{mode}')
+
+
+    
+    def handle_vote(self, performance_id, grade):
+        user = self.scope['user']
+        save = self.save_vote(performance_id, grade)
+        if save:
+            self.broadcast_message('LIVE: vote', {"user":user.username, "performance":performance_id, "grade":grade})
+        
+
+    @database_sync_to_async
+    def save_vote(self, performance_id, grade):
+        user = self.scope['user']
+        try:
+            performance = models.Performance.objects.get(id=int(performance_id))
+            vote = models.Vote.objects.get(performance=performance, user=user)
+            Performance.objects.delete(vote)
+            vote = models.Vote.objects.create(performance=performance, user=user, grade=int(grade))
+            return True
+        except models.Vote.DoesNotExist:
+            vote = models.Vote.objects.create(performance=performance, user=user, grade=int(grade))
+            return True
+        except models.Performance.DoesNotExist:
+            self.send_message("LIVE: error", "[Error]: performance not found")
+            return False
+
+
+    
