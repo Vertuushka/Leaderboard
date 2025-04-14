@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Participant(models.Model):
     name = models.CharField(max_length=100)
@@ -36,3 +37,8 @@ class Performance(models.Model):
 
     def __str__(self):
         return f'{self.participant} - {self.show}'
+
+class Vote(models.Model):
+    performance = models.ForeignKey(Performance, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    grade = models.IntegerField()
