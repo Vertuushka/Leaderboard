@@ -22,6 +22,9 @@ EVENTS = {
     "USER: vote": {"handler": "handle_vote", "args": ["performance_id", "grade"]},
 }
 
+CONNECTED_USERS = []
+CONNECTIONS = []
+
 class MessageConsumer(WebsocketConsumer):
 
     def __init__(self, *args, **kwargs):
@@ -38,12 +41,16 @@ class MessageConsumer(WebsocketConsumer):
             "message": message
         }))
 
+    def send_broadcast(self, data):
+        self.send(text_data=json.dumps(data))
+
     def broadcast_message(self, prefix, message=""):
         async_to_sync(self.channel_layer.group_send)(
-        self.room_group_name, json.dumps({
+        self.room_group_name, {
+            "type": "send_broadcast",
             "prefix": prefix,
             "message": message
-        }))
+        })
 
 
     def dispatch_action(self, prefix, data):
@@ -79,6 +86,7 @@ class MessageConsumer(WebsocketConsumer):
         self.send_message("LIVE: sync", {
             "current_state": self.state,
             "current_performance": self.current_performance,
+            "users": CONNECTED_USERS,
         })
         
 
@@ -98,7 +106,10 @@ class MessageConsumer(WebsocketConsumer):
         )
         self.accept()
         self.sync_state_with_user()
-        self.broadcast_message('LIVE: join', user.username)
+        if not user.username in CONNECTED_USERS:
+            self.broadcast_message('LIVE: join', user.username)
+            CONNECTED_USERS.append(user.username)
+        CONNECTIONS.append(user.username)
 
 
     def receive(self, text_data):
@@ -113,9 +124,12 @@ class MessageConsumer(WebsocketConsumer):
 
 
     def disconnect(self, close_code):
-        self.broadcast_message('LIVE: leave', self.scope['user'].username)
+        user = self.scope['user']
         self.channel_layer.group_discard(self.room_group_name, self.channel_name)
-
+        CONNECTIONS.remove(user.username)
+        if not user in CONNECTIONS:
+            CONNECTED_USERS.remove(user.username)
+            self.broadcast_message('LIVE: leave', user.username)
 
     def handle_start(self, show_name):
         try:

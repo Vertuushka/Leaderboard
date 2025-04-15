@@ -7,7 +7,35 @@ function registerHandler(prefix, handler) {
 
 function registerAllHandlers() {
     // register your handlers here
-    registerHandler("LIVE: error", new ErrorHandler())
+    registerHandler("LIVE: error", new ErrorHandler());
+    registerHandler("LIVE: sync", new SyncHandler());
+    registerHandler("LIVE: join", new JoinHandler());
+    registerHandler("LIVE: leave", new LeaveHandler());
+}
+
+class LeaveHandler {
+    handle(message) {
+        const username = message;
+        console.log(username + " left");
+    }
+}
+
+class JoinHandler {
+    handle(message) {
+        const username = message;
+        console.log(username + " joined");
+    }
+}
+
+class SyncHandler {
+    handle(message){
+        const state = message.current_state;
+        const performance = message.current_performance;
+        const users = message.users;
+        console.log(state)
+        console.log(performance)
+        console.log(users)
+    }
 }
 
 class ErrorHandler {
