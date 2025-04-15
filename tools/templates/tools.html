@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,15 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <script>
-        let url = `ws://${window.location.host}/ws/socket-server/`;
-
-        const Socket = new WebSocket(url);
-
-        Socket.onmessage = function(e) {
-            let data = JSON.parse(e.data);
-            console.log(data);
-        };
-    </script>
+    <script src="{% static 'socket.js' %}"></script>
 </body>
 </html>
