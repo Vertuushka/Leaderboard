@@ -17,7 +17,8 @@ class Dispatcher:
         prefix = data.get("prefix")
         handler = self.handlers.get(prefix)
         if handler:
-            handler.handle(self.consumer, data.message)
+            message = json.loads(data.get("message"))
+            handler.handle(self.consumer, message)
         else:
             self.consumer.send_error(f"No handler found for prefix {prefix}")
 
