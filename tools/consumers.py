@@ -17,7 +17,10 @@ class Dispatcher:
         prefix = data.get("prefix")
         handler = self.handlers.get(prefix)
         if handler:
-            message = json.loads(data.get("message"))
+            message = (data.get("message"))
+            if message != "":
+                message = json.loads(data.get("message"))
+                print(message)
             handler.handle(self.consumer, message)
         else:
             self.consumer.send_error(f"No handler found for prefix {prefix}")
@@ -36,7 +39,7 @@ class MessageConsumer(WebsocketConsumer):
     def send_broadcast(self, data):
         self.send(text_data=json.dumps(data))
 
-    def broadcast_message(self, prefix, message=""):
+    def broadcast_message(self, prefix, message=None):
         async_to_sync(self.channel_layer.group_send)(
         self.room_group_name, {
             "type": "send_broadcast",
