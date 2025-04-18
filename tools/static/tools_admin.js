@@ -1,4 +1,4 @@
-import * as tools from "./tools.js";
+import * as tools from "./live.js";
 
 function RegisterElements() {
     tools.RegisterElement("online_list", "online_list", tools.TextElement);
@@ -7,7 +7,6 @@ function RegisterElements() {
 
 function init() {
     RegisterElements();
-    tools.ELEMENTS.online_list.setText("admin");
 }
 
 document.addEventListener("DOMContentLoaded", init);

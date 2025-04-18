@@ -1,3 +1,5 @@
+import * as controller from './live.js';
+
 class StartHandler{
     handle(message){
         console.log("Starting show " + message.show + ". Performances: " + message.performances);
@@ -19,14 +21,16 @@ class SwitchModeHandler {
 class LeaveHandler {
     handle(message) {
         const username = message;
-        console.log(username + " left");
+        const formattedText = `, ${username}`;
+        controller.ELEMENTS.online_list.removeText(formattedText);
     }
 }
 
 class JoinHandler {
     handle(message) {
         const username = message;
-        console.log(username + " joined");
+        const formattedText = `, ${username}`;
+        controller.ELEMENTS.online_list.addText(formattedText);
     }
 }
 
@@ -35,6 +39,11 @@ class SyncHandler {
         const state = message.current_state;
         const performance = message.current_performance;
         const users = message.users;
+        for (let i = 0; i < users.length; i++) {
+            const user = users[i];
+            const formattedText = `, ${user}`;
+            controller.ELEMENTS.online_list.addText(formattedText); 
+        }
         console.log(state)
         console.log(performance)
         console.log(users)

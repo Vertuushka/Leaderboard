@@ -113,15 +113,16 @@ class DisconnectHandler(Handler):
 class ConnectHandler(Handler):
     def handle(self, consumer, data):
         user = consumer.scope["user"]
-        if not user.username in self.controller.online_list:
-            consumer.broadcast_message("LIVE: join", user.username)
-            self.controller.online_list.append(user.username)
-        self.controller.connected_users.append(user.username)
         consumer.send_message("LIVE: sync", {
             "current_state": self.controller.state,
             "current_performance": self.controller.current_performance,
             "users": self.controller.online_list
         })
+        if not user.username in self.controller.online_list:
+            consumer.broadcast_message("LIVE: join", user.username)
+            self.controller.online_list.append(user.username)
+        self.controller.connected_users.append(user.username)
+        
 
 class SocketController:
     def __init__(self):
