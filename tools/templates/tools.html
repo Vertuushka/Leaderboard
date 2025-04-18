@@ -4,10 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+    <title>LEADERBOARD - admin</title>
     <script type="module" src="{% static 'socket.js' %}"></script>
     <script type="module" src="{% static 'tools.js' %}"></script>
+    <script type="module" src="{% static 'tools.js' %}"></script>
+    <script type="module" src="{% static 'tools_admin.js' %}"></script>
+</head>
+<body>
+    <p>Online list: <span id="online_list"></span></p>
+    <hr>
+    <p>Current show: <span></span></p>
+    {% if shows %}
+        <select name="" id="">
+            {% for show in shows %}
+                <option value="{{ show.id }}">{{ show.name }}</option>
+            {% endfor %}
+        </select>
+    {% endif %}
+    <hr>
+    <p>Current performance: <span></span></p>
+    <p>Song: <span></span></p>
+    <p>Country: <span></span></p>
+    <p>Name: <span></span></p>
+    <button id="live_start">Start</button>
+    <button>Previous</button>
+    <button>Next</button>
+    <button>Switch to scoreboard</button>
+    <button></button>
 </body>
 </html>
