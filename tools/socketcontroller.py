@@ -114,6 +114,7 @@ class ConnectHandler(Handler):
     def handle(self, consumer, data):
         user = consumer.scope["user"]
         consumer.send_message("LIVE: sync", {
+            "user": user.username,
             "current_state": self.controller.state,
             "current_performance": self.controller.current_performance,
             "users": self.controller.online_list

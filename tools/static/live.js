@@ -13,10 +13,10 @@ export function RegisterElement(name, id, type) {
 export class ButtonElement {
     constructor(element) {
         this.element = element;
-        this.text = this.element.innerText;
+        this.text = this.element.textContent;
         this.clickHandler = null;
     }
-    setText(text) {this.element.innerText = text;}
+    setText(text) {this.element.textContent = text;}
     setClickHandler(clickHandler) {
         if (this.clickHandler === null) {
             this.clickHandler = clickHandler;
@@ -31,10 +31,46 @@ export class ButtonElement {
 export class TextElement {
     constructor(element) {
         this.element = element;
-        this.text = this.element.innerText;
+        this.text = this.element.textContent;
     }
-    setText(text) {this.element.innerText = text;}
-    addText(text) {this.element.innerText += text;}
-    removeText(text) {this.element.innerText = this.element.innerText.replace(text, "");}
-    clear() {this.element.innerText = "";}
+    setText(text) {this.element.textContent = text;}
+    addText(text) {this.element.textContent += text;}
+    clear() {this.element.textContent = "";}
+    loadFromArray(array) {
+        this.clear();
+        for (let i = 0; i < array.length; i++) {
+            if (i > 0) {
+                this.addText(", ");
+            }
+            const element = array[i]
+            this.addText(element);
+        }
+    }
 }
+
+class Live{
+    #user = "";
+
+    getUser() {return this.#user;}
+
+    setUser(user) {
+        if (this.#user !== "") {
+            console.error("User already set.")
+            return;
+        }
+        this.#user = user;
+    }
+}
+
+class OnlineList {
+    constructor() {
+        this.users = [];
+    }
+    addUser(user) { 
+        this.users.push(user); 
+    }
+    removeUser(user) { this.users = this.users.filter(u => u !== user); }
+}
+
+export const ONLINE_LIST = new OnlineList();
+export const LIVE = new Live();

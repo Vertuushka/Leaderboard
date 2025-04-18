@@ -49,10 +49,7 @@ class LiveSocket {
     }
 }
 
-function init() {
-    registerAllHandlers();
-    const DISPATCHER = new Dispatcher(HANDLERS);
-    const SOCKET = new LiveSocket(ENDPOINT, DISPATCHER);
-}
 
-document.addEventListener("DOMContentLoaded", init)
+registerAllHandlers();
+const DISPATCHER = new Dispatcher(HANDLERS);
+export const SOCKET = new LiveSocket(ENDPOINT, DISPATCHER);
