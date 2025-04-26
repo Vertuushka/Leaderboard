@@ -46,10 +46,6 @@ export class SyncHandler {
         controller.ONLINE_LIST.users = users;
         controller.ONLINE_LIST.removeUser(controller.LIVE.getUser());
         controller.ELEMENTS.online_list.loadFromArray(controller.ONLINE_LIST.users);
-        
-        console.log(state)
-        console.log(performance)
-        console.log(users)
     }
 }
 
@@ -58,3 +54,5 @@ export class ErrorHandler {
         console.error(message);
     }
 }
+
+

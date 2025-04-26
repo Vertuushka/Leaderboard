@@ -63,9 +63,7 @@ class Live{
 }
 
 class OnlineList {
-    constructor() {
-        this.users = [];
-    }
+    users = [];
     addUser(user) { 
         this.users.push(user); 
     }
