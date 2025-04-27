@@ -6,7 +6,7 @@ class GlobalSettings(models.Model):
         ('SF1', 'Sefmi-final 1'),
         ('SF2', 'Semi-final 2'),
         ('GF', 'Grand final'),
-    ], default='spring')
+    ], default='SF1')
 
     class Meta:
         verbose_name = "Global state"
@@ -15,7 +15,6 @@ class GlobalSettings(models.Model):
     def __str__(self):
         return f"Global state: {self.state}"
 
-    # Это чтобы в админке не плодились дубликаты
     def save(self, *args, **kwargs):
         self.pk = 1
         super().save(*args, **kwargs)
