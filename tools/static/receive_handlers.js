@@ -2,7 +2,7 @@ import * as controller from './live.js';
 
 export class StartHandler{
     handle(message){
-        console.log("Starting show " + message.show + ". Performances: " + message.performances);
+        console.log("Starting show ", message.show, ". Performances: ", message.performances);
     }
 }
 

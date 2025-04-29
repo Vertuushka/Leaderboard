@@ -66,9 +66,10 @@ class MessageConsumer(WebsocketConsumer):
         data = {"prefix":"LIVE: connect", "message":""}
         self.dispatcher.dispatch(data)
 
-    def receive(self, _data):
+    def receive(self, text_data):
+        print(text_data)
         try:
-            data = json.loads(_data)
+            data = json.loads(text_data)
         except json.JSONDecodeError:
             self.send_error("invalid JSON")
             return

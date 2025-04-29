@@ -4,17 +4,18 @@ export function RegisterElements(){
 
 }
 
-export function RegisterElement(name, id, type) {
+export function RegisterElement(id, type, handler=null) {
     const element = document.getElementById(id);
-    const obj = new type(element);
-    ELEMENTS[name] = obj;
+    const obj = new type(element, handler);
+    ELEMENTS[id] = obj;
 }
 
 export class ButtonElement {
-    constructor(element) {
+    constructor(element, handler) {
         this.element = element;
         this.text = this.element.textContent;
         this.clickHandler = null;
+        this.setClickHandler(handler.handle);
     }
     setText(text) {this.element.textContent = text;}
     setClickHandler(clickHandler) {

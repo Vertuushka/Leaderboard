@@ -2,6 +2,7 @@ from . models import Show, Performance
 from channels.db import database_sync_to_async
 from . sockethandlersABS import *
 from ranking.models import Rank
+from django.forms.models import model_to_dict
 
 def build_error(str):
     return f"[Error]: {str}"
@@ -97,7 +98,7 @@ class StartHandler(ProtectedHandler):
             consumer.send_error(e)
             return
         context = {
-            "show": show,
+            "show": model_to_dict(show),
             "performances": list(show_performances.values())
         }
         consumer.broadcast_message("LIVE: start", context)
