@@ -8,9 +8,9 @@ from . models import GlobalSettings
 def index(request):
     context = defaultdict(lambda: None)
     try:
-        show = Show.objects.get(name=GlobalSettings.objects.first().state)
+        show = GlobalSettings.objects.get(id=1).state
         context['show'] = show
-        context['performances'] = Performance.objects.filter(show=show),
+        context['performances'] = Performance.objects.filter(show=show)
         context['participants'] = Participant.objects.all()
     except Exception as e:
         error = build_error_msg(e)

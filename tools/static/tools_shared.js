@@ -28,6 +28,7 @@ function init() {
     RegisterElements();
     const el = document.querySelector(`#${data_el}`);
     data = JSON.parse(el.textContent.trim());
+    console.log(data);
     el.remove();
     
     updatePerformanceInfo();
