@@ -12,8 +12,9 @@ class UIUtils {
         controller.ELEMENTS.current_show_label.setText(SHOW_NAMES[showName]);
     }
 
-    static updateOnlineList(users) {
-        controller.ELEMENTS.online_list.loadFromArray(users);
+    static updateOnlineList() {
+        if (controller.LIVE.isLive() === true)
+        controller.ELEMENTS.online_list.loadFromArray(controller.ONLINE_LIST.getUsers());
     }
 
     static updatePerformanceData() {
@@ -27,14 +28,15 @@ class UIUtils {
 
 export class StartHandler{
     handle(message){
-        console.log("Starting show ", message.show);
+        participants.updatePerformances(message.performances); 
+        controller.LIVE.setState("LIVE_MODE: start");
         UIUtils.setShowName(message.show.name);
     }
 }
 
 export class PerformanceHandler{
     handle(message){
-        controller.LIVE.setPerformance(message-1);
+        controller.LIVE.setPerformance(message);
         UIUtils.updatePerformanceData();
         console.log("Switching to performance " + JSON.stringify(participants.data[controller.LIVE.getPerformance()]));
     }
@@ -50,7 +52,7 @@ export class LeaveHandler {
     handle(message) {
         const username = message;
         controller.ONLINE_LIST.removeUser(username);
-        UIUtils.updateOnlineList(controller.ONLINE_LIST.users);
+        UIUtils.updateOnlineList();
     }
 }
 
@@ -59,7 +61,7 @@ export class JoinHandler {
         const username = message;
         if (username !== controller.LIVE.getUser()) {
             controller.ONLINE_LIST.addUser(username);
-            UIUtils.updateOnlineList(controller.ONLINE_LIST.users);
+            UIUtils.updateOnlineList();
         }
     }
 }
@@ -67,12 +69,19 @@ export class JoinHandler {
 export class SyncHandler {
     handle(message){
         const state = message.current_state;
+        controller.LIVE.setState(state);
         const performance = message.current_performance;
+        if (performance !== undefined) {
+            controller.LIVE.setPerformance(performance);
+            UIUtils.updatePerformanceData();
+        }
         const users = message.users;
-        controller.LIVE.setUser(message.user);
-        controller.ONLINE_LIST.users = users;
-        controller.ONLINE_LIST.removeUser(controller.LIVE.getUser());
-        UIUtils.updateOnlineList(controller.ONLINE_LIST.users);
+        if (users !== undefined) {
+            controller.LIVE.setUser(message.user);
+            controller.ONLINE_LIST.users = users;
+            controller.ONLINE_LIST.removeUser(controller.LIVE.getUser());
+            UIUtils.updateOnlineList();
+        }
         if (message.show) { UIUtils.setShowName(message.show.name); }
     }
 }

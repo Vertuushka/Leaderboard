@@ -20,7 +20,7 @@ class Dispatcher:
             message = (data.get("message"))
             if message != "":
                 message = json.loads(data.get("message"))
-                print(message)
+                # print(message)
             handler.handle(self.consumer, message)
         else:
             self.consumer.send_error(f"No handler found for prefix {prefix}")
@@ -67,7 +67,7 @@ class MessageConsumer(WebsocketConsumer):
         self.dispatcher.dispatch(data)
 
     def receive(self, text_data):
-        print(text_data)
+        # print(text_data)
         try:
             data = json.loads(text_data)
         except json.JSONDecodeError:

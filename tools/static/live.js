@@ -48,6 +48,7 @@ export class TextElement {
 class Live{
     #user = "";
     #performance_id = 0;
+    #state = "LIVE_MODE: stop";
     getUser() {return this.#user;}
 
     setUser(user) {
@@ -60,6 +61,16 @@ class Live{
 
     getPerformance() {return this.#performance_id;}
     setPerformance(performance_id) {this.#performance_id = performance_id;}
+
+    getStatus() {return this.#state;}
+    setState(state) {this.#state = state;}
+
+    isLive() {
+        if (this.#state === "LIVE_MODE: stop") {
+            return false;
+        }
+        return true;
+    }
 }
 
 class OnlineList {
@@ -68,6 +79,7 @@ class OnlineList {
         this.#users.push(user); 
     }
     removeUser(user) { this.#users = this.#users.filter(u => u !== user); }
+    getUsers() { return this.#users; }
 }
 
 export const ONLINE_LIST = new OnlineList();

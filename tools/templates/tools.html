@@ -13,13 +13,6 @@
     <p>Online list: <span id="online_list"></span></p>
     <hr>
     <p>Current show: <span id="current_show_label">{{ show }}</span></p>
-    {% if shows %}
-        <select name="" id="">
-            {% for show in shows %}
-                <option value="{{ show.id }}">{{ show.name }}</option>
-            {% endfor %}
-        </select>
-    {% endif %}
     <hr>
     <p>Current performance: <span id="performance_id"></span></p>
     <p>Song: <span id="song_name"></span></p>

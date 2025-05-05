@@ -11,7 +11,7 @@ def tools(request):
         context = {}
         
         shows = Show.objects.all()
-        show = GlobalSettings.objects.get(state=1).state
+        show = GlobalSettings.objects.get(id=1).state
         performances = Performance.objects.filter(show=show).order_by('id')
         performances_data = []
         for performance in performances:

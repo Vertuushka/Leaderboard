@@ -1,4 +1,5 @@
 import * as tools from "./live.js";
+import { ELEMENTS } from "./live.js";
 
 const data_el = "performances_data";
 export let data;
@@ -11,12 +12,25 @@ function RegisterElements() {
     tools.RegisterElement("artist_name", tools.TextElement);
 }
 
+function updatePerformanceInfo() {
+    ELEMENTS.song_name.setText(data[0].song);
+    ELEMENTS.country_name.setText(data[0].country);
+    ELEMENTS.artist_name.setText(data[0].name);
+
+}
+
+export function updatePerformances(arg) {
+    data = JSON.parse(arg.trim());
+    updatePerformanceInfo();
+}
 
 function init() {
     RegisterElements();
     const el = document.querySelector(`#${data_el}`);
     data = JSON.parse(el.textContent.trim());
     el.remove();
+    
+    updatePerformanceInfo();
 }
 
 document.addEventListener("DOMContentLoaded", init);

@@ -1,8 +1,10 @@
 from . models import Show, Performance
+from main.models import GlobalSettings
 from channels.db import database_sync_to_async
 from . sockethandlersABS import *
 from ranking.models import Rank
 from django.forms.models import model_to_dict
+import json
 
 def build_error(str):
     return f"[Error]: {str}"
@@ -80,31 +82,44 @@ class PreviousHandler(ProtectedHandler):
 
 class NextHandler(ProtectedHandler):
     def handle_protected(self, consumer, data):
-        if self.controller.current_performance < len(self.controller.performances)-1:
+        if self.controller.current_performance < len(self.controller.performances) -1:
             self.controller.current_performance += 1
             consumer.broadcast_message("LIVE: performance", self.controller.current_performance)
 
 class PreviousHandler(ProtectedHandler):
     def handle_protected(self, consumer, data):
-        if self.controller.current_performance > 1:
+        if self.controller.current_performance > 0:
             self.controller.current_performance -= 1
             consumer.broadcast_message("LIVE: performance", self.controller.current_performance)
 
 class StartHandler(ProtectedHandler):
     def handle_protected(self, consumer, data):
         self.controller.state = "LIVE: start"
+        self.controller.live = True
+        context = {}
         try:
-            show = Show.objects.get(id=int(data))
+            show = GlobalSettings.objects.get(id=1).state
+            context["show"] = model_to_dict(show)
             self.controller.show = show
             performances = list(Performance.objects.filter(show=show))
             self.controller.performances = performances
             self.controller.current_performance = 0
+            _performances = Performance.objects.filter(show=show).order_by('id')
+            performances_data = []
+            for performance in _performances:
+                performances_data.append({
+                    "id": performance.id,
+                    "passed": performance.passed,
+                    "name": performance.participant.name,
+                    "song": performance.participant.song,
+                    "country": performance.participant.country,
+                    "image": performance.participant.img,
+                })
+            context["performances"] = json.dumps(performances_data)
         except Exception as e:
             consumer.send_error(e)
             return
-        context = {
-            "show": model_to_dict(show),
-        }
+        ConnectHandler(CONTROLLER).handle(consumer, data)
         consumer.broadcast_message("LIVE: start", context)
 
 class DisconnectHandler(Handler):
@@ -126,7 +141,8 @@ class ConnectHandler(Handler):
         }
         if self.controller.show:
             msg["show"] = model_to_dict(self.controller.show)
-        consumer.send_message("LIVE: sync", msg)
+        if self.controller.live == True:
+            consumer.send_message("LIVE: sync", msg)
             
         if not user.username in self.controller.online_list:
             consumer.broadcast_message("LIVE: join", user.username)
@@ -142,9 +158,10 @@ class SocketController:
         else:
             self.handlers = {}
             self.state = "LIVE_MODE: stop"
+            self.live = False
             self.show = None
             self.performances = []
-            self.current_performance = -1
+            self.current_performance = 0
             self.connected_users = []
             self.online_list = []
             self._instance = self
