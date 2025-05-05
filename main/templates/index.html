@@ -3,6 +3,7 @@
 {% block style %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/live.css' %}">
+    <script type="module" src="{% static 'tools_shared.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -12,23 +13,23 @@
     {% endif %}
 
     <header class="wrapper gapLarge center">
-        <h1 class="title grow">{{ show }}</h1>
+        <h1 class="title grow" id="current_show_label">{{ show }}</h1>
     </header>
 
     <div class="wrapper gapMedium feed">
     {% for participant in participants %}
         <div class="container gapSmall card">
-            <div class="cardHeaderImg" style="background-image: url('{% static "img/" %}{{ participant.country }}.png" %}');">
+            <div class="cardHeaderImg" style="background-image: url('{% static "img/" %}{{ participant.country }}.jpg');">
                 <div class="container gapMedium effects">
                     <div class="wrapper gapMedium cardHeader">
                         <div class="container gapSmall">
-                            <p class="footnote">{{ participant.country }}</p>
-                            <h2 class="title">{{ participant.name }} - {{ participant.song }}</h2>
+                            <p class="footnote" id="country_name">{{ participant.country }}</p>
+                            <h2 class="title"><span id="artist_name">{{ participant.name }}</span> - <span id="song_name">{{ participant.song }}</span></h2>
                         </div>
                         <img class="heart" src="{% static 'img/hearts/' %}{{ participant.country }}.svg" alt="">
                     </div>
 
-                    <div class="wrapper playerVotes">
+                    <div class="wrapper playerVotes" id="online_list">
                         <div class="wrapper gapMedium playerVote">
                             <p>Username</p>
                             <p class="">0</p>
@@ -112,5 +113,7 @@
         </div>
         {% endfor %}
     </div>
-
+    <script id="performances_data" type="application/json">
+        {{ performances_data|safe }}
+    </script>
 {% endblock %}
