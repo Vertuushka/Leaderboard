@@ -4,3 +4,4 @@ from .models import *
 admin.site.register(Participant)
 admin.site.register(Show)
 admin.site.register(Performance)
+admin.site.register(Vote)

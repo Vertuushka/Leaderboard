@@ -39,6 +39,13 @@ class Performance(models.Model):
         return f'{self.participant} - {self.show}'
 
 class Vote(models.Model):
+    CRITERIA_TYPES = [
+        (1, 'Qualified'),
+        (2, 'Musical Quality'),
+        (3, 'Stage Performance'),
+        (4, 'Visual Presentation'),
+    ]
     performance = models.ForeignKey(Performance, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    criteria = models.IntegerField(choices=CRITERIA_TYPES)
     grade = models.IntegerField()

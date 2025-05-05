@@ -1,9 +1,18 @@
 export const ELEMENTS = {};
 
-export function RegisterElement(id, type, handler=null) {
-    const element = document.getElementById(id);
+export function RegisterElement(id, type, handler=null, relativeName=null) {
+    let element;
+    if (typeof(id) === "object") {
+        element = id;
+    }
+    else{
+        element = document.getElementById(id);
+    }
     const obj = new type(element, handler);
-    ELEMENTS[id] = obj;
+    if (typeof(id) === "object")
+        ELEMENTS[relativeName] = obj;
+    else
+        ELEMENTS[id] = obj;
 }
 
 export class ButtonElement {

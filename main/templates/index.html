@@ -3,7 +3,9 @@
 {% block style %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/live.css' %}">
+    <script type="module" src="{% static 'socket.js' %}"></script>
     <script type="module" src="{% static 'tools_shared.js' %}"></script>
+    <script type="module" src="{% static 'tools_player.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -50,17 +52,17 @@
                         <p class="footnote">Description</p>
                     </div>
         
-                    <div class="btnGrid gapMedium">
-                        <button>1</button>
-                        <button>2</button>
-                        <button>3</button>
-                        <button>4</button>
-                        <button>5</button>
-                        <button>6</button>
-                        <button>7</button>
-                        <button>8</button>
-                        <button>10</button>
-                        <button>12</button>
+                    <div class="btnGrid gapMedium" data-criteria="2">
+                        <button class="voteBtn">1</button>
+                        <button class="voteBtn">2</button>
+                        <button class="voteBtn">3</button>
+                        <button class="voteBtn">4</button>
+                        <button class="voteBtn">5</button>
+                        <button class="voteBtn">6</button>
+                        <button class="voteBtn">7</button>
+                        <button class="voteBtn">8</button>
+                        <button class="voteBtn">10</button>
+                        <button class="voteBtn">12</button>
                     </div>
                 </section>
     
@@ -73,17 +75,17 @@
                         <p class="footnote">Description</p>
                     </div>
         
-                    <div class="btnGrid gapMedium">
-                        <button>1</button>
-                        <button>2</button>
-                        <button>3</button>
-                        <button>4</button>
-                        <button>5</button>
-                        <button>6</button>
-                        <button>7</button>
-                        <button>8</button>
-                        <button>10</button>
-                        <button>12</button>
+                    <div class="btnGrid gapMedium" data-criteria="3">
+                        <button class="voteBtn">1</button>
+                        <button class="voteBtn">2</button>
+                        <button class="voteBtn">3</button>
+                        <button class="voteBtn">4</button>
+                        <button class="voteBtn">5</button>
+                        <button class="voteBtn">6</button>
+                        <button class="voteBtn">7</button>
+                        <button class="voteBtn">8</button>
+                        <button class="voteBtn">10</button>
+                        <button class="voteBtn">12</button>
                     </div>
                 </section>
     
@@ -96,17 +98,17 @@
                         <p class="footnote">Description</p>
                     </div>
         
-                    <div class="btnGrid gapMedium">
-                        <button>1</button>
-                        <button>2</button>
-                        <button>3</button>
-                        <button>4</button>
-                        <button>5</button>
-                        <button>6</button>
-                        <button>7</button>
-                        <button>8</button>
-                        <button>10</button>
-                        <button>12</button>
+                    <div class="btnGrid gapMedium" data-criteria="4">
+                        <button class="voteBtn">1</button>
+                        <button class="voteBtn">2</button>
+                        <button class="voteBtn">3</button>
+                        <button class="voteBtn">4</button>
+                        <button class="voteBtn">5</button>
+                        <button class="voteBtn">6</button>
+                        <button class="voteBtn">7</button>
+                        <button class="voteBtn">8</button>
+                        <button class="voteBtn">10</button>
+                        <button class="voteBtn">12</button>
                     </div>
                 </section>
             </div>

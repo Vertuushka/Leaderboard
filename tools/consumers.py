@@ -18,8 +18,6 @@ class Dispatcher:
         handler = self.handlers.get(prefix)
         if handler:
             message = (data.get("message"))
-            if message != "":
-                message = json.loads(data.get("message"))
                 # print(message)
             handler.handle(self.consumer, message)
         else:

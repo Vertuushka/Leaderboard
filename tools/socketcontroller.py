@@ -2,9 +2,10 @@ from . models import Show, Performance
 from main.models import GlobalSettings
 from channels.db import database_sync_to_async
 from . sockethandlersABS import *
-from ranking.models import Rank
+from .models import Vote
 from django.forms.models import model_to_dict
 import json
+from asgiref.sync import async_to_sync
 
 def build_error(str):
     return f"[Error]: {str}"
@@ -26,23 +27,32 @@ def register_handlers():
     register_handler("LIVE: switch_mode_play", SwitchModeHandler(CONTROLLER))
     register_handler("USER: rank", UserScoreHandler(CONTROLLER))
 
+@database_sync_to_async
+def update_rank(user, performance_id, grade, criteria):
+    performance = Performance.objects.get(id=performance_id)
+    obj = Vote.objects.filter(user=user, performance=performance, criteria=criteria).first()
+    if obj:
+        obj.grade = grade
+        obj.save()
+        return
+    else: 
+        Vote.objects.create(user=user, performance=performance, grade=grade, criteria=criteria)
 
 class UserScoreHandler(Handler):
-    @database_sync_to_async
     def handle(self, consumer, data):
         try:
+            print(data)
             user = consumer.scope["user"]
-            performance_id = int(data["performance"])
-            new_rank = int(data["rank"])
-
-            performance = Performance.objects.get(id=performance_id)
-            Rank.objects.filter(user=user, performance=performance).delete()
-            Rank.objects.filter(user=user, rank=new_rank).delete()
-            Rank.objects.create(user=user, performance=performance, rank=new_rank)
+            performance_id = data["performance"]+1
+            grade = data["vote"]
+            criteria = data["criteria"]
+            async_to_sync(update_rank)(user, performance_id, grade, criteria)
+            
             context = {
                 "user": user.username,
                 "performance": performance_id,
-                "rank": new_rank
+                "criteria": criteria,
+                "grade": grade
             }
             consumer.broadcast_message("USER: share_score", context)
         except Exception as e:
