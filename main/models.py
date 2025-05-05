@@ -1,12 +1,15 @@
 from django.db import models
+from tools.models import Show
 
 # Create your models here.
 class GlobalSettings(models.Model):
-    state = models.CharField(max_length=50, choices=[
-        ('SF1', 'Sefmi-final 1'),
-        ('SF2', 'Semi-final 2'),
-        ('GF', 'Grand final'),
-    ], default='SF1')
+    state = models.OneToOneField(
+        Show,
+        on_delete=models.CASCADE,
+        primary_key=True,
+        related_name='global_settings',
+        default=1
+    )
 
     class Meta:
         verbose_name = "Global state"

@@ -12,8 +12,8 @@ class Participant(models.Model):
 
 class Show(models.Model):
     SHOW_TYPES = [
-        ('SF1', 'Semi-Final 1'),
-        ('SF2', 'Semi-Final 2'),
+        ('SF1', 'Semi Final 1'),
+        ('SF2', 'Semi Final 2'),
         ('GF', 'Grand Final'),
     ]
     name = models.CharField(max_length=3, choices=SHOW_TYPES, unique=True)

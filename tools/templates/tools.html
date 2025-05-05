@@ -7,11 +7,12 @@
     <title>LEADERBOARD - admin</title>
     <script type="module" src="{% static 'socket.js' %}"></script>
     <script type="module" src="{% static 'tools_admin.js' %}"></script>
+    <script type="module" src="{% static 'tools_shared.js' %}"></script>
 </head>
 <body>
     <p>Online list: <span id="online_list"></span></p>
     <hr>
-    <p>Current show: <span></span></p>
+    <p>Current show: <span id="current_show_label">{{ show }}</span></p>
     {% if shows %}
         <select name="" id="">
             {% for show in shows %}
@@ -20,14 +21,17 @@
         </select>
     {% endif %}
     <hr>
-    <p>Current performance: <span></span></p>
-    <p>Song: <span></span></p>
-    <p>Country: <span></span></p>
-    <p>Name: <span></span></p>
+    <p>Current performance: <span id="performance_id"></span></p>
+    <p>Song: <span id="song_name"></span></p>
+    <p>Country: <span id="country_name"></span></p>
+    <p>Name: <span id="artist_name"></span></p>
     <button id="live_start">Start</button>
-    <button>Previous</button>
-    <button>Next</button>
+    <button id="live_prev">Previous</button>
+    <button id="live_next">Next</button>
     <button>Switch to scoreboard</button>
     <button></button>
+    <script id="performances_data" type="application/json">
+        {{ performances|safe }}
+    </script>
 </body>
 </html>

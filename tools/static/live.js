@@ -1,9 +1,5 @@
 export const ELEMENTS = {};
 
-export function RegisterElements(){
-
-}
-
 export function RegisterElement(id, type, handler=null) {
     const element = document.getElementById(id);
     const obj = new type(element, handler);
@@ -51,7 +47,7 @@ export class TextElement {
 
 class Live{
     #user = "";
-
+    #performance_id = 0;
     getUser() {return this.#user;}
 
     setUser(user) {
@@ -61,14 +57,17 @@ class Live{
         }
         this.#user = user;
     }
+
+    getPerformance() {return this.#performance_id;}
+    setPerformance(performance_id) {this.#performance_id = performance_id;}
 }
 
 class OnlineList {
-    users = [];
+    #users = [];
     addUser(user) { 
-        this.users.push(user); 
+        this.#users.push(user); 
     }
-    removeUser(user) { this.users = this.users.filter(u => u !== user); }
+    removeUser(user) { this.#users = this.#users.filter(u => u !== user); }
 }
 
 export const ONLINE_LIST = new OnlineList();

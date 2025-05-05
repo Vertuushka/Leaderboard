@@ -16,7 +16,7 @@ def register_handlers():
     register_handler("LIVE: disconnect", DisconnectHandler(CONTROLLER))
     register_handler("LIVE: start", StartHandler(CONTROLLER))
     register_handler("LIVE: next", NextHandler(CONTROLLER))
-    register_handler("LIVE: prev", NextHandler(CONTROLLER))
+    register_handler("LIVE: prev", PreviousHandler(CONTROLLER))
     register_handler("LIVE: score_update", ScoreHandler(CONTROLLER))
     register_handler("LIVE: switch_mode_stop", SwitchModeHandler(CONTROLLER))
     register_handler("LIVE: switch_mode_timer", SwitchModeHandler(CONTROLLER))
@@ -80,8 +80,14 @@ class PreviousHandler(ProtectedHandler):
 
 class NextHandler(ProtectedHandler):
     def handle_protected(self, consumer, data):
-        if self.controller.current_performance < len(self.controller.performances) -1:
+        if self.controller.current_performance < len(self.controller.performances)-1:
             self.controller.current_performance += 1
+            consumer.broadcast_message("LIVE: performance", self.controller.current_performance)
+
+class PreviousHandler(ProtectedHandler):
+    def handle_protected(self, consumer, data):
+        if self.controller.current_performance > 1:
+            self.controller.current_performance -= 1
             consumer.broadcast_message("LIVE: performance", self.controller.current_performance)
 
 class StartHandler(ProtectedHandler):
@@ -89,17 +95,15 @@ class StartHandler(ProtectedHandler):
         self.controller.state = "LIVE: start"
         try:
             show = Show.objects.get(id=int(data))
-            show_performances = Performance.objects.filter(show=show)
-            if not show_performances:
-                raise Performance.DoesNotExist()
             self.controller.show = show
-            self.controller.performances = list(show_performances.values())
-        except (Show.DoesNotExist, Performance.DoesNotExist ) as e:
+            performances = list(Performance.objects.filter(show=show))
+            self.controller.performances = performances
+            self.controller.current_performance = 0
+        except Exception as e:
             consumer.send_error(e)
             return
         context = {
             "show": model_to_dict(show),
-            "performances": list(show_performances.values())
         }
         consumer.broadcast_message("LIVE: start", context)
 
@@ -114,12 +118,16 @@ class DisconnectHandler(Handler):
 class ConnectHandler(Handler):
     def handle(self, consumer, data):
         user = consumer.scope["user"]
-        consumer.send_message("LIVE: sync", {
+        msg = {
             "user": user.username,
             "current_state": self.controller.state,
             "current_performance": self.controller.current_performance,
-            "users": self.controller.online_list
-        })
+            "users": self.controller.online_list,
+        }
+        if self.controller.show:
+            msg["show"] = model_to_dict(self.controller.show)
+        consumer.send_message("LIVE: sync", msg)
+            
         if not user.username in self.controller.online_list:
             consumer.broadcast_message("LIVE: join", user.username)
             self.controller.online_list.append(user.username)
@@ -127,14 +135,24 @@ class ConnectHandler(Handler):
         
 
 class SocketController:
+    _instance = None
     def __init__(self):
-        self.handlers = {}
-        self.state = "LIVE_MODE: stop"
-        self.show = None
-        self.performances = []
-        self.current_performance = -1
-        self.connected_users = []
-        self.online_list = []
-
-CONTROLLER = SocketController()
+        if SocketController._instance is not None:
+            return
+        else:
+            self.handlers = {}
+            self.state = "LIVE_MODE: stop"
+            self.show = None
+            self.performances = []
+            self.current_performance = -1
+            self.connected_users = []
+            self.online_list = []
+            self._instance = self
+    
+    def get_instance():
+        if SocketController._instance is None:
+            SocketController._instance = SocketController()
+        return SocketController._instance
+    
+CONTROLLER = SocketController.get_instance()
 register_handlers()

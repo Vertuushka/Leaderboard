@@ -14,13 +14,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        # global settings data load
-        if GlobalSettings.objects.exists():
-            self.stdout.write(self.style.WARNING('Global settings table is not empty. Skipping table.'))
-        else:
-            GlobalSettings.objects.create( state = 'SF1' )
-            self.stdout.write(self.style.SUCCESS('Global state is set to SF1.'))
 
+        # global settings data loa
         if Show.objects.exists():
             self.stdout.write(self.style.WARNING('Shows table is not empty. Skipping table.'))
         else:
@@ -29,6 +24,11 @@ class Command(BaseCommand):
             Show.objects.create(name='GF')
             self.stdout.write(self.style.SUCCESS('Shows table populated.'))
 
+        if GlobalSettings.objects.exists():
+            self.stdout.write(self.style.WARNING('Global settings table is not empty. Skipping table.'))
+        else:
+            GlobalSettings.objects.create( state = Show.objects.get(id=1) )
+            self.stdout.write(self.style.SUCCESS('Global state is set to SF1.'))
 
         # participants data load
         if Participant.objects.exists():
