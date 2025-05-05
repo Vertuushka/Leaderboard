@@ -1,7 +1,116 @@
-This is the main page
-<br>
-CURRENT SHOW: {{show}}
-<br>
-{% if error %}
-    {{error}}
-{% endif %}
+{% extends 'base.html' %}
+
+{% block style %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/live.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    {% if error %}
+        {{error}}
+    {% endif %}
+
+    <header class="wrapper gapLarge center">
+        <h1 class="title grow">{{ show }}</h1>
+    </header>
+
+    <div class="wrapper gapMedium feed">
+    {% for participant in participants %}
+        <div class="container gapSmall card">
+            <div class="cardHeaderImg" style="background-image: url('{% static "img/" %}{{ participant.country }}.png" %}');">
+                <div class="container gapMedium effects">
+                    <div class="wrapper gapMedium cardHeader">
+                        <div class="container gapSmall">
+                            <p class="footnote">{{ participant.country }}</p>
+                            <h2 class="title">{{ participant.name }} - {{ participant.song }}</h2>
+                        </div>
+                        <img class="heart" src="{% static 'img/hearts/' %}{{ participant.country }}.svg" alt="">
+                    </div>
+
+                    <div class="wrapper playerVotes">
+                        <div class="wrapper gapMedium playerVote">
+                            <p>Username</p>
+                            <p class="">0</p>
+                            <p class="">0</p>
+                            <p class="">0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container gapLarge forms">
+                <section class="container gapLarge" action="">
+                    <div class="container gapSmall cardFormHeader">
+                        <div class="wrapper center">
+                            <h2 class="title grow">Question</h2>
+                            <p class="footnote">1 of 3</p>
+                        </div>
+                        <p class="footnote">Description</p>
+                    </div>
+        
+                    <div class="btnGrid gapMedium">
+                        <button>1</button>
+                        <button>2</button>
+                        <button>3</button>
+                        <button>4</button>
+                        <button>5</button>
+                        <button>6</button>
+                        <button>7</button>
+                        <button>8</button>
+                        <button>10</button>
+                        <button>12</button>
+                    </div>
+                </section>
+    
+                <section class="container gapLarge" action="">
+                    <div class="container gapSmall cardFormHeader">
+                        <div class="wrapper center">
+                            <h2 class="title grow">Question</h2>
+                            <p class="footnote">2 of 3</p>
+                        </div>
+                        <p class="footnote">Description</p>
+                    </div>
+        
+                    <div class="btnGrid gapMedium">
+                        <button>1</button>
+                        <button>2</button>
+                        <button>3</button>
+                        <button>4</button>
+                        <button>5</button>
+                        <button>6</button>
+                        <button>7</button>
+                        <button>8</button>
+                        <button>10</button>
+                        <button>12</button>
+                    </div>
+                </section>
+    
+                <section class="container gapLarge" action="">
+                    <div class="container gapSmall cardFormHeader">
+                        <div class="wrapper center">
+                            <h2 class="title grow">Question</h2>
+                            <p class="footnote">3 of 3</p>
+                        </div>
+                        <p class="footnote">Description</p>
+                    </div>
+        
+                    <div class="btnGrid gapMedium">
+                        <button>1</button>
+                        <button>2</button>
+                        <button>3</button>
+                        <button>4</button>
+                        <button>5</button>
+                        <button>6</button>
+                        <button>7</button>
+                        <button>8</button>
+                        <button>10</button>
+                        <button>12</button>
+                    </div>
+                </section>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

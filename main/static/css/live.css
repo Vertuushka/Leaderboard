@@ -1,0 +1,176 @@
+main {
+    min-height: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+header {
+    padding: var(--medium) var(--large);
+}
+
+.feed {
+    padding: var(--medium);
+
+    box-sizing: border-box;
+
+    width: 100vw;
+    min-height: 100%;
+
+    overflow-y: scroll;
+    scroll-snap-type: x mandatory;
+}
+
+.card {
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+
+    min-width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+
+    border-radius: var(--medium);
+    border: 1px solid var(--primary);
+    overflow: hidden;
+}
+
+.cardHeaderImg {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.effects {
+    padding: var(--large) 0;
+
+    backdrop-filter: blur(var(--minimal));
+    background: linear-gradient(0deg, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0.5) 100%);
+}
+
+.cardHeader {
+    padding: var(--medium) var(--large);
+}
+
+.cardHeader div {
+    flex-grow: 1;
+}
+
+.cardHeader img {
+    aspect-ratio: 1;
+    height: 52px;
+}
+
+.playerVotes {
+    padding: var(--medium) 0;
+
+    border-width: 1px 0 1px 0;
+    border-style: solid;
+    border-color: var(--primary);
+
+    backdrop-filter: blur(var(--large));
+
+    background-color: var(--primary);
+}
+
+.playerVote {
+    margin-left: var(--large);
+}
+
+.forms {
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.card form {
+    padding: var(--large);
+}
+
+.btnGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.btnGrid button {
+    aspect-ratio: 1;
+
+    border-radius: 100%;
+    border: 1px solid var(--primary);
+
+    cursor: pointer;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    color: var(--text);
+    background: none;
+}
+
+.btnGrid button:nth-child(1) {
+    border-color: var(--1);
+}
+.btnGrid button:nth-child(1):hover {
+    background-color: var(--1-hover);
+}
+
+.btnGrid button:nth-child(2) {
+    border-color: var(--2);
+}
+.btnGrid button:nth-child(2):hover {
+    background-color: var(--2-hover);
+}
+
+.btnGrid button:nth-child(3) {
+    border-color: var(--3);
+}
+.btnGrid button:nth-child(3):hover {
+    background-color: var(--3-hover);
+}
+
+.btnGrid button:nth-child(4) {
+    border-color: var(--4);
+}
+.btnGrid button:nth-child(4):hover {
+    background-color: var(--4-hover);
+}
+
+.btnGrid button:nth-child(5) {
+    border-color: var(--5);
+}
+.btnGrid button:nth-child(5):hover {
+    background-color: var(--5-hover);
+}
+
+.btnGrid button:nth-child(6) {
+    border-color: var(--6);
+}
+.btnGrid button:nth-child(6):hover {
+    background-color: var(--6-hover);
+}
+
+.btnGrid button:nth-child(7) {
+    border-color: var(--7);
+}
+.btnGrid button:nth-child(7):hover {
+    background-color: var(--7-hover);
+}
+
+.btnGrid button:nth-child(8) {
+    border-color: var(--8);
+}
+.btnGrid button:nth-child(8):hover {
+    background-color: var(--8-hover);
+}
+
+.btnGrid button:nth-child(9) {
+    border-color: var(--10);
+}
+.btnGrid button:nth-child(9):hover {
+    background-color: var(--10-hover);
+}
+
+.btnGrid button:nth-child(10) {
+    border-color: var(--12);
+}
+.btnGrid button:nth-child(10):hover {
+    background-color: var(--12-hover);
+}

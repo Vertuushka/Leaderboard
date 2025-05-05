@@ -1,0 +1,140 @@
+@import url('gambarino.css');
+
+:root {
+    --bg: hsl(0, 0%, 4%);
+    --primary: hsla(0, 0%, 100%, 6%);
+
+    --text-primary: hsl(0, 0%, 96%);
+    --text-secondary: hsla(0, 0%, 96%, 64%);
+
+    --minimal: 2px;
+    --small: 6px;
+    --medium: 12px;
+    --large: 24px;
+
+    --1: #FF3B30;
+    --1-hover: #FF3B3024;
+  
+    --2: #FF5E3A;
+    --2-hover: #FF5E3A24;
+  
+    --3: #FF7635;
+    --3-hover: #FF763524;
+  
+    --4: #FF9633;
+    --4-hover: #FF963324;
+  
+    --5: #FFB82E;
+    --5-hover: #FFB82E24;
+  
+    --6: #FFD52B;
+    --6-hover: #FFD52B24;
+  
+    --7: #D4E12B;
+    --7-hover: #D4E12B24;
+  
+    --8: #A6DB2B;
+    --8-hover: #A6DB2B24;
+  
+    --10: #7DD622;
+    --10-hover: #7DD62224;
+  
+    --12: #34C759;
+    --12-hover: #34C75924;  
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+body {
+    height: 100vh;
+    box-sizing: border-box;
+
+    overflow: hidden;
+
+    display: grid;
+    grid-template-rows: max-content 1fr;
+}
+
+nav {
+    justify-content: space-between;
+    padding: var(--medium);
+}
+
+.title {
+    font-family: Gambarino-Regular;
+    font-size: 20px;
+}
+
+.regular {
+    font-size: 14px;
+    color: var(--text-primary);
+}
+
+.footnote {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text-primary);
+}
+
+.wrapper {
+    display: flex;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.gapMinimal {
+    gap: var(--minimal);
+}
+
+.gapSmall {
+    gap: var(--small);
+}
+
+.gapMedium {
+    gap: var(--medium); 
+}
+
+.gapLarge {
+    gap: var(--large);
+}
+
+.grow {
+    flex-grow: 1;
+}
+
+.center {
+    align-items: center;
+}
+
+/* components */
+.btn {
+    aspect-ratio: 1;
+    padding: var(--medium);
+
+    border: none;
+    border-radius: 100%;
+
+    color: var(--text-primary);
+    background: none;
+    cursor: pointer;
+
+    display: grid;
+    place-content: center;
+}
