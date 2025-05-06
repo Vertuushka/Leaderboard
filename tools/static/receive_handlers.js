@@ -1,5 +1,6 @@
 import * as controller from './live.js';
 import * as participants from './tools_shared.js'
+import * as constants from './shared_constants.js'
 
 const SHOW_NAMES = {
     "SF1": "Semi Final 1",
@@ -23,6 +24,8 @@ class UIUtils {
         controller.ELEMENTS.song_name.setText(participants.data[controller.LIVE.getPerformance()].song);
         controller.ELEMENTS.country_name.setText(participants.data[controller.LIVE.getPerformance()].country);
         controller.ELEMENTS.artist_name.setText(participants.data[controller.LIVE.getPerformance()].name);
+        controller.ELEMENTS.participantImg.setImg(constants.bg_url + participants.data[controller.LIVE.getPerformance()].country + ".jpg");
+        controller.ELEMENTS.heartImg.setImg(constants.hearts_url + participants.data[controller.LIVE.getPerformance()].country + ".svg");
     }
 }
 
@@ -47,6 +50,7 @@ export class SwitchModeHandler {
         console.log("Switching mode to " + message);
     }
 }
+
 
 export class LeaveHandler {
     handle(message) {

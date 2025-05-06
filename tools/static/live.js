@@ -15,6 +15,26 @@ export function RegisterElement(id, type, handler=null, relativeName=null) {
         ELEMENTS[id] = obj;
 }
 
+export class ImageElement {
+    constructor(element) {
+        this.element = element;
+        this.src = this.element.src;
+    }
+    setImg(src) { this.element.src = src; }
+}
+
+export class BackgroundElement {
+    constructor(element) {  
+        console.info("constructing background element");
+        this.element = element;
+        this.src = this.element.style.backgroundImage;
+    }
+    setImg(src) { 
+        console.info("setting background image" + src);
+        this.element.style.backgroundImage = `url('${src}')`; 
+    }
+}
+
 export class ButtonElement {
     constructor(element, handler) {
         this.element = element;

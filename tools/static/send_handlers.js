@@ -13,6 +13,7 @@ export class PreviousHandler {
     handle(){ SOCKET.send({ "prefix": "LIVE: prev", "message": "1" }); }
 }
 
+
 export class VoteHandler {
     handle(){
         const data = {

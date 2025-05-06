@@ -83,13 +83,6 @@ class ScoreHandler(ProtectedHandler):
             consumer.send_error(build_error(e))
             return
 
-
-class PreviousHandler(ProtectedHandler):
-    def handle_protected(self, consumer, data):
-        if self.controller.current_performance > -1:
-            self.controller.current_performance -= 1
-            consumer.broadcast_message("LIVE: performance", self.controller.current_performance)
-
 class NextHandler(ProtectedHandler):
     def handle_protected(self, consumer, data):
         if self.controller.current_performance < len(self.controller.performances) -1:

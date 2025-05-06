@@ -19,17 +19,12 @@ function registerAllHandlers() {
 }
 
 class Dispatcher {
-    constructor(handlers) {
-        this.handlers = handlers;
-    }
+    constructor(handlers) { this.handlers = handlers; }
 
     dispatch(data) {
         const handler = this.handlers[data.prefix];
-        if (handler) {
-            handler.handle(data.message);
-        } else {
-            console.warn("No handler found for prefix: " + data.prefix);
-        }
+        if (handler) { handler.handle(data.message); } 
+        else { console.warn("No handler found for prefix: " + data.prefix);}
     }
 }
 
@@ -43,10 +38,7 @@ class LiveSocket {
             this.dispatcher.dispatch(data);
         }
     }
-
-    send(data) {
-        this.socket.send(JSON.stringify(data));
-    }
+    send(data) { this.socket.send(JSON.stringify(data)); }
 }
 
 
