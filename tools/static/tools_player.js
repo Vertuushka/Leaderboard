@@ -11,7 +11,6 @@ function RegisterElements() {
 
 function init() {
     RegisterElements();
-    console.log(ELEMENTS.voteBtn1)
 }
 
 document.addEventListener("DOMContentLoaded", init);

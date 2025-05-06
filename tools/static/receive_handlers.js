@@ -1,33 +1,6 @@
 import * as controller from './live.js';
 import * as participants from './tools_shared.js'
-import * as constants from './shared_constants.js'
-
-const SHOW_NAMES = {
-    "SF1": "Semi Final 1",
-    "SF2": "Semi Final 2",
-    "GF": "Grand Final",
-}
-
-class UIUtils {
-    static setShowName(showName) {
-        controller.ELEMENTS.current_show_label.setText(SHOW_NAMES[showName]);
-    }
-
-    static updateOnlineList() {
-        if (controller.LIVE.isLive() === true)
-        controller.ELEMENTS.online_list.loadFromArray(controller.ONLINE_LIST.getUsers());
-    }
-
-    static updatePerformanceData() {
-        if (controller.ELEMENTS.performance_id !== undefined) 
-            controller.ELEMENTS.performance_id.setText(participants.data[controller.LIVE.getPerformance()].id);
-        controller.ELEMENTS.song_name.setText(participants.data[controller.LIVE.getPerformance()].song);
-        controller.ELEMENTS.country_name.setText(participants.data[controller.LIVE.getPerformance()].country);
-        controller.ELEMENTS.artist_name.setText(participants.data[controller.LIVE.getPerformance()].name);
-        controller.ELEMENTS.participantImg.setImg(constants.bg_url + participants.data[controller.LIVE.getPerformance()].country + ".jpg");
-        controller.ELEMENTS.heartImg.setImg(constants.hearts_url + participants.data[controller.LIVE.getPerformance()].country + ".svg");
-    }
-}
+import { UIUtils } from './UIController.js';
 
 export class StartHandler{
     handle(message){
@@ -41,7 +14,7 @@ export class PerformanceHandler{
     handle(message){
         controller.LIVE.setPerformance(message);
         UIUtils.updatePerformanceData();
-        console.log("Switching to performance " + JSON.stringify(participants.data[controller.LIVE.getPerformance()]));
+        // console.log("Switching to performance " + JSON.stringify(participants.data[controller.LIVE.getPerformance()]));
     }
 }
 
@@ -55,8 +28,8 @@ export class SwitchModeHandler {
 export class LeaveHandler {
     handle(message) {
         const username = message;
+        UIUtils.removeOnlineUser(username);
         controller.ONLINE_LIST.removeUser(username);
-        UIUtils.updateOnlineList();
     }
 }
 
@@ -65,7 +38,7 @@ export class JoinHandler {
         const username = message;
         if (username !== controller.LIVE.getUser()) {
             controller.ONLINE_LIST.addUser(username);
-            UIUtils.updateOnlineList();
+            UIUtils.addOnlineUser(username);
         }
     }
 }
@@ -84,7 +57,9 @@ export class SyncHandler {
             controller.LIVE.setUser(message.user);
             controller.ONLINE_LIST.users = users;
             controller.ONLINE_LIST.removeUser(controller.LIVE.getUser());
-            UIUtils.updateOnlineList();
+            for(let i=0; i<users.length; i++) {
+                UIUtils.addOnlineUser(users[i]);
+            }
         }
         if (message.show) { UIUtils.setShowName(message.show.name); }
     }

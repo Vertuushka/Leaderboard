@@ -19,25 +19,18 @@
     </header>
 
     <div class="wrapper gapMedium feed">
-    {% for participant in participants %}
         <div class="container gapSmall card">
-            <div class="cardHeaderImg" id="participantImg" style="background-image: url('{% static "img/" %}{{ participant.country }}.jpg');">
+            <div class="cardHeaderImg" id="participantImg">
                 <div class="container gapMedium effects">
                     <div class="wrapper gapMedium cardHeader">
                         <div class="container gapSmall">
-                            <p class="footnote" id="country_name">{{ participant.country }}</p>
-                            <h2 class="title"><span id="artist_name">{{ participant.name }}</span> - <span id="song_name">{{ participant.song }}</span></h2>
+                            <p class="footnote" id="country_name"></p>
+                            <h2 class="title"><span id="artist_name"></span> - <span id="song_name"></span></h2>
                         </div>
-                        <img class="heart" id="heartImg" src="{% static 'img/hearts/' %}{{ participant.country }}.svg" alt="">
+                        <img class="heart" id="heartImg" src="{% static 'img/hearts/Switzerland.svg' %}" alt="">
                     </div>
 
                     <div class="wrapper playerVotes" id="online_list">
-                        <div class="wrapper gapMedium playerVote">
-                            <p>Username</p>
-                            <p class="">0</p>
-                            <p class="">0</p>
-                            <p class="">0</p>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -113,7 +106,6 @@
                 </section>
             </div>
         </div>
-        {% endfor %}
     </div>
     <script id="performances_data" type="application/json">
         {{ performances_data|safe }}

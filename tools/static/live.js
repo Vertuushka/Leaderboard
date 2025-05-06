@@ -15,6 +15,47 @@ export function RegisterElement(id, type, handler=null, relativeName=null) {
         ELEMENTS[id] = obj;
 }
 
+export class DummyElement {
+    constructor(element) { this.element = element; }
+    get() { return this.element; }
+}
+
+export class UserElement {
+    constructor(element) {
+        this.element = element;
+        this.nameElement = this.element.querySelector(".username");
+        this.name = this.nameElement.textContent.trim();
+
+        this.criteria = 0;
+        this.gc1Element = this.element.querySelector(".grade-criteria-1");
+        if (this.gc1Element !== null){
+            this.gc1 = this.gc1Element.textContent.trim();
+            this.criteria++;
+        }
+        this.gc2Element = this.element.querySelector(".grade-criteria-2");
+        if (this.gc2Element!== null) {
+            this.gc2 = this.gc2Element.textContent.trim();
+            this.criteria++;
+        }
+        this.gc3Element = this.element.querySelector(".grade-criteria-3");
+        if (this.gc3Element!== null) {
+            this.gc3 = this.gc3Element.textContent.trim();
+            this.criteria++;
+        }
+        this.gc4Element = this.element.querySelector(".grade-criteria-4");
+        if (this.gc4Element!== null) {
+            this.gc4 = this.gc4Element.textContent.trim();
+            this.criteria++;
+        }
+    }
+
+    updateGrade(criteria, grade) {
+        if (this[`gc${criteria}Element`] !== null)
+            this[`gc${criteria}Element`].textContent = grade;
+    }
+
+}
+
 export class ImageElement {
     constructor(element) {
         this.element = element;
@@ -25,12 +66,10 @@ export class ImageElement {
 
 export class BackgroundElement {
     constructor(element) {  
-        console.info("constructing background element");
         this.element = element;
         this.src = this.element.style.backgroundImage;
     }
     setImg(src) { 
-        console.info("setting background image" + src);
         this.element.style.backgroundImage = `url('${src}')`; 
     }
 }
@@ -78,6 +117,7 @@ class Live{
     #user = "";
     #performance_id = 0;
     #state = "LIVE_MODE: stop";
+    #client_performance = 0;
     getUser() {return this.#user;}
 
     setUser(user) {
@@ -94,6 +134,9 @@ class Live{
     getStatus() {return this.#state;}
     setState(state) {this.#state = state;}
 
+    getClientPerformance() {return this.#client_performance;}
+    setClientPerformance(performance_id) {this.#client_performance = performance_id;}
+
     isLive() {
         if (this.#state === "LIVE_MODE: stop") {
             return false;
@@ -104,12 +147,11 @@ class Live{
 
 class OnlineList {
     #users = [];
-    addUser(user) { 
-        this.#users.push(user); 
-    }
+    addUser(user) { this.#users.push(user); }
     removeUser(user) { this.#users = this.#users.filter(u => u !== user); }
     getUsers() { return this.#users; }
+    getIndex(username) { return this.#users.indexOf(username); }
 }
 
-export const ONLINE_LIST = new OnlineList();
 export const LIVE = new Live();
+export const ONLINE_LIST = new OnlineList(LIVE);

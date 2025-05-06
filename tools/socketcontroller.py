@@ -147,10 +147,11 @@ class ConnectHandler(Handler):
         if self.controller.live == True:
             consumer.send_message("LIVE: sync", msg)
             
-        if not user.username in self.controller.online_list:
+        if not user.username in self.controller.online_list and not user.is_staff:
             consumer.broadcast_message("LIVE: join", user.username)
             self.controller.online_list.append(user.username)
-        self.controller.connected_users.append(user.username)
+        if not user.is_staff:
+            self.controller.connected_users.append(user.username)
         
 
 class SocketController:
