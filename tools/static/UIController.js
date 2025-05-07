@@ -48,8 +48,10 @@ export class UIUtils {
 
     static updateGradeInfo(username, performance, criteria, grade) {
         const key = `online_list_user_${username}`
-        if (controller.LIVE.getClientPerformance() == performance-1) {
-            controller.ELEMENTS[key].updateGrade(criteria, grade);
+        if (controller.LIVE.getClientPerformance() == performance) {
+            if (controller.ELEMENTS[key] !== undefined) {
+                controller.ELEMENTS[key].updateGrade(criteria, grade);
+            }
         }
     }
 }

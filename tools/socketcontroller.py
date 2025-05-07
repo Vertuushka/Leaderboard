@@ -29,7 +29,7 @@ def register_handlers():
 
 @database_sync_to_async
 def update_rank(user, performance_id, grade, criteria):
-    performance = Performance.objects.get(id=performance_id)
+    performance = Performance.objects.filter(show=CONTROLLER.show)[performance_id]
     obj = Vote.objects.filter(user=user, performance=performance, criteria=criteria).first()
     if obj:
         obj.grade = grade
@@ -41,9 +41,8 @@ def update_rank(user, performance_id, grade, criteria):
 class UserScoreHandler(Handler):
     def handle(self, consumer, data):
         try:
-            print(data)
             user = consumer.scope["user"]
-            performance_id = data["performance"]+1
+            performance_id = data["performance"]
             grade = data["vote"]
             criteria = data["criteria"]
             async_to_sync(update_rank)(user, performance_id, grade, criteria)

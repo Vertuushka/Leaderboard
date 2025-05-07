@@ -49,3 +49,6 @@ class Vote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     criteria = models.IntegerField(choices=CRITERIA_TYPES)
     grade = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.user} - {self.performance} - {self.criteria} - {self.grade}"

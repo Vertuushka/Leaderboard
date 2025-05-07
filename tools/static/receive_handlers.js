@@ -4,6 +4,7 @@ import { UIUtils } from './UIController.js';
 
 export class StartHandler{
     handle(message){
+        controller.LIVE.reset();
         participants.updatePerformances(message.performances); 
         controller.LIVE.setState("LIVE_MODE: start");
         UIUtils.setShowName(message.show.name);
