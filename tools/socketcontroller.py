@@ -128,7 +128,8 @@ class StartHandler(ProtectedHandler):
 class DisconnectHandler(Handler):
     def handle(self, consumer, data):
         user = consumer.scope["user"]
-        self.controller.connected_users.remove(user.username)
+        if user.username in self.controller.connected_users:
+            self.controller.connected_users.remove(user.username)
         if not user.username in self.controller.connected_users:
             self.controller.online_list.remove(user.username)
             consumer.broadcast_message("LIVE: leave", user.username)
