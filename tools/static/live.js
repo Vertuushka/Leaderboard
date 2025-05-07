@@ -142,9 +142,7 @@ class Live{
     }
 
     reset() {
-        this.#user = "";
         this.#performance_id = 0;
-        this.#state = "LIVE_MODE: stop";
         this.#client_performance = 0;
     }
 }

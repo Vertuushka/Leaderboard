@@ -42,6 +42,7 @@ export class UIUtils {
     }
 
     static removeOnlineUser(username) {
+        console.log(username);
         const el = document.getElementById(`online_list_user_${username}`);
         el.remove();
     }
