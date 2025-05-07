@@ -109,12 +109,20 @@ section {
 .btnGrid button:nth-child(1):hover {
     background-color: var(--1-hover);
 }
+.btnGrid button:nth-child(1).active {
+    color: var(--bg);
+    background-color: var(--1);
+}
 
 .btnGrid button:nth-child(2) {
     border-color: var(--2);
 }
 .btnGrid button:nth-child(2):hover {
     background-color: var(--2-hover);
+}
+.btnGrid button:nth-child(2).active {
+    color: var(--bg);
+    background-color: var(--2);
 }
 
 .btnGrid button:nth-child(3) {
@@ -123,12 +131,20 @@ section {
 .btnGrid button:nth-child(3):hover {
     background-color: var(--3-hover);
 }
+.btnGrid button:nth-child(3).active {
+    color: var(--bg);
+    background-color: var(--3);
+}
 
 .btnGrid button:nth-child(4) {
     border-color: var(--4);
 }
 .btnGrid button:nth-child(4):hover {
     background-color: var(--4-hover);
+}
+.btnGrid button:nth-child(4).active {
+    color: var(--bg);
+    background-color: var(--4);
 }
 
 .btnGrid button:nth-child(5) {
@@ -137,12 +153,20 @@ section {
 .btnGrid button:nth-child(5):hover {
     background-color: var(--5-hover);
 }
+.btnGrid button:nth-child(5).active {
+    color: var(--bg);
+    background-color: var(--5);
+}
 
 .btnGrid button:nth-child(6) {
     border-color: var(--6);
 }
 .btnGrid button:nth-child(6):hover {
     background-color: var(--6-hover);
+}
+.btnGrid button:nth-child(6).active {
+    color: var(--bg);
+    background-color: var(--6);
 }
 
 .btnGrid button:nth-child(7) {
@@ -151,12 +175,20 @@ section {
 .btnGrid button:nth-child(7):hover {
     background-color: var(--7-hover);
 }
+.btnGrid button:nth-child(7).active {
+    color: var(--bg);
+    background-color: var(--7);
+}
 
 .btnGrid button:nth-child(8) {
     border-color: var(--8);
 }
 .btnGrid button:nth-child(8):hover {
     background-color: var(--8-hover);
+}
+.btnGrid button:nth-child(8).active {
+    color: var(--bg);
+    background-color: var(--8);
 }
 
 .btnGrid button:nth-child(9) {
@@ -165,10 +197,18 @@ section {
 .btnGrid button:nth-child(9):hover {
     background-color: var(--10-hover);
 }
+.btnGrid button:nth-child(9).active {
+    color: var(--bg);
+    background-color: var(--10);
+}
 
 .btnGrid button:nth-child(10) {
     border-color: var(--12);
 }
 .btnGrid button:nth-child(10):hover {
     background-color: var(--12-hover);
+}
+.btnGrid button:nth-child(10).active {
+    color: var(--bg);
+    background-color: var(--12);
 }

@@ -1,0 +1,17 @@
+.btn {
+    aspect-ratio: 1;
+    padding: var(--medium);
+
+    border: none;
+    border-radius: 100%;
+
+    color: var(--text-primary);
+    background: none;
+    
+    cursor: pointer;
+
+    display: grid;
+    place-content: center;
+}
+
+
