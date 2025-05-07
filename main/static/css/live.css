@@ -1,73 +1,57 @@
 main {
-    min-height: 100%;
-    overflow: hidden;
+    height: 100%;
+
+    /* overflow: hidden; */
     box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: minmax(256px, 512px);
+    justify-content: center;
 }
 
-header {
+nav {
     padding: var(--medium) var(--large);
 }
 
-.feed {
-    padding: var(--medium);
-
-    box-sizing: border-box;
-
-    width: 100vw;
-    min-height: 100%;
-
-    overflow-y: scroll;
-    scroll-snap-type: x mandatory;
-}
-
-.card {
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
-
-    min-width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-
+header {
     border-radius: var(--medium);
-    border: 1px solid var(--primary);
-    overflow: hidden;
-}
+    outline: 1px solid var(--primary);
 
-.cardHeaderImg {
+    box-sizing: border-box;
+    overflow: hidden;
+
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
 }
 
+.headerBody {
+    height: 100%;
+    background: linear-gradient(0deg, rgba(10, 10, 10, 0.75) 0%, rgba(10, 10, 10, 0.25) 100%);
+
+    display: grid;
+    grid-template-rows: minmax(max-content, 1fr) max-content;
+}
+
+.headerContentWrapper {
+    padding: var(--large);
+}
+
+.heart {
+    aspect-ratio: 1;
+    width: 48px;
+}
+
 .effects {
     padding: var(--large) 0;
-
     backdrop-filter: blur(var(--minimal));
     background: linear-gradient(0deg, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0.5) 100%);
 }
 
-.cardHeader {
-    padding: var(--medium) var(--large);
-}
-
-.cardHeader div {
-    flex-grow: 1;
-}
-
-.cardHeader img {
-    aspect-ratio: 1;
-    height: 52px;
-}
-
 .playerVotes {
     padding: var(--medium) 0;
-
-    border-width: 1px 0 1px 0;
-    border-style: solid;
-    border-color: var(--primary);
-
+    border-top: 1px solid var(--primary);
     backdrop-filter: blur(var(--large));
-
     background-color: var(--primary);
 }
 
@@ -76,15 +60,29 @@ header {
 }
 
 .forms {
+    padding: var(--large);
     height: 100%;
     overflow-y: scroll;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none; 
+}
+.forms::-webkit-scrollbar {
+    display: none;
 }
 
-.card form {
-    padding: var(--large);
+section {
+    padding: var(--large) 0;
+    align-items: center;
+}
+
+.cardFormHeader {
+    align-items: center;
 }
 
 .btnGrid {
+    width: 100%;
+
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(2, 1fr);

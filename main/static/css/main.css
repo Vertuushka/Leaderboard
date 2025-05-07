@@ -56,18 +56,13 @@
 }
 
 body {
-    height: 100vh;
-    box-sizing: border-box;
+    padding: 0 var(--medium);
 
+    box-sizing: border-box;
     overflow: hidden;
 
-    display: grid;
-    grid-template-rows: max-content 1fr;
-}
-
-nav {
-    justify-content: space-between;
-    padding: var(--medium);
+    display: flex;
+    flex-direction: column;
 }
 
 .title {

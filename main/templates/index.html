@@ -14,99 +14,100 @@
         {{error}}
     {% endif %}
 
-    <header class="wrapper gapLarge center">
+    <nav class="wrapper gapLarge center">
         <h1 class="title grow" id="current_show_label">{{ show }}</h1>
+
+        <div class="wrapper gapSmall">
+            <button class="btn">P</button> <!-- previous -->
+            <button class="btn">L</button> <!-- live  -->
+            <button class="btn">N</button> <!-- next -->
+        </div>
+    </nav>
+
+    <header id="participantImg">
+        <div class="container headerBody">
+            <div class="wrapper gapLarge center headerContentWrapper">
+                <div class="container gapSmall grow">
+                    <p class="footnote" id="country_name"></p>
+                    <h2><span class="title" id="artist_name"></span> - <span class="title" id="song_name"></span></h2>
+                </div>
+        
+                <img class="heart" id="heartImg" src="{% static 'img/hearts/Switzerland.svg' %}" alt="">
+            </div>
+            
+            <div class="wrapper playerVotes gridSpan" id="online_list"></div>
+        </div>
     </header>
 
-    <div class="wrapper gapMedium feed">
-        <div class="container gapSmall card">
-            <div class="cardHeaderImg" id="participantImg">
-                <div class="container gapMedium effects">
-                    <div class="wrapper gapMedium cardHeader">
-                        <div class="container gapSmall">
-                            <p class="footnote" id="country_name"></p>
-                            <h2 class="title"><span id="artist_name"></span> - <span id="song_name"></span></h2>
-                        </div>
-                        <img class="heart" id="heartImg" src="{% static 'img/hearts/Switzerland.svg' %}" alt="">
-                    </div>
-
-                    <div class="wrapper playerVotes" id="online_list">
-                    </div>
-                </div>
+    <div class="container forms">
+        <section class="container gapLarge" action="">
+            <div class="container gapSmall cardFormHeader">
+                <h2 class="title grow">Musical Quality</h2>
+                <p class="footnote">Song, vocal, arrangement, melody, lyrics</p>
             </div>
 
-            <div class="container gapLarge forms">
-                <section class="container gapLarge" action="">
-                    <div class="container gapSmall cardFormHeader">
-                        <div class="wrapper center">
-                            <h2 class="title grow">Question</h2>
-                            <p class="footnote">1 of 3</p>
-                        </div>
-                        <p class="footnote">Description</p>
-                    </div>
-        
-                    <div class="btnGrid gapMedium" data-criteria="2">
-                        <button class="voteBtn">1</button>
-                        <button class="voteBtn">2</button>
-                        <button class="voteBtn">3</button>
-                        <button class="voteBtn">4</button>
-                        <button class="voteBtn">5</button>
-                        <button class="voteBtn">6</button>
-                        <button class="voteBtn">7</button>
-                        <button class="voteBtn">8</button>
-                        <button class="voteBtn">10</button>
-                        <button class="voteBtn">12</button>
-                    </div>
-                </section>
-    
-                <section class="container gapLarge" action="">
-                    <div class="container gapSmall cardFormHeader">
-                        <div class="wrapper center">
-                            <h2 class="title grow">Question</h2>
-                            <p class="footnote">2 of 3</p>
-                        </div>
-                        <p class="footnote">Description</p>
-                    </div>
-        
-                    <div class="btnGrid gapMedium" data-criteria="3">
-                        <button class="voteBtn">1</button>
-                        <button class="voteBtn">2</button>
-                        <button class="voteBtn">3</button>
-                        <button class="voteBtn">4</button>
-                        <button class="voteBtn">5</button>
-                        <button class="voteBtn">6</button>
-                        <button class="voteBtn">7</button>
-                        <button class="voteBtn">8</button>
-                        <button class="voteBtn">10</button>
-                        <button class="voteBtn">12</button>
-                    </div>
-                </section>
-    
-                <section class="container gapLarge" action="">
-                    <div class="container gapSmall cardFormHeader">
-                        <div class="wrapper center">
-                            <h2 class="title grow">Question</h2>
-                            <p class="footnote">3 of 3</p>
-                        </div>
-                        <p class="footnote">Description</p>
-                    </div>
-        
-                    <div class="btnGrid gapMedium" data-criteria="4">
-                        <button class="voteBtn">1</button>
-                        <button class="voteBtn">2</button>
-                        <button class="voteBtn">3</button>
-                        <button class="voteBtn">4</button>
-                        <button class="voteBtn">5</button>
-                        <button class="voteBtn">6</button>
-                        <button class="voteBtn">7</button>
-                        <button class="voteBtn">8</button>
-                        <button class="voteBtn">10</button>
-                        <button class="voteBtn">12</button>
-                    </div>
-                </section>
+            <div class="btnGrid gapMedium" data-criteria="2">
+                <button class="voteBtn">1</button>
+                <button class="voteBtn">2</button>
+                <button class="voteBtn">3</button>
+                <button class="voteBtn">4</button>
+                <button class="voteBtn">5</button>
+                <button class="voteBtn">6</button>
+                <button class="voteBtn">7</button>
+                <button class="voteBtn">8</button>
+                <button class="voteBtn">10</button>
+                <button class="voteBtn">12</button>
             </div>
-        </div>
+
+            <p class="footnote">1 of 3</p>
+        </section>
+
+        <section class="container gapLarge" action="">
+            <div class="container gapSmall cardFormHeader">
+                <h2 class="title grow">Stage Performance</h2>
+                <p class="footnote">Artist’s charisma, delivery</p>
+            </div>
+
+            <div class="btnGrid gapMedium" data-criteria="2">
+                <button class="voteBtn">1</button>
+                <button class="voteBtn">2</button>
+                <button class="voteBtn">3</button>
+                <button class="voteBtn">4</button>
+                <button class="voteBtn">5</button>
+                <button class="voteBtn">6</button>
+                <button class="voteBtn">7</button>
+                <button class="voteBtn">8</button>
+                <button class="voteBtn">10</button>
+                <button class="voteBtn">12</button>
+            </div>
+
+            <p class="footnote">2 of 3</p>
+        </section>
+
+        <section class="container gapLarge" action="">
+            <div class="container gapSmall cardFormHeader">
+                <h2 class="title grow">Visual Presentation</h2>
+                <p class="footnote">Stage setup, lighting, costumes, graphics</p>
+            </div>
+
+            <div class="btnGrid gapMedium" data-criteria="2">
+                <button class="voteBtn">1</button>
+                <button class="voteBtn">2</button>
+                <button class="voteBtn">3</button>
+                <button class="voteBtn">4</button>
+                <button class="voteBtn">5</button>
+                <button class="voteBtn">6</button>
+                <button class="voteBtn">7</button>
+                <button class="voteBtn">8</button>
+                <button class="voteBtn">10</button>
+                <button class="voteBtn">12</button>
+            </div>
+
+            <p class="footnote">3 of 3</p>
+        </section>
     </div>
+
+
     <script id="performances_data" type="application/json">
         {{ performances_data|safe }}
     </script>
