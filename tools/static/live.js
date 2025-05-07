@@ -50,8 +50,10 @@ export class UserElement {
     }
 
     updateGrade(criteria, grade) {
-        if (this[`gc${criteria}Element`] !== null)
+        if (this[`gc${criteria}Element`] !== null) {
             this[`gc${criteria}Element`].textContent = grade;
+            this[`gc${criteria}Element`].style.color = `var(--${grade})`;
+        }
     }
 
 }
@@ -83,9 +85,8 @@ export class ButtonElement {
     }
     setText(text) {this.element.textContent = text;}
     setClickHandler(clickHandler) {
-        if (this.clickHandler === null) {
-            this.clickHandler = clickHandler;
-        } else {
+        if (this.clickHandler === null) { this.clickHandler = clickHandler; } 
+        else {
             this.element.removeEventListener("click", this.clickHandler);
             this.clickHandler = clickHandler;
         }
@@ -104,9 +105,7 @@ export class TextElement {
     loadFromArray(array) {
         this.clear();
         for (let i = 0; i < array.length; i++) {
-            if (i > 0) {
-                this.addText(", ");
-            }
+            if (i > 0) { this.addText(", "); }
             const element = array[i]
             this.addText(element);
         }
@@ -134,24 +133,30 @@ class Live{
     getStatus() {return this.#state;}
     setState(state) {this.#state = state;}
 
-    getClientPerformance() {return this.#client_performance;}
+    getClientPerformance() { return this.#client_performance;}
     setClientPerformance(performance_id) {this.#client_performance = performance_id;}
 
     isLive() {
-        if (this.#state === "LIVE_MODE: stop") {
-            return false;
-        }
+        if (this.#state === "LIVE_MODE: stop") { return false; }
         return true;
     }
+}
+
+class Live_Grades{
+    grades = {};
+    onlineGrades = {};
 }
 
 class OnlineList {
     #users = [];
     addUser(user) { this.#users.push(user); }
+    setUsers(users) { this.#users = users; }
     removeUser(user) { this.#users = this.#users.filter(u => u !== user); }
     getUsers() { return this.#users; }
     getIndex(username) { return this.#users.indexOf(username); }
+    isOnline(username) { return this.#users.includes(username); }
 }
 
 export const LIVE = new Live();
 export const ONLINE_LIST = new OnlineList(LIVE);
+export let grades = new Live_Grades();

@@ -6,7 +6,7 @@ import * as tools from "./live.js";
 function createOnlineListElement(username) {
     const el = document.createElement("div");
     el.classList.add("wrapper", "gapMedium", "playerVote");
-    el.id = `online_list_user${controller.ONLINE_LIST.getIndex(username)}`;
+    el.id = `online_list_user_${username}`;
     el.innerHTML = `
         <p class="username">${username}</p>
         <p class="grade-criteria-1"></p>
@@ -42,7 +42,14 @@ export class UIUtils {
     }
 
     static removeOnlineUser(username) {
-        const el = document.getElementById(`online_list_user${controller.ONLINE_LIST.getIndex(username)}`);
+        const el = document.getElementById(`online_list_user_${username}`);
         el.remove();
+    }
+
+    static updateGradeInfo(username, performance, criteria, grade) {
+        const key = `online_list_user_${username}`
+        if (controller.LIVE.getClientPerformance() == performance-1) {
+            controller.ELEMENTS[key].updateGrade(criteria, grade);
+        }
     }
 }

@@ -13,6 +13,7 @@ export class StartHandler{
 export class PerformanceHandler{
     handle(message){
         controller.LIVE.setPerformance(message);
+        controller.LIVE.setClientPerformance(message);
         UIUtils.updatePerformanceData();
         // console.log("Switching to performance " + JSON.stringify(participants.data[controller.LIVE.getPerformance()]));
     }
@@ -50,12 +51,13 @@ export class SyncHandler {
         const performance = message.current_performance;
         if (performance !== undefined) {
             controller.LIVE.setPerformance(performance);
+            controller.LIVE.setClientPerformance(performance);
             UIUtils.updatePerformanceData();
         }
         const users = message.users;
         if (users !== undefined) {
             controller.LIVE.setUser(message.user);
-            controller.ONLINE_LIST.users = users;
+            controller.ONLINE_LIST.setUsers(users);
             controller.ONLINE_LIST.removeUser(controller.LIVE.getUser());
             for(let i=0; i<users.length; i++) {
                 UIUtils.addOnlineUser(users[i]);
@@ -65,10 +67,20 @@ export class SyncHandler {
     }
 }
 
+export class UserShareScoreHandler {
+    handle(message) {
+        const username = message.user;
+        const performance = message.performance
+        const criteria = message.criteria;
+        const grade = message.grade;
+        console.log(username, performance, criteria, grade)
+        // controller.grades[username][performance][criteria] = grade;
+        UIUtils.updateGradeInfo(username, performance, criteria, grade);
+    }
+}
+
 export class ErrorHandler {
     handle(message) {
         console.error(message);
     }
 }
-
-
