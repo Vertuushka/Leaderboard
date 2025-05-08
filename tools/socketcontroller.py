@@ -120,6 +120,14 @@ class StartHandler(ProtectedHandler):
                 })
             context["performances"] = json.dumps(performances_data)
             context["performancesCount"] = count
+            all_votes = Vote.objects.filter(performance__show=self.controller.show)
+            if all_votes:
+                context["all_votes"] = list(all_votes.values(
+                    "performance_id",
+                    "criteria",
+                    "grade",
+                    "user__username",
+                ))
         except Exception as e:
             consumer.send_error(e)
             return
@@ -182,7 +190,7 @@ class SocketController:
             self.handlers = {}
             self.state = "LIVE_MODE: stop"
             self.live = False
-            self.show = None
+            self.show = GlobalSettings.objects.get(id=1).state
             self.performances = []
             self.current_performance = 0
             self.connected_users = []
