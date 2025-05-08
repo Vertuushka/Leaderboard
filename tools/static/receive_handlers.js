@@ -1,6 +1,7 @@
 import * as controller from './live.js';
 import * as participants from './tools_shared.js'
 import { UIUtils } from './UIController.js';
+import {data} from './tools_shared.js'
 
 export class StartHandler{
     handle(message){
@@ -66,6 +67,19 @@ export class SyncHandler {
             }
         }
         if (message.show) { UIUtils.setShowName(message.show.name); }
+        if (message.votes !== undefined) {
+
+            for (let i=0; i<message.votes.length; i++) {
+                const id = message.votes[i].performance_id;
+                const index = data.findIndex(performance => performance.id === id);
+                if (index !== -1) {
+                    if (controller.grades[index] === undefined) {
+                        controller.grades[index] = {};
+                    }
+                    controller.grades[index][message.votes[i].criteria] = message.votes[i].grade;
+                }
+            }
+        }
     }
 }
 

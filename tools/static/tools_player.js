@@ -15,16 +15,9 @@ function RegisterElements() {
             const block = groups.find(groups => groups.includes(btn))
             block.forEach(btn => {
                 btn.classList.remove("active");
-                if (tools.grades[tools.LIVE.getClientPerformance()] !== undefined && tools.grades[tools.LIVE.getClientPerformance()].includes(btn)) {
-                    const index = tools.grades[tools.LIVE.getClientPerformance()].indexOf(btn);
-                    if (index > -1)
-                        tools.grades[tools.LIVE.getClientPerformance()].splice(index, 1);
-                }
             })
             btn.classList.add("active");
-            if (tools.grades[tools.LIVE.getClientPerformance()] === undefined)
-                tools.grades[tools.LIVE.getClientPerformance()] = [];
-            tools.grades[tools.LIVE.getClientPerformance()].push(btn);
+            
         })
         tools.RegisterElement(btn, tools.ButtonElement, new VoteHandler(), `voteBtn${i}`);
     })

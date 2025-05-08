@@ -146,6 +146,12 @@ class ConnectHandler(Handler):
         }
         if self.controller.show:
             msg["show"] = model_to_dict(self.controller.show)
+        try:
+            votes = Vote.objects.filter(user=user, performance__show=self.controller.show)
+            if votes:
+                msg["votes"] = list(votes.values())
+        except Exception as e:
+            consumer.send_error(build_error(e))
         if self.controller.live == True:
             consumer.send_message("LIVE: sync", msg)
             

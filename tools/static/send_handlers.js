@@ -24,6 +24,9 @@ export class VoteHandler {
                 "vote": parseInt(this.textContent.trim())
             }
         }
+        if (live.grades[data.message.performance] === undefined) 
+            live.grades[data.message.performance] = {};
+        live.grades[data.message.performance][data.message.criteria] = data.message.vote;
         SOCKET.send(data);
     }
 }

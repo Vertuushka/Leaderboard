@@ -42,12 +42,18 @@ export class UIUtils {
             }
         }
 
-        if (controller.grades[key]!== undefined) {
-            for (let i = 0; i < constants.getGradeButtonsCount(); i++) {
-                if (controller.grades[key]!== undefined) {
-                    controller.grades[key].forEach(btn => {
-                        btn.classList.add("active");
-                    });
+        if (controller.grades[controller.LIVE.getClientPerformance()]!== undefined) {
+            if (constants.getGradeButtonsCount() === constants.grade_grand_final) {
+                for (let i in constants.grand_final_criteria) {
+                    let criteria = constants.grand_final_criteria[i];
+                    if (controller.grades[controller.LIVE.getClientPerformance()][criteria]!== undefined) {
+                        let grade = controller.grades[controller.LIVE.getClientPerformance()][criteria];
+                        if (controller.grades[controller.LIVE.getClientPerformance()][criteria] === 10)
+                            grade = 9;
+                        if (controller.grades[controller.LIVE.getClientPerformance()][criteria] === 12)
+                            grade = 10;
+                        controller.ELEMENTS[`voteBtn${grade + 10 * (criteria - 2) - 1}`].element.classList.add("active");
+                    }
                 }
             }
         }
