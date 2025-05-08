@@ -41,16 +41,18 @@ export class UIUtils {
                 controller.ELEMENTS[`voteBtn${i}`].element.classList.remove("active");
             }
         }
+        
+        const performance = controller.LIVE.getClientPerformance();
 
-        if (controller.grades[controller.LIVE.getClientPerformance()]!== undefined) {
+        if (controller.grades[performance]!== undefined) {
             if (constants.getGradeButtonsCount() === constants.grade_grand_final) {
                 for (let i in constants.grand_final_criteria) {
                     let criteria = constants.grand_final_criteria[i];
-                    if (controller.grades[controller.LIVE.getClientPerformance()][criteria]!== undefined) {
-                        let grade = controller.grades[controller.LIVE.getClientPerformance()][criteria];
-                        if (controller.grades[controller.LIVE.getClientPerformance()][criteria] === 10)
+                    if (controller.grades[performance][criteria]!== undefined) {
+                        let grade = controller.grades[performance][criteria];
+                        if (controller.grades[performance][criteria] === 10)
                             grade = 9;
-                        if (controller.grades[controller.LIVE.getClientPerformance()][criteria] === 12)
+                        if (controller.grades[performance][criteria] === 12)
                             grade = 10;
                         controller.ELEMENTS[`voteBtn${grade + 10 * (criteria - 2) - 1}`].element.classList.add("active");
                     }
@@ -60,17 +62,7 @@ export class UIUtils {
         const users = controller.ONLINE_LIST.getUsers();
         for (let i in users) {
             const username = users[i];
-            if (controller.grades.onlineGrades[username]!== undefined) {
-                if (controller.grades.onlineGrades[username][controller.LIVE.getClientPerformance()]!== undefined) {
-                    for (let i in constants.grand_final_criteria) {
-                        UIUtils.updateGradeInfo(username, controller.LIVE.getClientPerformance(), constants.grand_final_criteria[i], controller.grades.onlineGrades[username][controller.LIVE.getClientPerformance()][constants.grand_final_criteria[i]]);
-                    }
-                    return;
-                }
-            }
-            for (let i in constants.grand_final_criteria) {
-                UIUtils.updateGradeInfo(username, controller.LIVE.getClientPerformance(), constants.grand_final_criteria[i], "");
-            }
+            controller.grades.updateOnlineGradeData(username);
         }
 
     }
@@ -82,13 +74,7 @@ export class UIUtils {
         if (controller.ELEMENTS.online_list.isEmpty() === false && controller.ELEMENTS.online_list.element.querySelector("#online_list_dummy")) {
             controller.ELEMENTS.online_list.element.querySelector("#online_list_dummy").remove();
         }
-        if(controller.grades.onlineGrades[username] !== undefined) {
-            if (controller.grades.onlineGrades[username][controller.LIVE.getClientPerformance()]!== undefined) {
-                for (let i in constants.grand_final_criteria) {
-                    UIUtils.updateGradeInfo(username, controller.LIVE.getClientPerformance(), constants.grand_final_criteria[i], controller.grades.onlineGrades[username][controller.LIVE.getClientPerformance()][constants.grand_final_criteria[i]]);
-                }
-            }
-        }
+        controller.grades.updateOnlineGradeData(username);
     }
 
     static removeOnlineUser(username) {

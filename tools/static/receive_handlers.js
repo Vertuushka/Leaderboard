@@ -69,13 +69,8 @@ export class SyncHandler {
             for (let i=0; i<message.all_votes.length; i++) {
                 const id = message.all_votes[i].performance_id;
                 const index = data.findIndex(performance => performance.id === id);
-                if (index!== -1) {
-                    if (controller.grades.onlineGrades[message.all_votes[i].user__username] === undefined)
-                        controller.grades.onlineGrades[message.all_votes[i].user__username] = {};
-                    if (controller.grades.onlineGrades[message.all_votes[i].user__username][index] === undefined) 
-                        controller.grades.onlineGrades[message.all_votes[i].user__username][index] = {};
-                    controller.grades.onlineGrades[message.all_votes[i].user__username][index][message.all_votes[i].criteria] = message.all_votes[i].grade;
-                }
+                if (index!== -1)
+                    controller.grades.addOnlineGradeData(message.all_votes[i].user__username, index, message.all_votes[i].criteria, message.all_votes[i].grade)
             }
         }
         if (users !== undefined) {
@@ -100,11 +95,7 @@ export class UserShareScoreHandler {
         const performance = message.performance
         const criteria = message.criteria;
         const grade = message.grade;
-        if (controller.grades.onlineGrades[username] === undefined)
-            controller.grades.onlineGrades[username] = {}
-        if (controller.grades.onlineGrades[username][performance] === undefined)
-            controller.grades.onlineGrades[username][performance] = {}
-        controller.grades.onlineGrades[username][performance][criteria] = grade
+        controller.grades.addOnlineGradeData(username, performance, criteria, grade);
         UIUtils.updateGradeInfo(username, performance, criteria, grade);
     }
 }

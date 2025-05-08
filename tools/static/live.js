@@ -1,3 +1,6 @@
+import { UIUtils } from "./UIController.js";
+import { grand_final_criteria } from "./shared_constants.js"
+
 export const ELEMENTS = {};
 
 export function RegisterElement(id, type, handler=null, relativeName=null) {
@@ -172,6 +175,27 @@ class Live{
 class Live_Grades{
     grades = {};
     onlineGrades = {};
+    updateOnlineGradeData(username) {
+        const performance = LIVE.getClientPerformance()
+        if(this.onlineGrades[username] !== undefined) {
+            if (this.onlineGrades[username][performance] !== undefined) {
+                for (let i in grand_final_criteria) {
+                    UIUtils.updateGradeInfo(username, performance, grand_final_criteria[i], this.onlineGrades[username][performance][grand_final_criteria[i]])
+                }
+                return;
+            }
+        }
+        for (let i in grand_final_criteria) {
+            UIUtils.updateGradeInfo(username, performance, grand_final_criteria[i], "");
+        }
+    }
+    addOnlineGradeData(username, performance, criteria, grade) {
+        if (this.onlineGrades[username] === undefined)
+            this.onlineGrades[username] = {};
+        if (this.onlineGrades[username][performance] === undefined)
+            this.onlineGrades[username][performance] = {};
+        this.onlineGrades[username][performance][criteria] = grade;
+    }
 }
 
 class OnlineList {
