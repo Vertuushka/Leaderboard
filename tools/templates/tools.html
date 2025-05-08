@@ -1,30 +1,51 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEADERBOARD - admin</title>
+{% extends 'base.html' %}
+
+{% block style %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/live.css' %}">
     <script type="module" src="{% static 'socket.js' %}"></script>
     <script type="module" src="{% static 'tools_admin.js' %}"></script>
     <script type="module" src="{% static 'tools_shared.js' %}"></script>
-</head>
-<body>
-    <p>Online list: <span id="online_list"></span></p>
-    <hr>
-    <p>Current show: <span id="current_show_label">{{ show }}</span></p>
-    <hr>
-    <p>Current performance: <span id="performance_id"></span></p>
-    <p>Song: <span id="song_name"></span></p>
-    <p>Country: <span id="country_name"></span></p>
-    <p>Name: <span id="artist_name"></span></p>
-    <button id="live_start">Start</button>
-    <button id="live_prev">Previous</button>
-    <button id="live_next">Next</button>
-    <button>Switch to scoreboard</button>
-    <button>Stop live</button>
+{% endblock %}
+
+{% block content %}
+
+    {% if error %}
+        {{error}}
+    {% endif %}
+    <nav class="wrapper gapLarge center">
+        <h1 class="title grow" id="current_show_label">{{ show }}</h1>
+    </nav>
+
+    <header id="participantImg">
+        <div class="container headerBody">
+            <div class="wrapper gapLarge center headerContentWrapper">
+                <div class="container gapSmall grow">
+                    <p class="footnote">
+                        <span id="country_name"></span> (pid: <span id="performance_id"></span> )
+                    </p>
+                    <h2><span class="title" id="artist_name"></span> - <span class="title" id="song_name"></span></h2>
+                </div>
+        
+                <img class="heart" id="heartImg" src="{% static 'img/hearts/Switzerland.svg' %}" alt="">
+            </div>
+            
+            <div class="wrapper playerVotes gridSpan" id="online_list">
+                <p class="playerVote" id="online_list_dummy">No users connected.</p>
+            </div>
+        </div>
+    </header>
+    <div class="container forms">
+        <section class="container">
+            <button id="live_start">Start</button>
+            <button id="live_prev">Previous</button>
+            <button id="live_next">Next</button>
+            <button>Switch to scoreboard</button>
+            <button>Stop live</button>
+        </section>
+    </div>
+
     <script id="performances_data" type="application/json">
         {{ performances|safe }}
     </script>
-</body>
-</html>
+{% endblock %}
