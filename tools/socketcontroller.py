@@ -131,7 +131,7 @@ class DisconnectHandler(Handler):
         user = consumer.scope["user"]
         if user.username in self.controller.connected_users:
             self.controller.connected_users.remove(user.username)
-        if not user.username in self.controller.connected_users:
+        if not user.username in self.controller.connected_users and user.username in self.controller.online_list:
             self.controller.online_list.remove(user.username)
             consumer.broadcast_message("LIVE: leave", user.username)
 

@@ -6,7 +6,6 @@ export const SHOW_NAMES = {
     "GF": "Grand Final",
 }
 
-export const onlineListDummy = document.createElement("p");
-onlineListDummy.id = "online_list_dummy";
-onlineListDummy.classList.add("playerVote");
-onlineListDummy.textContent = "No users connected.";
+let onlineListDummy;
+export function setOnlineListDummy(el) { onlineListDummy = el;}
+export function getOnlineListDummy() { return onlineListDummy; }

@@ -33,8 +33,12 @@ function init() {
     RegisterElements();
     const el = document.querySelector(`#${data_el}`);
     data = JSON.parse(el.textContent.trim());
+    tools.LIVE.setPerformancesCount(data.length);
     el.remove();
-    
+
+    const online_dummy = document.querySelector("#online_list_dummy");
+    constants.setOnlineListDummy(online_dummy);
+
     updatePerformanceInfo();
 }
 

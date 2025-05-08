@@ -50,7 +50,7 @@ export class UIUtils {
         const el = document.getElementById(`online_list_user_${username}`);
         el.remove();
         if (controller.ELEMENTS.online_list.isEmpty() === true) {
-            controller.ELEMENTS.online_list.element.appendChild(constants.onlineListDummy);
+            controller.ELEMENTS.online_list.element.appendChild(constants.getOnlineListDummy());
         }
     }
 

@@ -14,9 +14,17 @@ export class C_HandlePrevious {
 export class C_HandleNext {
     handle() {
         const currentPerf = LIVE.getClientPerformance();
-        if (currentPerf < LIVE.getPerformancesCount()) {
+        if (currentPerf < LIVE.getPerformancesCount() - 1) {
             LIVE.setClientPerformance(currentPerf + 1);
             UIUtils.updatePerformanceData("client");
+        }
+    }
+}
+
+export class C_HandleLive {
+    handle() {
+        if (LIVE.isLive()) {
+            UIUtils.updatePerformanceData();
         }
     }
 }

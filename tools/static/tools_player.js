@@ -20,6 +20,8 @@ function RegisterElements() {
         tools.RegisterElement(btn, tools.ButtonElement, new VoteHandler(), `voteBtn${i}`);
     })
     tools.RegisterElement("C_Previous", tools.ButtonElement, new C_Handlers.C_HandlePrevious());
+    tools.RegisterElement("C_Next", tools.ButtonElement, new C_Handlers.C_HandleNext());
+    tools.RegisterElement("C_Live", tools.ButtonElement, new C_Handlers.C_HandleLive());
 }
 
 function init() {
