@@ -152,6 +152,17 @@ class ConnectHandler(Handler):
                 msg["votes"] = list(votes.values())
         except Exception as e:
             consumer.send_error(build_error(e))
+        try: 
+            all_votes = Vote.objects.filter(performance__show=self.controller.show).exclude(user=user).select_related("user")
+            if all_votes:
+                msg["all_votes"] = list(all_votes.values(
+                    "performance_id",
+                    "criteria",
+                    "grade",
+                    "user__username",
+                ))
+        except Exception as e:
+            consumer.send_error(build_error(e))
         if self.controller.live == True:
             consumer.send_message("LIVE: sync", msg)
             

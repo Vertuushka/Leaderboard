@@ -53,14 +53,6 @@ export class SyncHandler {
         controller.LIVE.setState(state);
         const performance = message.current_performance;
         const users = message.users;
-        if (users !== undefined) {
-            controller.LIVE.setUser(message.user);
-            controller.ONLINE_LIST.setUsers(users);
-            controller.ONLINE_LIST.removeUser(controller.LIVE.getUser());
-            for(let i=0; i<users.length; i++) {
-                UIUtils.addOnlineUser(users[i]);
-            }
-        }
         if (message.show) { UIUtils.setShowName(message.show.name); }
         if (message.votes !== undefined) {
             for (let i=0; i<message.votes.length; i++) {
@@ -71,6 +63,27 @@ export class SyncHandler {
                         controller.grades[index] = {};
                     controller.grades[index][message.votes[i].criteria] = message.votes[i].grade;
                 }
+            }
+        }
+        if (message.all_votes !== undefined) {
+            for (let i=0; i<message.all_votes.length; i++) {
+                const id = message.all_votes[i].performance_id;
+                const index = data.findIndex(performance => performance.id === id);
+                if (index!== -1) {
+                    if (controller.grades.onlineGrades[message.all_votes[i].user__username] === undefined)
+                        controller.grades.onlineGrades[message.all_votes[i].user__username] = {};
+                    if (controller.grades.onlineGrades[message.all_votes[i].user__username][index] === undefined) 
+                        controller.grades.onlineGrades[message.all_votes[i].user__username][index] = {};
+                    controller.grades.onlineGrades[message.all_votes[i].user__username][index][message.all_votes[i].criteria] = message.all_votes[i].grade;
+                }
+            }
+        }
+        if (users !== undefined) {
+            controller.LIVE.setUser(message.user);
+            controller.ONLINE_LIST.setUsers(users);
+            controller.ONLINE_LIST.removeUser(controller.LIVE.getUser());
+            for(let i=0; i<users.length; i++) {
+                UIUtils.addOnlineUser(users[i]);
             }
         }
         if (performance !== undefined) {
@@ -87,8 +100,11 @@ export class UserShareScoreHandler {
         const performance = message.performance
         const criteria = message.criteria;
         const grade = message.grade;
-        console.log(username, performance, criteria, grade)
-        // controller.grades[username][performance][criteria] = grade;
+        if (controller.grades.onlineGrades[username] === undefined)
+            controller.grades.onlineGrades[username] = {}
+        if (controller.grades.onlineGrades[username][performance] === undefined)
+            controller.grades.onlineGrades[username][performance] = {}
+        controller.grades.onlineGrades[username][performance][criteria] = grade
         UIUtils.updateGradeInfo(username, performance, criteria, grade);
     }
 }

@@ -42,7 +42,6 @@ export class UIUtils {
             }
         }
 
-
         if (controller.grades[controller.LIVE.getClientPerformance()]!== undefined) {
             if (constants.getGradeButtonsCount() === constants.grade_grand_final) {
                 for (let i in constants.grand_final_criteria) {
@@ -58,6 +57,21 @@ export class UIUtils {
                 }
             }
         }
+        const users = controller.ONLINE_LIST.getUsers();
+        for (let i in users) {
+            const username = users[i];
+            if (controller.grades.onlineGrades[username]!== undefined) {
+                if (controller.grades.onlineGrades[username][controller.LIVE.getClientPerformance()]!== undefined) {
+                    for (let i in constants.grand_final_criteria) {
+                        UIUtils.updateGradeInfo(username, controller.LIVE.getClientPerformance(), constants.grand_final_criteria[i], controller.grades.onlineGrades[username][controller.LIVE.getClientPerformance()][constants.grand_final_criteria[i]]);
+                    }
+                    return;
+                }
+            }
+            for (let i in constants.grand_final_criteria) {
+                UIUtils.updateGradeInfo(username, controller.LIVE.getClientPerformance(), constants.grand_final_criteria[i], "");
+            }
+        }
 
     }
 
@@ -65,14 +79,19 @@ export class UIUtils {
         const el = createOnlineListElement(username);
         controller.ELEMENTS.online_list.get().appendChild(el);
         tools.RegisterElement(el.id, tools.UserElement);
-        console.log(controller.ELEMENTS.online_list.isEmpty());
-        if (controller.ELEMENTS.online_list.isEmpty() === false) {
+        if (controller.ELEMENTS.online_list.isEmpty() === false && controller.ELEMENTS.online_list.element.querySelector("#online_list_dummy")) {
             controller.ELEMENTS.online_list.element.querySelector("#online_list_dummy").remove();
+        }
+        if(controller.grades.onlineGrades[username] !== undefined) {
+            if (controller.grades.onlineGrades[username][controller.LIVE.getClientPerformance()]!== undefined) {
+                for (let i in constants.grand_final_criteria) {
+                    UIUtils.updateGradeInfo(username, controller.LIVE.getClientPerformance(), constants.grand_final_criteria[i], controller.grades.onlineGrades[username][controller.LIVE.getClientPerformance()][constants.grand_final_criteria[i]]);
+                }
+            }
         }
     }
 
     static removeOnlineUser(username) {
-        console.log(username);
         const el = document.getElementById(`online_list_user_${username}`);
         el.remove();
         if (controller.ELEMENTS.online_list.isEmpty() === true) {
