@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, HttpResponse
 from tools.models import Participant
 from .models import Rank
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def ranking(request):
     participants = Participant.objects.all()
     context = {
@@ -10,7 +12,7 @@ def ranking(request):
     }
     return HttpResponse("Ranking page")
 
-
+@login_required
 def ranking_update(request):
     if request.method == "POST":
         user = request.user

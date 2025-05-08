@@ -4,8 +4,9 @@ from .utils import *
 from tools.models import *
 from . models import GlobalSettings
 import json
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
+@login_required
 def index(request):
     context = defaultdict(lambda: None)
     try:

@@ -4,6 +4,7 @@ from .models import Account
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 import random
+from django.contrib import messages
 
 # main login page
 def user_login(request):
@@ -18,8 +19,9 @@ def user_create(request):
     if request.method == "POST":
         username = request.POST.get('username')
         try:
-            User.objects.get(username=username)
-            return redirect('login')
+            user = User.objects.get(username=username)
+            message.info(request, username)
+            return redirect('new_session')
         except:
             token = get_random_string(length=25)
             pass_code = random.randint(10, 99)
@@ -43,10 +45,11 @@ def new_session(request):
         username = request.POST.get("username")
         pass_code = request.POST.get("pass_code")
         try:
-            account = Account.objects.get(pass_code=pass_code)
+            user = User.objects.get(username=username)
+            account = Account.objects.get(user=user, pass_code=pass_code)
             login(request, user)
             return redirect("index")
         except:
-             return HttpResponse("Invalid passcode")
+             return HttpResponse("Invalid passcode/username")
     else:
         return redirect("login")
