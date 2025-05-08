@@ -58,7 +58,7 @@ export class SyncHandler {
         const state = message.current_state;
         controller.LIVE.setState(state);
         const performance = message.current_performance;
-        const users = message.users;
+        let users = message.users;
         if (message.show) { UIUtils.setShowName(message.show.name); }
         if (message.votes !== undefined) {
             for (let i=0; i<message.votes.length; i++) {
@@ -79,11 +79,14 @@ export class SyncHandler {
                     controller.grades.addOnlineGradeData(message.all_votes[i].user__username, index, message.all_votes[i].criteria, message.all_votes[i].grade)
             }
         }
-        if (users !== undefined) {
-            console.log("[SYNC user-list]: " + users);
+        if (message.user !== undefined) 
             controller.LIVE.setUser(message.user);
+        if (users !== undefined) {
+            users = users.filter(u => u !== controller.LIVE.getUser());
+            console.log(users);
             controller.ONLINE_LIST.setUsers(users);
             controller.ONLINE_LIST.removeUser(controller.LIVE.getUser());
+            console.log("Modifying user list from SYNC: " + controller.ONLINE_LIST.getUsers())
             for(let i=0; i<users.length; i++) {
                 UIUtils.addOnlineUser(users[i]);
             }
