@@ -68,6 +68,8 @@ export class UIUtils {
     }
 
     static addOnlineUser(username) {
+        if (controller.LIVE.getStatus() === "LIVE_MODE: stop")
+            return; 
         const el = createOnlineListElement(username);
         controller.ELEMENTS.online_list.get().appendChild(el);
         tools.RegisterElement(el.id, tools.UserElement);

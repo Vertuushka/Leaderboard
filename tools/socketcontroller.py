@@ -163,8 +163,8 @@ class ConnectHandler(Handler):
                 ))
         except Exception as e:
             consumer.send_error(build_error(e))
-        if self.controller.live == True:
-            consumer.send_message("LIVE: sync", msg)
+        # if self.controller.live == True:
+        consumer.send_message("LIVE: sync", msg)
             
         if not user.username in self.controller.online_list and not user.is_staff:
             consumer.broadcast_message("LIVE: join", user.username)

@@ -10,6 +10,10 @@ export class StartHandler{
         controller.LIVE.setState("LIVE_MODE: start");
         controller.LIVE.setPerformancesCount(message.performancesCount);
         UIUtils.setShowName(message.show.name);
+        const users = controller.ONLINE_LIST.getUsers();
+        for( let u in users ) {
+            UIUtils.addOnlineUser(users[u]);
+        }
     }
 }
 
@@ -39,9 +43,11 @@ export class LeaveHandler {
 
 export class JoinHandler {
     handle(message) {
+        console.log("[USER JOINED LIVE]: " + message);
         const username = message;
         if (username !== controller.LIVE.getUser()) {
             controller.ONLINE_LIST.addUser(username);
+            console.log("[Adding to online list]: " + message);
             UIUtils.addOnlineUser(username);
         }
     }
@@ -74,6 +80,7 @@ export class SyncHandler {
             }
         }
         if (users !== undefined) {
+            console.log("[SYNC user-list]: " + users);
             controller.LIVE.setUser(message.user);
             controller.ONLINE_LIST.setUsers(users);
             controller.ONLINE_LIST.removeUser(controller.LIVE.getUser());
