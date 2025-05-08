@@ -9,3 +9,7 @@ export const SHOW_NAMES = {
 let onlineListDummy;
 export function setOnlineListDummy(el) { onlineListDummy = el;}
 export function getOnlineListDummy() { return onlineListDummy; }
+
+let gradeButtonsCount;
+export function setGradeButtonsCount(count) { gradeButtonsCount = count; }
+export function getGradeButtonsCount() { return gradeButtonsCount; }

@@ -19,7 +19,7 @@ export class VoteHandler {
         const data = {
             "prefix": "USER: rank",
             "message": {
-                "performance": live.LIVE.getPerformance(),
+                "performance": live.LIVE.getClientPerformance(),
                 "criteria": parseInt(this.parentElement.dataset.criteria),
                 "vote": parseInt(this.textContent.trim())
             }

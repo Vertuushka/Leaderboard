@@ -23,6 +23,7 @@ export class UIUtils {
     }
 
     static updatePerformanceData(source="live") {
+        /* performance data - song, name, country, images */
         let key;
         if (source == "live") { key = controller.LIVE.getPerformance(); }
         if (source == "client") { key = controller.LIVE.getClientPerformance(); }
@@ -33,6 +34,24 @@ export class UIUtils {
         controller.ELEMENTS.artist_name.setText(participants.data[key].name);
         controller.ELEMENTS.participantImg.setImg(constants.bg_url + participants.data[key].country + ".jpg");
         controller.ELEMENTS.heartImg.setImg(constants.hearts_url + participants.data[key].country + ".svg");
+        
+        /* grades data */
+        for (let i = 0; i < constants.getGradeButtonsCount(); i++) {
+            if (controller.ELEMENTS[`voteBtn${i}`]!== undefined) {
+                controller.ELEMENTS[`voteBtn${i}`].element.classList.remove("active");
+            }
+        }
+
+        if (controller.grades[key]!== undefined) {
+            for (let i = 0; i < constants.getGradeButtonsCount(); i++) {
+                if (controller.grades[key]!== undefined) {
+                    controller.grades[key].forEach(btn => {
+                        btn.classList.add("active");
+                    });
+                }
+            }
+        }
+
     }
 
     static addOnlineUser(username) {

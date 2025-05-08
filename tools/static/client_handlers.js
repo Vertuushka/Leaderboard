@@ -24,6 +24,7 @@ export class C_HandleNext {
 export class C_HandleLive {
     handle() {
         if (LIVE.isLive()) {
+            LIVE.setClientPerformance(LIVE.getPerformance());
             UIUtils.updatePerformanceData();
         }
     }
