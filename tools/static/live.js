@@ -118,7 +118,6 @@ export class TextElement {
         setTimeout(() => {
             this.element.textContent = text;
         }, 300);
-        // this.element.textContent = text;
     }
     addText(text) {this.element.textContent += text;}
     clear() {this.element.textContent = "";}

@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 class Account(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     auth_token = models.CharField(max_length=25)
+    pass_code = models.IntegerField()
 
     def __str__(self):
         return self.user.username
