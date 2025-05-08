@@ -1,17 +1,29 @@
 .btn {
-    aspect-ratio: 1;
-    padding: var(--medium);
+    padding: var(--medium) var(--large);
 
     border: none;
-    border-radius: 100%;
+    border-radius: var(--large);
 
     color: var(--text-primary);
     background: none;
     
     cursor: pointer;
 
+    display: flex;
+    align-items: center;
+}
+
+.btn:hover {
+    background-color: var(--primary);
+}
+
+.btnIconOnly {
+    padding: var(--medium);
+
+    aspect-ratio: 1;
+
+    border-radius: 100%;
+
     display: grid;
     place-content: center;
 }
-
-
