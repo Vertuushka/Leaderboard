@@ -39,12 +39,19 @@ export class UIUtils {
         const el = createOnlineListElement(username);
         controller.ELEMENTS.online_list.get().appendChild(el);
         tools.RegisterElement(el.id, tools.UserElement);
+        console.log(controller.ELEMENTS.online_list.isEmpty());
+        if (controller.ELEMENTS.online_list.isEmpty() === false) {
+            controller.ELEMENTS.online_list.element.querySelector("#online_list_dummy").remove();
+        }
     }
 
     static removeOnlineUser(username) {
         console.log(username);
         const el = document.getElementById(`online_list_user_${username}`);
         el.remove();
+        if (controller.ELEMENTS.online_list.isEmpty() === true) {
+            controller.ELEMENTS.online_list.element.appendChild(constants.onlineListDummy);
+        }
     }
 
     static updateGradeInfo(username, performance, criteria, grade) {

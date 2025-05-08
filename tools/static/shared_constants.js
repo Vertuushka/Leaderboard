@@ -5,3 +5,8 @@ export const SHOW_NAMES = {
     "SF2": "Semi Final 2",
     "GF": "Grand Final",
 }
+
+export const onlineListDummy = document.createElement("p");
+onlineListDummy.id = "online_list_dummy";
+onlineListDummy.classList.add("playerVote");
+onlineListDummy.textContent = "No users connected.";

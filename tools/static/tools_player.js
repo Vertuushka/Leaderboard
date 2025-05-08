@@ -1,6 +1,7 @@
 import * as tools from "./live.js";
 import { ELEMENTS } from "./live.js";
 import { VoteHandler } from "./send_handlers.js";
+import * as C_Handlers from "./client_handlers.js";
 
 function RegisterElements() {
     const voteBtns = [...document.querySelectorAll(".voteBtn")];
@@ -18,6 +19,7 @@ function RegisterElements() {
         })
         tools.RegisterElement(btn, tools.ButtonElement, new VoteHandler(), `voteBtn${i}`);
     })
+    tools.RegisterElement("C_Previous", tools.ButtonElement, new C_Handlers.C_HandlePrevious());
 }
 
 function init() {

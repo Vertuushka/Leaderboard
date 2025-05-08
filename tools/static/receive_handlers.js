@@ -7,6 +7,7 @@ export class StartHandler{
         controller.LIVE.reset();
         participants.updatePerformances(message.performances); 
         controller.LIVE.setState("LIVE_MODE: start");
+        controller.LIVE.setPerformancesCount(message.performancesCount);
         UIUtils.setShowName(message.show.name);
     }
 }

@@ -104,6 +104,7 @@ class StartHandler(ProtectedHandler):
             context["show"] = model_to_dict(show)
             self.controller.show = show
             performances = list(Performance.objects.filter(show=show))
+            count = len(performances)
             self.controller.performances = performances
             self.controller.current_performance = 0
             _performances = Performance.objects.filter(show=show).order_by('id')
@@ -118,6 +119,7 @@ class StartHandler(ProtectedHandler):
                     "image": performance.participant.img,
                 })
             context["performances"] = json.dumps(performances_data)
+            context["performancesCount"] = count
         except Exception as e:
             consumer.send_error(e)
             return

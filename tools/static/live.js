@@ -18,6 +18,7 @@ export function RegisterElement(id, type, handler=null, relativeName=null) {
 export class DummyElement {
     constructor(element) { this.element = element; }
     get() { return this.element; }
+    isEmpty() { if (this.element.children.length === 0) return true; return false; }
 }
 
 export class UserElement {
@@ -117,6 +118,7 @@ class Live{
     #performance_id = 0;
     #state = "LIVE_MODE: stop";
     #client_performance = 0;
+    #performancesCount = 0;
     getUser() {return this.#user;}
 
     setUser(user) {
@@ -129,6 +131,8 @@ class Live{
 
     getPerformance() {return this.#performance_id;}
     setPerformance(performance_id) {this.#performance_id = performance_id;}
+    getPerformancesCount() {return this.#performancesCount;}
+    setPerformancesCount(count) {this.#performancesCount = count;}
 
     getStatus() {return this.#state;}
     setState(state) {this.#state = state;}
