@@ -117,3 +117,12 @@ body {
 .center {
     align-items: center;
 }
+
+.fadeTransition {
+    transition: opacity 0.3s ease;
+    opacity: 1;
+  }
+  
+.fadeOut {
+    opacity: 0;
+}

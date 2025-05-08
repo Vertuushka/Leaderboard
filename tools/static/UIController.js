@@ -42,6 +42,7 @@ export class UIUtils {
             }
         }
 
+
         if (controller.grades[controller.LIVE.getClientPerformance()]!== undefined) {
             if (constants.getGradeButtonsCount() === constants.grade_grand_final) {
                 for (let i in constants.grand_final_criteria) {

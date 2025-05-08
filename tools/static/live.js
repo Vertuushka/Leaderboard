@@ -63,17 +63,31 @@ export class ImageElement {
     constructor(element) {
         this.element = element;
         this.src = this.element.src;
+        this.element.classList.add('fadeTransition');
     }
-    setImg(src) { this.element.src = src; }
+    setImg(src) { 
+        this.element.classList.add('fadeOut');
+
+        setTimeout(() => {
+            this.element.src = src;
+            this.element.classList.remove('fadeOut');
+        }, 300);
+    }
 }
 
 export class BackgroundElement {
     constructor(element) {  
         this.element = element;
         this.src = this.element.style.backgroundImage;
+        this.element.classList.add('fadeTransition');
     }
     setImg(src) { 
-        this.element.style.backgroundImage = `url('${src}')`; 
+        this.element.classList.add('fadeOut');
+
+        setTimeout(() => {
+            this.element.style.backgroundImage = `url('${src}')`;
+            this.element.classList.remove('fadeOut');
+        }, 300);
     }
 }
 
@@ -100,7 +114,12 @@ export class TextElement {
         this.element = element;
         this.text = this.element.textContent;
     }
-    setText(text) {this.element.textContent = text;}
+    setText(text) {
+        setTimeout(() => {
+            this.element.textContent = text;
+        }, 300);
+        // this.element.textContent = text;
+    }
     addText(text) {this.element.textContent += text;}
     clear() {this.element.textContent = "";}
     loadFromArray(array) {

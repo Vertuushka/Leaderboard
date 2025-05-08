@@ -52,11 +52,6 @@ export class SyncHandler {
         const state = message.current_state;
         controller.LIVE.setState(state);
         const performance = message.current_performance;
-        if (performance !== undefined) {
-            controller.LIVE.setPerformance(performance);
-            controller.LIVE.setClientPerformance(performance);
-            UIUtils.updatePerformanceData();
-        }
         const users = message.users;
         if (users !== undefined) {
             controller.LIVE.setUser(message.user);
@@ -68,17 +63,20 @@ export class SyncHandler {
         }
         if (message.show) { UIUtils.setShowName(message.show.name); }
         if (message.votes !== undefined) {
-
             for (let i=0; i<message.votes.length; i++) {
                 const id = message.votes[i].performance_id;
                 const index = data.findIndex(performance => performance.id === id);
                 if (index !== -1) {
-                    if (controller.grades[index] === undefined) {
+                    if (controller.grades[index] === undefined)
                         controller.grades[index] = {};
-                    }
                     controller.grades[index][message.votes[i].criteria] = message.votes[i].grade;
                 }
             }
+        }
+        if (performance !== undefined) {
+            controller.LIVE.setPerformance(performance);
+            controller.LIVE.setClientPerformance(performance);
+            UIUtils.updatePerformanceData();
         }
     }
 }
