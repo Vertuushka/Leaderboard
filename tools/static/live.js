@@ -1,5 +1,5 @@
 import { UIUtils } from "./UIController.js";
-import { grand_final_criteria } from "./shared_constants.js"
+import { grand_final_criteria, getGradeButtonsCount, criteria_passed } from "./shared_constants.js"
 
 export const ELEMENTS = {};
 
@@ -140,6 +140,10 @@ class Live{
     #state = "LIVE_MODE: stop";
     #client_performance = 0;
     #performancesCount = 0;
+    #showName = "";
+    getShowName(){return this.#showName}
+    setShowName(name){this.#showName = name}
+
     getUser() {return this.#user;}
 
     setUser(user) {
@@ -179,14 +183,22 @@ class Live_Grades{
         const performance = LIVE.getClientPerformance()
         if(this.onlineGrades[username] !== undefined) {
             if (this.onlineGrades[username][performance] !== undefined) {
-                for (let i in grand_final_criteria) {
-                    UIUtils.updateGradeInfo(username, performance, grand_final_criteria[i], this.onlineGrades[username][performance][grand_final_criteria[i]])
+                if (getGradeButtonsCount() > 2) {
+                    for (let i in grand_final_criteria) {
+                        UIUtils.updateGradeInfo(username, performance, grand_final_criteria[i], this.onlineGrades[username][performance][grand_final_criteria[i]])
+                    }
+                    return;
+                } else {
+                    UIUtils.updateGradeInfo(username, performance, criteria_passed, this.onlineGrades[username][performance][criteria_passed])
                 }
-                return;
             }
         }
-        for (let i in grand_final_criteria) {
-            UIUtils.updateGradeInfo(username, performance, grand_final_criteria[i], "");
+        if (getGradeButtonsCount() > 2) {
+            for (let i in grand_final_criteria) {
+                UIUtils.updateGradeInfo(username, performance, grand_final_criteria[i], "");
+            }
+        } else {
+            UIUtils.updateGradeInfo(username, performance, criteria_passed, "");
         }
     }
     addOnlineGradeData(username, performance, criteria, grade) {

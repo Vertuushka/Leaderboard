@@ -21,7 +21,7 @@ export class VoteHandler {
             "message": {
                 "performance": live.LIVE.getClientPerformance(),
                 "criteria": parseInt(this.parentElement.dataset.criteria),
-                "vote": parseInt(this.textContent.trim())
+                "vote": parseInt(this.dataset.grade)
             }
         }
         if (live.grades[data.message.performance] === undefined) 

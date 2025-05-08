@@ -7,12 +7,15 @@ function createOnlineListElement(username) {
     const el = document.createElement("div");
     el.classList.add("wrapper", "gapMedium", "playerVote");
     el.id = `online_list_user_${username}`;
+    /* CHANGE THIS TO GRAND FINAL CHECK */
     el.innerHTML = `
         <p class="username">${username}</p>
-        <p class="grade-criteria-1"></p>
-        <p class="grade-criteria-2"></p>
-        <p class="grade-criteria-3"></p>
-        <p class="grade-criteria-4"></p>
+        ${true ? `
+            <p class="grade-criteria-2"></p>
+            <p class="grade-criteria-3"></p>
+            <p class="grade-criteria-4"></p>` : `
+            <p class="grade-criteria-1"></p>
+            `}        
         `;
     return el;
 }
@@ -57,8 +60,11 @@ export class UIUtils {
                         controller.ELEMENTS[`voteBtn${grade + 10 * (criteria - 2) - 1}`].element.classList.add("active");
                     }
                 }
+            } else {
+                let grade = controller.grades[performance][constants.criteria_passed]
+                controller.ELEMENTS[`voteBtn${grade}`].element.classList.add("active");
             }
-        }
+        } 
         const users = controller.ONLINE_LIST.getUsers();
         for (let i in users) {
             const username = users[i];

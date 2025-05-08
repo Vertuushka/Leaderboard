@@ -10,6 +10,7 @@ export class StartHandler{
         controller.LIVE.setState("LIVE_MODE: start");
         controller.LIVE.setPerformancesCount(message.performancesCount);
         UIUtils.setShowName(message.show.name);
+        controller.LIVE.setShowName(message.show.name);
         const users = controller.ONLINE_LIST.getUsers();
         for( let u in users ) {
             UIUtils.addOnlineUser(users[u]);
@@ -43,11 +44,9 @@ export class LeaveHandler {
 
 export class JoinHandler {
     handle(message) {
-        console.log("[USER JOINED LIVE]: " + message);
         const username = message;
         if (username !== controller.LIVE.getUser()) {
             controller.ONLINE_LIST.addUser(username);
-            console.log("[Adding to online list]: " + message);
             UIUtils.addOnlineUser(username);
         }
     }
@@ -59,6 +58,9 @@ export class SyncHandler {
         controller.LIVE.setState(state);
         const performance = message.current_performance;
         let users = message.users;
+        if (message.show !== undefined) {
+            controller.LIVE.setShowName(message.show.name);
+        }
         if (message.show) { UIUtils.setShowName(message.show.name); }
         if (message.votes !== undefined) {
             for (let i=0; i<message.votes.length; i++) {
@@ -83,10 +85,8 @@ export class SyncHandler {
             controller.LIVE.setUser(message.user);
         if (users !== undefined) {
             users = users.filter(u => u !== controller.LIVE.getUser());
-            console.log(users);
             controller.ONLINE_LIST.setUsers(users);
             controller.ONLINE_LIST.removeUser(controller.LIVE.getUser());
-            console.log("Modifying user list from SYNC: " + controller.ONLINE_LIST.getUsers())
             for(let i=0; i<users.length; i++) {
                 UIUtils.addOnlineUser(users[i]);
             }
@@ -95,6 +95,10 @@ export class SyncHandler {
             controller.LIVE.setPerformance(performance);
             controller.LIVE.setClientPerformance(performance);
             UIUtils.updatePerformanceData();
+        }
+        if (controller.ELEMENTS.C_Live !== undefined)
+        {
+            controller.ELEMENTS.C_Live.element.classList.add("live");
         }
     }
 }

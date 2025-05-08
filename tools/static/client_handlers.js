@@ -1,5 +1,5 @@
 import { UIUtils } from "./UIController.js";
-import { LIVE } from "./live.js";
+import { LIVE, ELEMENTS } from "./live.js";
 
 
 export class C_HandlePrevious {
@@ -8,6 +8,10 @@ export class C_HandlePrevious {
         if (currentPerf > 0) {
             LIVE.setClientPerformance(currentPerf - 1);
             UIUtils.updatePerformanceData("client");
+            if (LIVE.getPerformance() === LIVE.getClientPerformance())
+                ELEMENTS.C_Live.element.classList.add("live");
+            else
+                ELEMENTS.C_Live.element.classList.remove("live");
         }
     }
 }
@@ -18,6 +22,10 @@ export class C_HandleNext {
         if (currentPerf < LIVE.getPerformancesCount() - 1) {
             LIVE.setClientPerformance(currentPerf + 1);
             UIUtils.updatePerformanceData("client");
+            if (LIVE.getPerformance() === LIVE.getClientPerformance())
+                ELEMENTS.C_Live.element.classList.add("live");
+            else
+                ELEMENTS.C_Live.element.classList.remove("live");
         }
     }
 }
@@ -27,6 +35,7 @@ export class C_HandleLive {
         if (LIVE.isLive()) {
             LIVE.setClientPerformance(LIVE.getPerformance());
             UIUtils.updatePerformanceData();
+            this.classList.add("live");
         }
     }
 }
