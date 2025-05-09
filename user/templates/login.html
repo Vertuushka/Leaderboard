@@ -2,16 +2,14 @@
 {% load static %}
 
 {% block style %}
-    <link rel="stylesheet" href="{% static 'css/live.css' %}">
+    <link rel="stylesheet" href="{% static 'css/boarding.css' %}">
     <link rel="stylesheet" href="{% static 'css/btn.css' %}">
 {% endblock %}
 
 {% block content %}
-    <h1 class="title">Welcome</h1>
-
-    <form action="{% url 'create' %}" method="post">
+     <form class="gapLarge" action="{% url 'create' %}" method="post">
         {% csrf_token %}
-        <input type="text" name="username" id="">
-        <input type="submit" value="Enter!">
+        <input class="title" type="text" name="username" id="" placeholder="Press to enter a username">
+        <button class="btn" type="submit">Continue</button>
     </form>
 {% endblock %}

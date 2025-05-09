@@ -1,0 +1,23 @@
+form {
+    padding: var(--large);
+    height: 100%;
+
+    display: grid;
+    grid-template-rows: 1fr max-content;
+    justify-items: center;
+    align-items: center;
+}
+
+input {
+    padding: var(--large);
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    text-align: center;
+    color: var(--text);
+    background: none;
+}
+
+input:focus {
+    outline: none;
+}
