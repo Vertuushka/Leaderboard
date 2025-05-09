@@ -3,9 +3,7 @@
 {% block style %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/live.css' %}">
-    <script type="module" src="{% static 'socket.js' %}"></script>
-    <script type="module" src="{% static 'tools_admin.js' %}"></script>
-    <script type="module" src="{% static 'tools_shared.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/btn.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -35,17 +33,22 @@
             </div>
         </div>
     </header>
-    <div class="container forms">
-        <section class="container">
-            <button id="live_start">Start</button>
-            <button id="live_prev">Previous</button>
-            <button id="live_next">Next</button>
-            <button>Switch to scoreboard</button>
-            <button>Stop live</button>
-        </section>
-    </div>
+
+    <section class="container">
+            <button class="btn" id="live_start">Start</button>
+            <button class="btn" id="live_prev">Previous</button>
+            <button class="btn" id="live_next">Next</button>
+            <button class="btn">Stop live</button>
+        <button class="btn">Switch to scoreboard</button>
+    </section>
 
     <script id="performances_data" type="application/json">
         {{ performances|safe }}
     </script>
+{% endblock %}
+
+{% block script %}
+    <script type="module" src="{% static 'socket.js' %}"></script>
+    <script type="module" src="{% static 'tools_admin.js' %}"></script>
+    <script type="module" src="{% static 'tools_shared.js' %}"></script>
 {% endblock %}

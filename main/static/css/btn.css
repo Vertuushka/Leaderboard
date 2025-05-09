@@ -27,3 +27,155 @@
     display: grid;
     place-content: center;
 }
+
+.btnGrid {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.btnWrapper {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+}
+
+.voteBtn {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    aspect-ratio: 1;
+
+    padding: var(--small);
+
+    border-radius: 100%;
+    border: 1px solid var(--primary);
+
+    cursor: pointer;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    color: var(--text);
+    background: none;
+}
+
+.btn1 {
+    border-color: var(--1);
+}
+.btn1:hover {
+    background-color: var(--1-hover);
+}
+.btn1.active {
+    color: var(--bg);
+    background-color: var(--1);
+}
+
+.btn1.active svg {
+    fill: var(--bg);
+}
+
+.btn2 {
+    border-color: var(--2);
+}
+.btn2:hover {
+    background-color: var(--2-hover);
+}
+.btn2.active {
+    color: var(--bg);
+    background-color: var(--2);
+}
+
+.btn3 {
+    border-color: var(--3);
+}
+.btn3:hover {
+    background-color: var(--3-hover);
+}
+.btn3.active {
+    color: var(--bg);
+    background-color: var(--3);
+}
+
+.btn4 {
+    border-color: var(--4);
+}
+.btn4:hover {
+    background-color: var(--4-hover);
+}
+.btn4.active {
+    color: var(--bg);
+    background-color: var(--4);
+}
+
+.btn5 {
+    border-color: var(--5);
+}
+.btn5:hover {
+    background-color: var(--5-hover);
+}
+.btn5.active {
+    color: var(--bg);
+    background-color: var(--5);
+}
+
+.btn6 {
+    border-color: var(--6);
+}
+.btn6:hover {
+    background-color: var(--6-hover);
+}
+.btn6.active {
+    color: var(--bg);
+    background-color: var(--6);
+}
+
+.btn7 {
+    border-color: var(--7);
+}
+.btn7:hover {
+    background-color: var(--7-hover);
+}
+.btn7.active {
+    color: var(--bg);
+    background-color: var(--7);
+}
+
+.btn8 {
+    border-color: var(--8);
+}
+.btn8:hover {
+    background-color: var(--8-hover);
+}
+.btn8.active {
+    color: var(--bg);
+    background-color: var(--8);
+}
+
+.btn10 {
+    border-color: var(--10);
+}
+.btn10:hover {
+    background-color: var(--10-hover);
+}
+.btn10.active {
+    color: var(--bg);
+    background-color: var(--10);
+}
+
+.btn12 {
+    border-color: var(--12);
+}
+.btn12:hover {
+    background-color: var(--12-hover);
+}
+.btn12.active {
+    color: var(--bg);
+    background-color: var(--12);
+}
+
+.btn12.active svg {
+    fill: var(--bg);
+}
