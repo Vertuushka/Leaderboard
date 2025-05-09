@@ -7,32 +7,33 @@
 {% endblock %}
 
 {% block content %}
-
+<main>
     {% if error %}
         {{error}}
     {% endif %}
-    <nav class="wrapper gapLarge center">
-        <h1 class="title grow" id="current_show_label">{{ show }}</h1>
-    </nav>
+    <div class="headerImg" id="participantImg">
+        <div class="gradient"></div>
+    </div>
 
-    <header id="participantImg">
-        <div class="container headerBody">
-            <div class="wrapper gapLarge center headerContentWrapper">
-                <div class="container gapSmall grow">
-                    <p class="footnote">
-                        <span id="country_name"></span> (pid: <span id="performance_id"></span> )
-                    </p>
-                    <h2><span class="title" id="artist_name"></span> - <span class="title" id="song_name"></span></h2>
-                </div>
-        
-                <img class="heart" id="heartImg" src="{% static 'img/hearts/Switzerland.svg' %}" alt="">
+    <header class="container gapLarge">
+        <div class="wrapper gapLarge headerContent grow">
+            <div class="container gapMinimal grow">
+                <p class="footnote" id="current_show_label">{{ show }}</p>
+                <h2 class="title" id="country_name"></h2>
             </div>
-            
-            <div class="wrapper playerVotes gridSpan" id="online_list">
-                <p class="playerVote" id="online_list_dummy">No users connected.</p>
-            </div>
+
+            <img class="heart" id="heartImg" src="{% static 'img/hearts/Switzerland.svg' %}" alt="">
+        </div>
+
+        <div class="wrapper gapLarge headerContent">
+            <p class="footnote grow" id="artist_name"></p>
+            <p class="footnote" id="song_name"></p>
         </div>
     </header>
+    
+    <div class="wrapper scoreboard gridSpan" id="online_list">
+        <p class="playerVote" id="online_list_dummy">No users connected.</p>
+    </div>
 
     <section class="container">
             <button class="btn" id="live_start">Start</button>
@@ -45,6 +46,7 @@
     <script id="performances_data" type="application/json">
         {{ performances|safe }}
     </script>
+</main>
 {% endblock %}
 
 {% block script %}
