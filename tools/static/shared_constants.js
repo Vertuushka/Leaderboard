@@ -16,6 +16,10 @@ export const criteria_visual = 4;
 
 export const grand_final_criteria = [criteria_music, criteria_stage, criteria_visual]
 
+export const SFVoteHeader = "Will they qualify?";
+export const SFVoteText = "Will the song make it to the Grand Final?";
+export const SFVoteHeaderQualified = "Automatic Finalist";
+export const SFVoteTextQualified = "This song is already qualified to the Grand Final.";
 
 let onlineListDummy;
 export function setOnlineListDummy(el) { onlineListDummy = el;}

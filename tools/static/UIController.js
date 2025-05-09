@@ -37,7 +37,19 @@ export class UIUtils {
         controller.ELEMENTS.artist_name.setText(participants.data[key].name);
         controller.ELEMENTS.participantImg.setImg(constants.bg_url + participants.data[key].country + ".jpg");
         controller.ELEMENTS.heartImg.setImg(constants.hearts_url + participants.data[key].country + ".svg");
-        
+        if (controller.LIVE.getShowName() !== "GF") {
+            if (controller.ELEMENTS.SFVoteContainer!== undefined && participants.data[key].passed === true) {
+                controller.ELEMENTS.SFVoteContainer.element.classList.add("hidden");
+                controller.ELEMENTS.SFVoteHeader.setText(constants.SFVoteHeaderQualified);
+                controller.ELEMENTS.SFVoteText.setText(constants.SFVoteTextQualified);
+            }
+            if (controller.ELEMENTS.SFVoteContainer!== undefined && participants.data[key].passed === false) {
+                controller.ELEMENTS.SFVoteContainer.element.classList.remove("hidden");
+                controller.ELEMENTS.SFVoteHeader.setText(constants.SFVoteHeader);
+                controller.ELEMENTS.SFVoteText.setText(constants.SFVoteText);
+            }
+        }
+
         /* grades data */
         for (let i = 0; i < constants.getGradeButtonsCount(); i++) {
             if (controller.ELEMENTS[`voteBtn${i}`]!== undefined) {
@@ -60,6 +72,9 @@ export class UIUtils {
                         controller.ELEMENTS[`voteBtn${grade + 10 * (criteria - 2) - 1}`].element.classList.add("active");
                     }
                 }
+            } else {
+                let grade = controller.grades[performance][constants.criteria_passed]
+                controller.ELEMENTS[`voteBtn${grade}`].element.classList.add("active");
             }
         } 
         const users = controller.ONLINE_LIST.getUsers();
