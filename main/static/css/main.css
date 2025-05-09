@@ -12,6 +12,9 @@
     --medium: 12px;
     --large: 24px;
 
+    --maxWidth: 512px;
+    --minWidth: 256px;
+
     --1: #FF3B30;
     --1-hover: #FF3B3024;
   
@@ -51,13 +54,12 @@
     font-family: "Roboto", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
+    font-size: 14px;
     font-style: normal;
     font-variation-settings: "wdth" 100;
 }
 
 body {
-    padding: 0 var(--medium);
-
     box-sizing: border-box;
     overflow: hidden;
 
