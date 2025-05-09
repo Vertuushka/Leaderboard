@@ -63,21 +63,17 @@ class SwitchModeHandler(ProtectedHandler):
         consumer.broadcast_message("LIVE: mode", f"LIVE_MODE: {data}")
 
 class ScoreHandler(ProtectedHandler):
-    @database_sync_to_async
     def handle_protected(self, consumer, data):
         show = self.controller.show
         if not show:
-            consumer.send_error(build_error("no show selected"))
             return
         try:
-            performances = Performance.objects.filter(show=show)
-            if not performances:
-                raise Performance.DoesNotExist()
-            for performance in performances:
-                performance.points = data[performance.id]
+            id = data["performance"]
+            performance = Performance.objects.get(id=id)
+            if (show != "Grand Final"):
+                performance.passed = True if data["score"] == "on" else False
                 performance.save()
-            performances = Performance.objects.filter(show=show)
-            consumer.broadcast_message("LIVE: score", list(performances.values()))
+            # consumer.broadcast_message("LIVE: score", list(performances.values()))
         except Exception as e:
             consumer.send_error(build_error(e))
             return

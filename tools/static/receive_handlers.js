@@ -29,7 +29,12 @@ export class PerformanceHandler{
 
 export class SwitchModeHandler {
     handle(message){
-        console.log("Switching mode to " + message);
+        console.log(message)
+        if (message === "LIVE_MODE: score")
+        {
+            UIUtils.showScoreBoard();
+        }
+        // console.log("Switching mode to " + message);
     }
 }
 

@@ -39,14 +39,26 @@
 
     <section class="container">
             <button class="btn">Stop live</button>
-        <button class="btn">Switch to scoreboard</button>
+        <button class="btn" id="B_ScoreBoard">Switch to scoreboard</button>
     </section>
-
-    <script id="performances_data" type="application/json">
-        {{ performances|safe }}
-    </script>
-
+    <section class="container hidden" id="scoreBoardMode">
+        <div class="votesData" style="display: flex; flex-direction: column; gap: 5px;">
+            {% if show != "Grand Final" %}
+                {% for performance in forVote %}
+                    <div class="voteCard" style="display: flex; justify-content: space-between; gap: 25px;">
+                        <label for="vote_{{performance.participant.country}}" class="country" style="width: 100%; display: flex; gap: 25px;">
+                            <img {% if performance.passed %} class="auto_qualified" {% endif %} width="20px" src="{% static 'img/hearts/' %}{{ performance.participant.country }}.svg" alt="">
+                            <p {% if performance.passed %} class="auto_qualified" {% endif %}>{{performance.participant.country}}</p>
+                        </label>
+                        <input {% if performance.passed %} class="auto_qualified" checked disabled {% endif %} type="checkbox" name="" id="vote_{{performance.participant.country}}" class="voteResultInput" data-performance="{{ performance.id }}" data-criteria="1">
+                    </div>
+                {% endfor %}
+            {% else %}
+            {% endif %}
+        </div>
+    </section>
     <nav class="wrapper gapLarge">
+        
         <button class="btn btnIconOnly" id="live_prev">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff"><path d="m418.15-480 162.93 162.92q8.3 8.31 8.5 20.89.19 12.57-8.5 21.27-8.7 8.69-21.08 8.69-12.38 0-21.08-8.69L359.15-454.69q-5.61-5.62-7.92-11.85-2.31-6.23-2.31-13.46t2.31-13.46q2.31-6.23 7.92-11.85l179.77-179.77q8.31-8.3 20.89-8.5 12.57-.19 21.27 8.5 8.69 8.7 8.69 21.08 0 12.38-8.69 21.08L418.15-480Z"/></svg>
         </button>
@@ -57,7 +69,10 @@
         <button class="btn btnIconOnly" id="live_next">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff"><path d="M517.85-480 354.92-642.92q-8.3-8.31-8.5-20.89-.19-12.57 8.5-21.27 8.7-8.69 21.08-8.69 12.38 0 21.08 8.69l179.77 179.77q5.61 5.62 7.92 11.85 2.31 6.23 2.31 13.46t-2.31 13.46q-2.31 6.23-7.92 11.85L397.08-274.92q-8.31 8.3-20.89 8.5-12.57.19-21.27-8.5-8.69-8.7-8.69-21.08 0-12.38 8.69-21.08L517.85-480Z"/></svg>
         </button>
+
+        
     </nav>
+    
 
 </main>
 {% endblock %}
@@ -66,4 +81,7 @@
     <script type="module" src="{% static 'socket.js' %}"></script>
     <script type="module" src="{% static 'tools_admin.js' %}"></script>
     <script type="module" src="{% static 'tools_shared.js' %}"></script>
+    <script id="performances_data" type="application/json">
+        {{ performances|safe }}
+    </script>
 {% endblock %}

@@ -18,6 +18,15 @@ export function RegisterElement(id, type, handler=null, relativeName=null) {
         ELEMENTS[id] = obj;
 }
 
+export class VoteInputElement {
+    constructor(element, handler) {
+        this.element = element;
+        this.performance = this.element.dataset.performance;
+        this.criteria = this.element.dataset.criteria;
+        this.element.addEventListener("change", handler.handle.bind(this));
+    }
+}
+
 export class DummyElement {
     constructor(element) { this.element = element; }
     get() { return this.element; }
@@ -56,12 +65,12 @@ export class UserElement {
     updateGrade(criteria, grade) {
         if (this[`gc${criteria}Element`] !== null) {
             if (criteria === criteria_passed) {
+                this[`gc${criteria}Element`].parentElement.classList.remove("qualified"); 
+                this[`gc${criteria}Element`].parentElement.classList.remove("unqualified"); 
                 if (grade === 0) 
-                    this[`gc${criteria}Element`].innerHTML = svgCheck;
+                    this[`gc${criteria}Element`].parentElement.classList.add("qualified");
                 else if (grade === 1) 
-                    this[`gc${criteria}Element`].innerHTML = svgCrossMark;
-                else
-                    this[`gc${criteria}Element`].innerHTML = ""; 
+                    this[`gc${criteria}Element`].parentElement.classList.add("unqualified");
             } else {
                 this[`gc${criteria}Element`].textContent = grade;
                 this[`gc${criteria}Element`].style.color = `var(--${grade})`;
@@ -205,7 +214,6 @@ class Live_Grades{
                     UIUtils.updateGradeInfo(username, performance, grand_final_criteria[i], "");
                 }
             } else {
-                console.log()
                 UIUtils.updateGradeInfo(username, performance, criteria_passed, "");
             }
         }

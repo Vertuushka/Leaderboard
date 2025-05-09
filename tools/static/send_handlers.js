@@ -30,3 +30,20 @@ export class VoteHandler {
         SOCKET.send(data);
     }
 }
+
+export class ScoreBoardModeHandler {
+    handle() {
+        SOCKET.send({"prefix":"LIVE: switch_mode_score", "message":"score"});
+    }
+}
+
+export class VoteResultHandler {
+    handle() {
+        const msg = {
+            "performance": this.performance,
+            "criteria": this.criteria,
+            "score": this.element.value
+        }
+        SOCKET.send({"prefix": "LIVE: score_update", "message":msg});
+    }
+}

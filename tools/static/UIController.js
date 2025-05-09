@@ -80,7 +80,6 @@ export class UIUtils {
         const users = controller.ONLINE_LIST.getUsers();
         for (let i in users) {
             const username = users[i];
-            console.log(username);
             controller.grades.updateOnlineGradeData(username);
         }
 
@@ -110,9 +109,15 @@ export class UIUtils {
         const key = `online_list_user_${username}`
         if (controller.LIVE.getClientPerformance() == performance) {
             if (controller.ELEMENTS[key] !== undefined) {
-                console.log(criteria, grade);
                 controller.ELEMENTS[key].updateGrade(criteria, grade);
             }
+        }
+    }
+
+    static showScoreBoard() {
+        console.log("sfsd")
+        if (controller.ELEMENTS.scoreBoardMode !== undefined) {
+            controller.ELEMENTS.scoreBoardMode.element.classList.remove("hidden");
         }
     }
 }

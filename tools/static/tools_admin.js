@@ -8,10 +8,16 @@ function RegisterElements() {
     tools.RegisterElement("live_next", tools.ButtonElement, new sender.NextHandler);
     tools.RegisterElement("live_prev", tools.ButtonElement, new sender.PreviousHandler);
     tools.RegisterElement("admin_controller_label", tools.TextElement);
+    tools.RegisterElement("B_ScoreBoard", tools.ButtonElement, new sender.ScoreBoardModeHandler);
+    tools.RegisterElement("scoreBoardMode", tools.DummyElement);
 }
 
 function init() {
     RegisterElements();
+    const passingInputs = document.querySelectorAll(".voteResultInput");
+    passingInputs.forEach((input, i) => {
+        tools.RegisterElement(input, tools.VoteInputElement, new sender.VoteResultHandler, `result_${i}`);
+    })
 }
 
 document.addEventListener("DOMContentLoaded", init);

@@ -130,3 +130,7 @@ section {
 .cardFormHeader {
     align-items: center;
 }
+
+.username {
+    transition: 0.3s ease;
+}

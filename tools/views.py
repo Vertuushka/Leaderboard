@@ -25,6 +25,7 @@ def tools(request):
             })
         context["show"] = show
         context["performances"] = json.dumps(performances_data)
+        context["forVote"] = Performance.objects.filter(show=show)
         if request.user.is_staff:
             context["shows"] = shows
         return render(request, 'tools.html', context)
