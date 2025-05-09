@@ -15,6 +15,7 @@ class Show(models.Model):
         ('SF1', 'Semi Final 1'),
         ('SF2', 'Semi Final 2'),
         ('GF', 'Grand Final'),
+        ('N', 'End'),
     ]
     name = models.CharField(max_length=3, choices=SHOW_TYPES, unique=True)
 

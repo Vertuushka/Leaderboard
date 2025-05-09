@@ -7,4 +7,17 @@
 
 {% block content %}
     <h1>Results</h1>
+
+    {% for name, performances in data %}
+        <h2> {{ name }} </h2>
+        {% for performance in performances %}
+            <img width="25px" src="{% static 'img/hearts/' %}{{performance.participant.country}}.svg" alt="">
+            {% if name == "Semi Final 1" or name == "Semi Final 2" %}
+                <p class="{% if performance.passed %} qualified {% else %} unqualified {% endif %}">{{ performance.participant.country }}</p>
+            {% else %}
+                <p>{{ performance.participant.country }} - {{ performance.jury }} - {{ performance.votes }}</p>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+
 {% endblock %}
