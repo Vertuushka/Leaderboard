@@ -60,9 +60,6 @@ export class UIUtils {
                         controller.ELEMENTS[`voteBtn${grade + 10 * (criteria - 2) - 1}`].element.classList.add("active");
                     }
                 }
-            } else {
-                let grade = controller.grades[performance][constants.criteria_passed]
-                controller.ELEMENTS[`voteBtn${grade}`].element.classList.add("active");
             }
         } 
         const users = controller.ONLINE_LIST.getUsers();

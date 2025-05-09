@@ -7,6 +7,7 @@ function RegisterElements() {
     tools.RegisterElement("live_start", tools.ButtonElement, new sender.StartHandler);
     tools.RegisterElement("live_next", tools.ButtonElement, new sender.NextHandler);
     tools.RegisterElement("live_prev", tools.ButtonElement, new sender.PreviousHandler);
+    tools.RegisterElement("admin_controller_label", tools.TextElement);
 }
 
 function init() {
