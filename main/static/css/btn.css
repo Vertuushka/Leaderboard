@@ -39,10 +39,17 @@
 
 .btnWrapper {
     width: 100%;
+    height: 64px;
 
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-items: center;
+}
+
+.btnWrapper button {
+    height: 100%;
+    display: grid;
+    place-content: center;
 }
 
 .voteBtn {

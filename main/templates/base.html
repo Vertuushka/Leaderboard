@@ -18,10 +18,7 @@
     <title>Document</title>
 </head>
 <body>
-    <main>
-        {% block content %}{% endblock %}
-    </main>
-
+    {% block content %}{% endblock %}
     <script src="{% static 'js/main.js' %}"></script>
     {% block script %}{% endblock %}
 </body>

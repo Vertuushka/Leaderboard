@@ -7,11 +7,7 @@
 {% endblock %}
 
 {% block content %}
-
-    {% if error %}
-        {{error}}
-    {% endif %}
-
+<main>
     <div class="headerImg" id="participantImg">
         <div class="gradient"></div>
     </div>
@@ -38,7 +34,7 @@
 
     <div class="content">
         <div class="container gapSmall forms">
-            {% if show != "Grand Final" %}
+            {% if show == "Grand Final" %}
                 <section class="container gapLarge" action="">
                     <div class="container gapSmall center">
                         <h2 class="title grow">Musical Quality</h2>
@@ -100,9 +96,9 @@
                 </section>
             {% else %}
                 <section class="container gapLarge" action="">
-                    <div class="container gapSmall cardFormHeader">
-                        <h2 class="title grow">Visual Presentation</h2>
-                        <p class="footnote">Stage setup, lighting, costumes, graphics</p>
+                    <div class="container gapSmall center">
+                        <h2 class="title grow">Will it qualify?</h2>
+                        <p class="footnote">Will the song make it to the grand final</p>
                     </div>
     
                     <div class="btnWrapper gapMedium" data-criteria="1">
@@ -130,6 +126,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff"><path d="M517.85-480 354.92-642.92q-8.3-8.31-8.5-20.89-.19-12.57 8.5-21.27 8.7-8.69 21.08-8.69 12.38 0 21.08 8.69l179.77 179.77q5.61 5.62 7.92 11.85 2.31 6.23 2.31 13.46t-2.31 13.46q-2.31 6.23-7.92 11.85L397.08-274.92q-8.31 8.3-20.89 8.5-12.57.19-21.27-8.5-8.69-8.7-8.69-21.08 0-12.38 8.69-21.08L517.85-480Z"/></svg>
         </button>
     </nav>
+</main>
 {% endblock %}
 
 {% block script %}
