@@ -10,11 +10,11 @@ function createOnlineListElement(username) {
     /* CHANGE THIS TO GRAND FINAL CHECK */
     el.innerHTML = `
         <p class="username">${username}</p>
-        ${true ? `
+        ${controller.LIVE.getShowName() === "GF" ? `
             <p class="grade-criteria-2"></p>
             <p class="grade-criteria-3"></p>
             <p class="grade-criteria-4"></p>` : `
-            <p class="grade-criteria-1"></p>
+            <p class="grade-criteria-1"></p>                              
             `}        
         `;
     return el;
@@ -60,7 +60,7 @@ export class UIUtils {
         const performance = controller.LIVE.getClientPerformance();
 
         if (controller.grades[performance]!== undefined) {
-            if (constants.getGradeButtonsCount() === constants.grade_grand_final) {
+            if (controller.LIVE.getShowName() === "GF") {
                 for (let i in constants.grand_final_criteria) {
                     let criteria = constants.grand_final_criteria[i];
                     if (controller.grades[performance][criteria]!== undefined) {
@@ -80,6 +80,7 @@ export class UIUtils {
         const users = controller.ONLINE_LIST.getUsers();
         for (let i in users) {
             const username = users[i];
+            console.log(username);
             controller.grades.updateOnlineGradeData(username);
         }
 
@@ -109,6 +110,7 @@ export class UIUtils {
         const key = `online_list_user_${username}`
         if (controller.LIVE.getClientPerformance() == performance) {
             if (controller.ELEMENTS[key] !== undefined) {
+                console.log(criteria, grade);
                 controller.ELEMENTS[key].updateGrade(criteria, grade);
             }
         }

@@ -1,5 +1,5 @@
 import { UIUtils } from "./UIController.js";
-import { grand_final_criteria, getGradeButtonsCount, criteria_passed } from "./shared_constants.js"
+import { grand_final_criteria, getGradeButtonsCount, criteria_passed, svgCheck, svgCrossMark } from "./shared_constants.js"
 
 export const ELEMENTS = {};
 
@@ -55,8 +55,17 @@ export class UserElement {
 
     updateGrade(criteria, grade) {
         if (this[`gc${criteria}Element`] !== null) {
-            this[`gc${criteria}Element`].textContent = grade;
-            this[`gc${criteria}Element`].style.color = `var(--${grade})`;
+            if (criteria === criteria_passed) {
+                if (grade === 0) 
+                    this[`gc${criteria}Element`].innerHTML = svgCheck;
+                else if (grade === 1) 
+                    this[`gc${criteria}Element`].innerHTML = svgCrossMark;
+                else
+                    this[`gc${criteria}Element`].innerHTML = ""; 
+            } else {
+                this[`gc${criteria}Element`].textContent = grade;
+                this[`gc${criteria}Element`].style.color = `var(--${grade})`;
+            }
         }
     }
 
@@ -180,25 +189,25 @@ class Live_Grades{
     grades = {};
     onlineGrades = {};
     updateOnlineGradeData(username) {
-        const performance = LIVE.getClientPerformance()
-        if(this.onlineGrades[username] !== undefined) {
-            if (this.onlineGrades[username][performance] !== undefined) {
-                if (getGradeButtonsCount() > 2) {
-                    for (let i in grand_final_criteria) {
-                        UIUtils.updateGradeInfo(username, performance, grand_final_criteria[i], this.onlineGrades[username][performance][grand_final_criteria[i]])
-                    }
-                    return;
-                } else {
-                    UIUtils.updateGradeInfo(username, performance, criteria_passed, this.onlineGrades[username][performance][criteria_passed])
+        const performance = LIVE.getClientPerformance();
+        if(this.onlineGrades[username] !== undefined && this.onlineGrades[username][performance] !== undefined) {
+            if (LIVE.getShowName() === "GF") {
+                for (let i in grand_final_criteria) {
+                    UIUtils.updateGradeInfo(username, performance, grand_final_criteria[i], this.onlineGrades[username][performance][grand_final_criteria[i]])
                 }
-            }
-        }
-        if (getGradeButtonsCount() > 2) {
-            for (let i in grand_final_criteria) {
-                UIUtils.updateGradeInfo(username, performance, grand_final_criteria[i], "");
+                return;
+            } else {
+                UIUtils.updateGradeInfo(username, performance, criteria_passed, this.onlineGrades[username][performance][criteria_passed])
             }
         } else {
-            UIUtils.updateGradeInfo(username, performance, criteria_passed, "");
+            if (LIVE.getShowName() === "GF") {
+                for (let i in grand_final_criteria) {
+                    UIUtils.updateGradeInfo(username, performance, grand_final_criteria[i], "");
+                }
+            } else {
+                console.log()
+                UIUtils.updateGradeInfo(username, performance, criteria_passed, "");
+            }
         }
     }
     addOnlineGradeData(username, performance, criteria, grade) {
