@@ -159,21 +159,24 @@ class Live{
     #client_performance = 0;
     #performancesCount = 0;
     #showName = "";
+    #page = "LIVE";
+
+    getPage() {return this.#page}
+    setPage(page) {this.#page = page}
+
     getShowName(){return this.#showName}
     setShowName(name){this.#showName = name}
 
     getUser() {return this.#user;}
-
     setUser(user) {
-        if (this.#user !== "") {
-            console.error("User already set.")
+        if (this.#user !== "") 
             return;
-        }
         this.#user = user;
     }
 
     getPerformance() {return this.#performance_id;}
     setPerformance(performance_id) {this.#performance_id = performance_id;}
+
     getPerformancesCount() {return this.#performancesCount;}
     setPerformancesCount(count) {this.#performancesCount = count;}
 
@@ -184,13 +187,18 @@ class Live{
     setClientPerformance(performance_id) {this.#client_performance = performance_id;}
 
     isLive() {
-        if (this.#state === "LIVE_MODE: stop") { return false; }
+        if (this.#state === "LIVE_MODE: stop") 
+            return false;
         return true;
     }
 
     reset() {
+        console.log("Resetting live data");
         this.#performance_id = 0;
         this.#client_performance = 0;
+        this.#state = "LIVE_MODE: stop";
+        this.#page = "LIVE";
+        this.#showName = "";
     }
 }
 

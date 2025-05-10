@@ -10,6 +10,7 @@ function RegisterElements() {
     tools.RegisterElement("admin_controller_label", tools.TextElement);
     tools.RegisterElement("B_ScoreBoard", tools.ButtonElement, new sender.ScoreBoardModeHandler);
     tools.RegisterElement("scoreBoardMode", tools.DummyElement);
+    tools.RegisterElement("live_stop", tools.ButtonElement, new sender.StopHandler);
 }
 
 function init() {

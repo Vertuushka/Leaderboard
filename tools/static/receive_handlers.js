@@ -10,6 +10,7 @@ export class StartHandler{
         controller.LIVE.setState("LIVE_MODE: start");
         controller.LIVE.setPerformancesCount(message.performancesCount);
         UIUtils.setShowName(message.show.name);
+        UIUtils.showLiveButton();
         controller.LIVE.setShowName(message.show.name);
         const users = controller.ONLINE_LIST.getUsers();
         for( let u in users ) {
@@ -60,6 +61,10 @@ export class JoinHandler {
 export class SyncHandler {
     handle(message){
         const state = message.current_state;
+        if (state === "LIVE: start")
+            UIUtils.showLiveButton();
+        if (state === "LIVE: stop")
+            UIUtils.hideLiveButton();
         controller.LIVE.setState(state);
         const performance = message.current_performance;
         let users = message.users;
@@ -105,6 +110,18 @@ export class SyncHandler {
         {
             controller.ELEMENTS.C_Live.element.classList.add("live");
         }
+        if (controller.LIVE.isLive() === true) {
+            UIUtils.showLiveButton();
+        }
+    }
+}
+
+export class StopHandler {
+    handle(message) {
+        console.log("Stopping live");
+        controller.LIVE.reset();
+        UIUtils.hideLiveButton();
+        UIUtils.clearOnlineBar();
     }
 }
 

@@ -86,7 +86,7 @@ export class UIUtils {
     }
 
     static addOnlineUser(username) {
-        if (controller.LIVE.getStatus() === "LIVE_MODE: stop")
+        if (controller.LIVE.isLive() === false)
             return; 
         const el = createOnlineListElement(username);
         controller.ELEMENTS.online_list.get().appendChild(el);
@@ -119,5 +119,22 @@ export class UIUtils {
         if (controller.ELEMENTS.scoreBoardMode !== undefined) {
             controller.ELEMENTS.scoreBoardMode.element.classList.remove("hidden");
         }
+    }
+
+    static showLiveButton() {
+        if (controller.ELEMENTS.C_Live !== undefined) {
+            controller.ELEMENTS.C_Live.element.classList.remove("hidden");
+        }
+    }
+    static hideLiveButton() {
+        if (controller.ELEMENTS.C_Live!== undefined) {
+            controller.ELEMENTS.C_Live.element.classList.add("hidden");
+        }
+    }
+
+    static clearOnlineBar() {
+        controller.ELEMENTS.online_list.element.innerHTML = "";
+        controller.ELEMENTS.online_list.element.appendChild(constants.getOnlineListDummy());
+
     }
 }

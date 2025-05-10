@@ -26,6 +26,13 @@ def register_handlers():
     register_handler("LIVE: switch_mode_score", SwitchModeHandler(CONTROLLER))
     register_handler("LIVE: switch_mode_play", SwitchModeHandler(CONTROLLER))
     register_handler("USER: rank", UserScoreHandler(CONTROLLER))
+    register_handler("LIVE: stop", StopHandler(CONTROLLER))
+
+class StopHandler(ProtectedHandler):
+    def handle_protected(self, consumer, data):
+        self.controller.state = "LIVE_MODE: stop"
+        self.controller.live = False
+        consumer.broadcast_message("LIVE: stop", {})
 
 @database_sync_to_async
 def update_rank(user, performance_id, grade, criteria):

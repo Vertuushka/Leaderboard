@@ -24,9 +24,13 @@ function RegisterElements() {
     tools.RegisterElement("C_Previous", tools.ButtonElement, new C_Handlers.C_HandlePrevious());
     tools.RegisterElement("C_Next", tools.ButtonElement, new C_Handlers.C_HandleNext());
     tools.RegisterElement("C_Live", tools.ButtonElement, new C_Handlers.C_HandleLive());
-    tools.RegisterElement("SFVoteContainer", tools.DummyElement);
-    tools.RegisterElement("SFVoteHeader", tools.TextElement);
-    tools.RegisterElement("SFVoteText", tools.TextElement);
+    try {
+        tools.RegisterElement("SFVoteContainer", tools.DummyElement);
+        tools.RegisterElement("SFVoteHeader", tools.TextElement);
+        tools.RegisterElement("SFVoteText", tools.TextElement);
+    } catch(e) {
+        
+    }
 }
 
 function init() {

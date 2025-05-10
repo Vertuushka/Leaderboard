@@ -13,6 +13,14 @@ export class PreviousHandler {
     handle(){ SOCKET.send({ "prefix": "LIVE: prev", "message": "1" }); }
 }
 
+export class StopHandler{
+    handle(){ 
+        console.log("adad")
+        SOCKET.send({ "prefix": "LIVE: stop", "message": "1" }); 
+    }
+    
+}
+
 
 export class VoteHandler {
     handle(){
