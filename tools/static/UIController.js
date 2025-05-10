@@ -135,6 +135,9 @@ export class UIUtils {
     static clearOnlineBar() {
         controller.ELEMENTS.online_list.element.innerHTML = "";
         controller.ELEMENTS.online_list.element.appendChild(constants.getOnlineListDummy());
+    }
 
+    static C_Confetti(country) {
+        
     }
 }

@@ -18,6 +18,7 @@ function registerAllHandlers() {
     registerHandler("LIVE: start", new receiver.StartHandler());
     registerHandler("USER: share_score", new receiver.UserShareScoreHandler());
     registerHandler("LIVE: stop", new receiver.StopHandler());
+    registerHandler("LIVE: score", new receiver.ScoreHandler());
 }
 
 class Dispatcher {

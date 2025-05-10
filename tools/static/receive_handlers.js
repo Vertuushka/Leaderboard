@@ -136,6 +136,12 @@ export class UserShareScoreHandler {
     }
 }
 
+export class ScoreHandler {
+    handle(message) {
+        UIUtils.C_Confetti(message.country);
+    }
+}
+
 export class ErrorHandler {
     handle(message) {
         console.error(message);

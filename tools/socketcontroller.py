@@ -75,12 +75,16 @@ class ScoreHandler(ProtectedHandler):
         if not show:
             return
         try:
-            id = data["performance"]
-            performance = Performance.objects.get(id=id)
+            _id = data["performance"]
+            performance = Performance.objects.get(id=_id)
             if (show != "Grand Final"):
                 performance.passed = True if data["score"] == "on" else False
-                performance.save()
-            # consumer.broadcast_message("LIVE: score", list(performances.values()))
+                performance.save()  
+            msg = {
+                "country": performance.participant.country,
+                "passed": performance.passed,
+            }
+            consumer.broadcast_message("LIVE: score", msg)
         except Exception as e:
             consumer.send_error(build_error(e))
             return
