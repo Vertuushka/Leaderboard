@@ -22,6 +22,7 @@ class Command(BaseCommand):
             Show.objects.create(name='SF1')
             Show.objects.create(name='SF2')
             Show.objects.create(name='GF')
+            Show.objects.create(name='N')
             self.stdout.write(self.style.SUCCESS('Shows table populated.'))
 
         if GlobalSettings.objects.exists():

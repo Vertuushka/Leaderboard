@@ -128,7 +128,7 @@ export class StopHandler {
 export class UserShareScoreHandler {
     handle(message) {
         const username = message.user;
-        const performance = message.performance
+        const performance = message.performance;
         const criteria = message.criteria;
         const grade = message.grade;
         controller.grades.addOnlineGradeData(username, performance, criteria, grade);
@@ -138,7 +138,7 @@ export class UserShareScoreHandler {
 
 export class ScoreHandler {
     handle(message) {
-        UIUtils.C_Confetti(message.country);
+        UIUtils.C_Confetti(message.performance);
     }
 }
 

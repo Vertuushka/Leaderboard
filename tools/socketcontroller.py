@@ -81,7 +81,7 @@ class ScoreHandler(ProtectedHandler):
                 performance.passed = True if data["score"] == "on" else False
                 performance.save()  
             msg = {
-                "country": performance.participant.country,
+                "performance": performance.id,
                 "passed": performance.passed,
             }
             consumer.broadcast_message("LIVE: score", msg)

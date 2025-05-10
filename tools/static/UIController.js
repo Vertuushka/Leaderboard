@@ -137,7 +137,14 @@ export class UIUtils {
         controller.ELEMENTS.online_list.element.appendChild(constants.getOnlineListDummy());
     }
 
-    static C_Confetti(country) {
-        
+    static C_Confetti(performanceId) {
+        console.log(participants.data);
+        let i = participants.data.findIndex(obj => obj.id === performanceId);
+        controller.LIVE.setClientPerformance(i);
+        UIUtils.updatePerformanceData("client");
+        confetti({
+            particleCount: 450,
+            spread: 180,
+        });
     }
 }
