@@ -53,4 +53,5 @@ def new_session(request):
         except:
              return HttpResponse("Invalid passcode/username")
     else:
-        return HttpResponse("Enter your pass code here: ")
+        return render(request, 'getin.html')
+        # return HttpResponse("Enter your pass code here: ")
