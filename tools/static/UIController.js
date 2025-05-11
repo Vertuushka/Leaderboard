@@ -159,4 +159,15 @@ export class UIUtils {
             controller.ELEMENTS.seconds.setText(seconds);
         }
     }
+    static ScrollToCriteria(caller) {
+        // if(controller.ELEMENTS.voting !== undefined) {
+        //     if (caller === controller.ELEMENTS.voteCriteria1.element) {
+        //         controller.ELEMENTS.voteCriteria2.element.scrollIntoView({behavior: "smooth", block: "center"})
+        //     }
+        //     if (caller === controller.ELEMENTS.voteCriteria2.element) {
+        //         controller.ELEMENTS.voteCriteria3.element.scrollIntoView({behavior: "smooth", block: "center"})
+        //     }
+        // }
+        
+    }
 }

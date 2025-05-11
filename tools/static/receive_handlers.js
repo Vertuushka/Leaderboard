@@ -116,8 +116,7 @@ export class SyncHandler {
             controller.LIVE.setClientPerformance(performance);
             UIUtils.updatePerformanceData();
         }
-        if (controller.ELEMENTS.C_Live !== undefined)
-        {
+        if (controller.ELEMENTS.C_Live !== undefined) {
             controller.ELEMENTS.C_Live.element.classList.add("live");
         }
         if (controller.LIVE.isLive() === true) {

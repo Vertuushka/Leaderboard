@@ -31,6 +31,7 @@ function RegisterElements() {
     tools.RegisterElement("hours", tools.TextElement);
     tools.RegisterElement("minutes", tools.TextElement);
     tools.RegisterElement("seconds", tools.TextElement);
+
     try {
         tools.RegisterElement("SFVoteContainer", tools.DummyElement);
         tools.RegisterElement("SFVoteHeader", tools.TextElement);
@@ -46,6 +47,11 @@ function init() {
     const show_code = SHOW_NAMES_REVERSED[showLabel.textContent.trim()];
     tools.ELEMENTS.countdown.show();
     setInterval(() => UIUtils.ShowTimer(timer[show_code]), 1000);
+    if (show_code === "GF") {
+        tools.RegisterElement("voteCriteria1", tools.DummyElement);
+        tools.RegisterElement("voteCriteria2", tools.DummyElement);
+        tools.RegisterElement("voteCriteria3", tools.DummyElement);
+    }
 }
 
 document.addEventListener("DOMContentLoaded", init);

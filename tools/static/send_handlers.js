@@ -1,5 +1,6 @@
 import { SOCKET } from "./socket.js";
 import * as live from "./live.js"
+import { UIUtils } from "./UIController.js"
 
 export class StartHandler {
     handle(){ SOCKET.send({ "prefix": "LIVE: start", "message": "1" }); }
@@ -35,6 +36,7 @@ export class VoteHandler {
             live.grades[data.message.performance] = {};
         live.grades[data.message.performance][data.message.criteria] = data.message.vote;
         SOCKET.send(data);
+        UIUtils.ScrollToCriteria(this.parentElement.parentElement);
     }
 }
 
