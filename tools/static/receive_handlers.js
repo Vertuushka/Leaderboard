@@ -2,7 +2,6 @@ import * as controller from './live.js';
 import * as participants from './tools_shared.js';
 import { UIUtils } from './UIController.js';
 import {data} from './tools_shared.js';
-import { timer } from "./shared_constants.js";
 
 export class StartHandler{
     handle(message){
@@ -35,7 +34,6 @@ export class PerformanceHandler{
 
 export class SwitchModeHandler {
     handle(message){
-        console.log(message)
         if (message === "LIVE_MODE: score")
         {
             UIUtils.showScoreBoard();
@@ -68,7 +66,6 @@ export class SyncHandler {
         const state = message.current_state;
         let users = message.users;
         const performance = message.current_performance;
-        console.log(message.show);
         if (state === "LIVE: start") {
             UIUtils.showLiveButton();
             if (controller.ELEMENTS.countdown!== undefined) {
@@ -131,7 +128,6 @@ export class SyncHandler {
 
 export class StopHandler {
     handle(message) {
-        console.log("Stopping live");
         controller.LIVE.reset();
         UIUtils.hideLiveButton();
         UIUtils.clearOnlineBar();

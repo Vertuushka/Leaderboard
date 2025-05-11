@@ -195,7 +195,6 @@ class Live{
     }
 
     reset() {
-        console.log("Resetting live data");
         this.#performance_id = 0;
         this.#client_performance = 0;
         this.#state = "LIVE_MODE: stop";

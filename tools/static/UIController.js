@@ -115,7 +115,6 @@ export class UIUtils {
     }
 
     static showScoreBoard() {
-        console.log("sfsd")
         if (controller.ELEMENTS.scoreBoardMode !== undefined) {
             controller.ELEMENTS.scoreBoardMode.element.classList.remove("hidden");
         }
@@ -138,7 +137,6 @@ export class UIUtils {
     }
 
     static C_Confetti(performanceId) {
-        console.log(participants.data);
         let i = participants.data.findIndex(obj => obj.id === performanceId);
         controller.LIVE.setClientPerformance(i);
         UIUtils.updatePerformanceData("client");

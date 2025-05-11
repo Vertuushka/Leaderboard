@@ -15,7 +15,6 @@ export class PreviousHandler {
 
 export class StopHandler{
     handle(){ 
-        console.log("adad")
         SOCKET.send({ "prefix": "LIVE: stop", "message": "1" }); 
     }
     
