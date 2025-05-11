@@ -7,9 +7,13 @@
 {% endblock %}
 
 {% block content %}
-     <form class="gapLarge" action="{% url 'create' %}" method="post">
+<main class="gapLarge">
+    <h1 class="title">Welcome!</h1>
+
+    <form action="{% url 'create' %}" method="post">
         {% csrf_token %}
-        <input class="title" type="text" name="username" id="" placeholder="Press to enter a username">
-        <button class="btn" type="submit">Continue</button>
+        <input type="text" name="username" id="" placeholder="Press to enter a username">
+        <button class="btn" type="submit">Next</button>
     </form>
+</main>
 {% endblock %}

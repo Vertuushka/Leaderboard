@@ -2,14 +2,21 @@
 {% load static %}
 
 {% block style %}
+    <link rel="stylesheet" href="{% static 'css/boarding.css' %}">
     <link rel="stylesheet" href="{% static 'css/btn.css' %}">
 {% endblock %}
 
 {% block content %}
-    <h1>Your passkey</h1>
+<div class="gapLarge codeView">
+    <h1 class="title">Login code<br><span class="title">for</span> {{ request.user.username }}</h1>
     
-    <div>
-        <h2></h2>
-        <h2></h2>
+    <h2 class="code">{{ pass_code }}</h2>
+
+    <div class="container gapSmall">
+        <p class="good">Do take a screenshot</p>
+        <p class="bad">Do NOT share with anyone</p>
     </div>
+
+    <a class="boardingBtn" href="{% url 'index' %}">Done, let me in!</a>
+</div>
 {% endblock %}

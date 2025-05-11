@@ -1,23 +1,81 @@
-form {
-    padding: var(--large);
+main {
     height: 100%;
+    padding: var(--large);
 
     display: grid;
+    grid-template-columns: minmax(256px, 512px);
     grid-template-rows: 1fr max-content;
+    justify-content: center;
+}
+
+form {
+    padding: var(--minimal);
+    height: max-content;
+
+    border-radius: var(--large);
+    border: 1px solid var(--primary);
+
+    display: grid;
+    grid-template-columns: 1fr max-content;
     justify-items: center;
     align-items: center;
+    gap: var(--minimal);
 }
 
 input {
-    padding: var(--large);
+    padding: var(--medium) var(--large);
     width: 100%;
+
     box-sizing: border-box;
     border: none;
-    text-align: center;
+
     color: var(--text);
     background: none;
 }
 
 input:focus {
     outline: none;
+    border-radius: var(--large);
+    background: var(--primary);
+}
+
+span {
+    color: var(--text-secondary);
+}
+
+.codeView {
+    height: 100%;
+    padding: var(--large);
+
+    display: grid;
+    grid-template-columns: minmax(256px, 512px);
+    grid-template-rows: max-content minmax(max-content, 1fr) repeat(2, max-content);
+    justify-content: center;
+}
+
+.code {
+    place-self: center;
+    font-size: 64px;
+    font-weight: 700;
+}
+
+.boardingBtn {
+    width: 100%;
+    padding: var(--medium) var(--large);
+
+    border-radius: var(--large);
+
+    text-decoration: none;
+    text-align: center;
+
+    color: var(--bg);
+    background-color: var(--text-primary);
+}
+
+.good {
+    color: var(--12);
+}
+
+.bad {
+    color: var(--1);
 }

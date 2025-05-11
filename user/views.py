@@ -35,7 +35,8 @@ def user_create(request):
             user = User.objects.create(username=username)
             login(request, user)
             Account.objects.create(user=user, auth_token=token, pass_code=pass_code)
-            return HttpResponse("User Created, logged in. Passcode: " + str(pass_code))
+            # return HttpResponse("User Created, logged in. Passcode: " + str(pass_code))
+            return render(request, 'passkey.html', context={'pass_code': pass_code})
     else:
         return redirect('login')
 
