@@ -31,6 +31,8 @@ export class DummyElement {
     constructor(element) { this.element = element; }
     get() { return this.element; }
     isEmpty() { if (this.element.children.length === 0) return true; return false; }
+    hide() { this.element.classList.add("hidden"); }
+    show() { this.element.classList.remove("hidden"); }
 }
 
 export class UserElement {

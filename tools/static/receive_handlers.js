@@ -1,7 +1,8 @@
 import * as controller from './live.js';
-import * as participants from './tools_shared.js'
+import * as participants from './tools_shared.js';
 import { UIUtils } from './UIController.js';
-import {data} from './tools_shared.js'
+import {data} from './tools_shared.js';
+import { timer } from "./shared_constants.js";
 
 export class StartHandler{
     handle(message){
@@ -15,6 +16,10 @@ export class StartHandler{
         const users = controller.ONLINE_LIST.getUsers();
         for( let u in users ) {
             UIUtils.addOnlineUser(users[u]);
+        }
+        if (controller.ELEMENTS.countdown!== undefined) {
+            controller.ELEMENTS.countdown.hide();
+            controller.ELEMENTS.voting.show();
         }
     }
 }
@@ -61,17 +66,25 @@ export class JoinHandler {
 export class SyncHandler {
     handle(message){
         const state = message.current_state;
-        if (state === "LIVE: start")
-            UIUtils.showLiveButton();
-        if (state === "LIVE: stop")
-            UIUtils.hideLiveButton();
-        controller.LIVE.setState(state);
-        const performance = message.current_performance;
         let users = message.users;
-        if (message.show !== undefined) {
-            controller.LIVE.setShowName(message.show.name);
+        const performance = message.current_performance;
+        console.log(message.show);
+        if (state === "LIVE: start") {
+            UIUtils.showLiveButton();
+            if (controller.ELEMENTS.countdown!== undefined) {
+                controller.ELEMENTS.countdown.hide();
+                controller.ELEMENTS.voting.show();
+            }
         }
-        if (message.show) { UIUtils.setShowName(message.show.name); }
+        if (state === "LIVE: stop") {
+            UIUtils.hideLiveButton();
+            if (controller.ELEMENTS.countdown!== undefined) {
+                controller.ELEMENTS.voting.hide();
+            }
+        }
+        controller.LIVE.setState(state);
+        if (message.show !== undefined) 
+            controller.LIVE.setShowName(message.show.name);
         if (message.votes !== undefined) {
             for (let i=0; i<message.votes.length; i++) {
                 const id = message.votes[i].performance_id;

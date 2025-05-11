@@ -147,4 +147,18 @@ export class UIUtils {
             spread: 180,
         });
     }
+
+    static ShowTimer(time) {
+        if(controller.ELEMENTS.countdown!== undefined) {
+            const currentDate = new Date().getTime();
+            const distance = time - currentDate;
+            const hours = Math.floor(distance / 1000 / 60 / 60);
+            const minutes = Math.floor(distance / 1000 / 60) % 60;
+            const seconds = Math.floor(distance / 1000) % 60;
+            
+            controller.ELEMENTS.hours.setText(hours);
+            controller.ELEMENTS.minutes.setText(minutes);
+            controller.ELEMENTS.seconds.setText(seconds);
+        }
+    }
 }

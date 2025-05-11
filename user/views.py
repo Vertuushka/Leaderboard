@@ -20,7 +20,7 @@ def user_create(request):
         username = request.POST.get('username')
         try:
             user = User.objects.get(username=username)
-            message.info(request, username)
+            messages.info(request, username)
             return redirect('new_session')
         except:
             token = get_random_string(length=25)
@@ -52,4 +52,4 @@ def new_session(request):
         except:
              return HttpResponse("Invalid passcode/username")
     else:
-        return redirect("login")
+        return HttpResponse("Enter your pass code here: ")

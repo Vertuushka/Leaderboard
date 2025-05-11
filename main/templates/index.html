@@ -33,7 +33,16 @@
     </div>
 
     <div class="content">
-        <div class="container gapSmall forms">
+        <div class="container gapSmall forms hidden" id="countdown">
+            <section class="container gapLarge">
+                <div class="container gapSmall center">
+                    <h2 class="title grow">Coming soon!</h2>
+                    <p class="footnote">This live will be available in:</p>
+                    <p class ="title"><span class ="title" id="hours">99</span>:<span class ="title" id="minutes">99</span>:<span class ="title" id="seconds">99</span></p>
+                </div>
+            </section>
+        </div>
+        <div class="container gapSmall forms hidden" id="voting">
             {% if show.name == "GF" %}
                 <section class="container gapLarge" action="">
                     <div class="container gapSmall center">
