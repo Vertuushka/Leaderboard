@@ -146,6 +146,7 @@ export class UserShareScoreHandler {
 
 export class ScoreHandler {
     handle(message) {
+        console.log(message);
         UIUtils.C_Confetti(message.performance);
     }
 }

@@ -43,7 +43,7 @@
     </section>
     <section class="container hidden" id="scoreBoardMode">
         <div class="votesData" style="display: flex; flex-direction: column; gap: 5px;">
-            {% if show != "Grand Final" %}
+            {% if show.name != "GF" %}
                 {% for performance in forVote %}
                     <div class="voteCard" style="display: flex; justify-content: space-between; gap: 25px;">
                         <label for="vote_{{performance.participant.country}}" class="country" style="width: 100%; display: flex; gap: 25px;">
@@ -54,6 +54,16 @@
                     </div>
                 {% endfor %}
             {% else %}
+            {% for performance in forVote %}
+                <div class="voteCard" style="display: flex; justify-content: space-between; gap: 25px;">
+                    <label for="vote_{{performance.participant.country}}" class="country" style="width: 100%; display: flex; gap: 25px;">
+                        <img {% if performance.passed %} class="auto_qualified" {% endif %} width="20px" src="{% static 'img/hearts/' %}{{ performance.participant.country }}.svg" alt="">
+                        <p {% if performance.passed %} class="auto_qualified" {% endif %}>{{performance.participant.country}}</p>
+                    </label>
+                    <input type="number" name="" id="vote_{{performance.participant.country}}" class="voteResultInput" data-performance="{{ performance.id }}" data-criteria="2" value="{{performance.jury}}">
+                    <input type="number" name="" id="vote_{{performance.participant.country}}" class="voteResultInput" data-performance="{{ performance.id }}" data-criteria="3" value="{{performance.votes}}">
+                </div>
+            {% endfor %}
             {% endif %}
         </div>
     </section>
@@ -78,6 +88,7 @@
 {% endblock %}
 
 {% block script %}
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <script type="module" src="{% static 'socket.js' %}"></script>
     <script type="module" src="{% static 'tools_admin.js' %}"></script>
     <script type="module" src="{% static 'tools_shared.js' %}"></script>
