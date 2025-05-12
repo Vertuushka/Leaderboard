@@ -27,6 +27,11 @@ def register_handlers():
     register_handler("LIVE: switch_mode_play", SwitchModeHandler(CONTROLLER))
     register_handler("USER: rank", UserScoreHandler(CONTROLLER))
     register_handler("LIVE: stop", StopHandler(CONTROLLER))
+    register_handler("LIVE: show_result", ShowResultHandler(CONTROLLER))
+
+class ShowResultHandler(ProtectedHandler):
+    def handle_protected(self, consumer, data):
+        consumer.broadcast_message("LIVE: show_result", {})
 
 class StopHandler(ProtectedHandler):
     def handle_protected(self, consumer, data):

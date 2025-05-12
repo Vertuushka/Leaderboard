@@ -11,6 +11,7 @@ function RegisterElements() {
     tools.RegisterElement("B_ScoreBoard", tools.ButtonElement, new sender.ScoreBoardModeHandler);
     tools.RegisterElement("scoreBoardMode", tools.DummyElement);
     tools.RegisterElement("live_stop", tools.ButtonElement, new sender.StopHandler);
+    tools.RegisterElement("B_ResultRedirect", tools.ButtonElement, new sender.SendResultRedirect);
 }
 
 function init() {

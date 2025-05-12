@@ -56,3 +56,9 @@ export class VoteResultHandler {
         SOCKET.send({"prefix": "LIVE: score_update", "message":msg});
     }
 }
+
+export class SendResultRedirect {
+    handle() {
+        SOCKET.send({"prefix":"LIVE: show_result", "message":"1"});
+    }
+}

@@ -58,25 +58,27 @@ export class UIUtils {
         }
         
         const performance = controller.LIVE.getClientPerformance();
+        if (controller.ELEMENTS["voteBtn1"] !== undefined) {
 
-        if (controller.grades[performance]!== undefined) {
-            if (controller.LIVE.getShowName() === "GF") {
-                for (let i in constants.grand_final_criteria) {
-                    let criteria = constants.grand_final_criteria[i];
-                    if (controller.grades[performance][criteria]!== undefined) {
-                        let grade = controller.grades[performance][criteria];
-                        if (controller.grades[performance][criteria] === 10)
-                            grade = 9;
-                        if (controller.grades[performance][criteria] === 12)
-                            grade = 10;
-                        controller.ELEMENTS[`voteBtn${grade + 10 * (criteria - 2) - 1}`].element.classList.add("active");
+            if (controller.grades[performance]!== undefined) {
+                if (controller.LIVE.getShowName() === "GF") {
+                    for (let i in constants.grand_final_criteria) {
+                        let criteria = constants.grand_final_criteria[i];
+                        if (controller.grades[performance][criteria]!== undefined) {
+                            let grade = controller.grades[performance][criteria];
+                            if (controller.grades[performance][criteria] === 10)
+                                grade = 9;
+                            if (controller.grades[performance][criteria] === 12)
+                                grade = 10;
+                            controller.ELEMENTS[`voteBtn${grade + 10 * (criteria - 2) - 1}`].element.classList.add("active");
+                        }
                     }
+                } else {
+                    let grade = controller.grades[performance][constants.criteria_passed]
+                    controller.ELEMENTS[`voteBtn${grade}`].element.classList.add("active");
                 }
-            } else {
-                let grade = controller.grades[performance][constants.criteria_passed]
-                controller.ELEMENTS[`voteBtn${grade}`].element.classList.add("active");
-            }
-        } 
+            } 
+        }
         const users = controller.ONLINE_LIST.getUsers();
         for (let i in users) {
             const username = users[i];

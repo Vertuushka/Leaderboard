@@ -1,5 +1,6 @@
 export const bg_url = "/static/img/";
 export const hearts_url = "/static/img/hearts/";
+export const results_url = `${window.location.origin}/results/`;
 export const SHOW_NAMES = {
     "SF1": "Semi Final 1",
     "SF2": "Semi Final 2",
