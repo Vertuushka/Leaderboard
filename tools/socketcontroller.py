@@ -197,10 +197,7 @@ class SocketController:
             self.handlers = {}
             self.state = "LIVE_MODE: stop"
             self.live = False
-            try:
-                self.show = GlobalSettings.objects.get(id=1).state
-            except:
-                self.show = None
+            self.show = None
             self.performances = []
             self.current_performance = 0
             self.connected_users = []
