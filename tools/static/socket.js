@@ -1,6 +1,7 @@
 import * as receiver from './receive_handlers.js';
 
-const ENDPOINT = `ws://${window.location.host}/ws/socket-server/`;
+const websocketProtocol = window.location.protocol === "https:" ? "wss" : "ws";
+const ENDPOINT = `${websocketProtocol}://${window.location.host}/ws/socket-server/`;
 const HANDLERS = {};
 
 function registerHandler(prefix, handler) {
