@@ -34,42 +34,47 @@ def index(request):
 
 @login_required
 def results(request):
-    user = request.user
     state = GlobalSettings.objects.get(id=1).state.id
     if state == 1:
         return redirect("index")
-    context = {}
-    show_names = []
-    performances = []
-    user_votes = []
-    if state == 2:
-        show_names = ["Semi Final 1"]
-        perf_qs = Performance.objects.filter(show__id=1)
-        performances = [perf_qs]
-        user_votes = [Vote.objects.filter(performance__in=perf_qs, user=user)]
-    if state == 3:
-        performances_all = Performance.objects.filter(show__id__in=[1,2])
-        show_names = ["Semi Final 2", "Semi Final 1" ]
-        perf_qs1 = performances_all.filter(show__id=2)
-        perf_qs2 = performances_all.filter(show__id=1)
-        performances = [perf_qs1, perf_qs2]
-        user_votes = [Vote.objects.filter(performance__in=perf_qs1, user=user), Vote.objects.filter(performance__in=perf_qs2, user=user)]
-    if state == 4:
-        performances = Performance.objects.filter(show__id__in=[3])
-        show_names = ["Grand Final"]
-        performances = [performances]
-        u_votes = Vote.objects.filter(performance__in=performances, user=user)
-        for performance in performances:
-            grade = 0
-            for i in range(2, 5):
-                try:
-                    vote = Vote.objects.get(performance=performance, criteria=i)
-                    grade += vote.grade
-                except:
-                    pass
-            user_votes.append([grade])
-            
 
-    data = zip(show_names, performances, user_votes)
-    context['data'] = data
+    context = {}
+    shows_performances_votes = []
+    user = request.user
+
+    if state == 2:
+        performances = Performance.objects.filter(show__id=1).order_by('id')
+        votes = Vote.objects.filter(performance__in=performances, user=user, criteria=1)
+        vote_map = {vote.performance_id: vote.grade for vote in votes}
+        performance_vote_pairs = [(perf, vote_map.get(perf.id)) for perf in performances]
+        shows_performances_votes.append(("Semi Final 1", performance_vote_pairs))
+
+
+    elif state == 3:
+        for show_id, show_label in [(2, "Semi Final 2"), (1, "Semi Final 1")]:
+            performances = Performance.objects.filter(show__id=show_id).order_by('order')
+            votes = Vote.objects.filter(performance__in=performances, user=user, criteria=1)
+            vote_map = {vote.performance_id: vote.grade for vote in votes}
+            performance_vote_pairs = [(perf, vote_map.get(perf.id)) for perf in performances]
+            shows_performances_votes.append((show_label, performance_vote_pairs))
+
+
+    elif state == 4:
+        performances = Performance.objects.filter(show__id=3)
+        
+        votes = Vote.objects.filter(performance__in=performances, user=user, criteria__in=[2, 3, 4])
+        grade_map = defaultdict(int)
+        for vote in votes:
+            grade_map[vote.performance_id] += vote.grade
+
+        performances = sorted(
+            performances,
+            key=lambda p: (p.jury or 0) + (p.votes or 0),
+            reverse=True
+        )
+
+        performance_vote_pairs = [(perf, grade_map.get(perf.id, 0)) for perf in performances]
+        shows_performances_votes.append(("Grand Final", performance_vote_pairs))
+
+    context['data'] = shows_performances_votes
     return render(request, "results.html", context)

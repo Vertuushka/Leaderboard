@@ -8,16 +8,36 @@
 {% block content %}
     <h1>Results</h1>
 
-    {% for name, performances in data %}
-        <h2> {{ name }} </h2>
-        {% for performance in performances %}
-            <img width="25px" src="{% static 'img/hearts/' %}{{performance.participant.country}}.svg" alt="">
-            {% if name == "Semi Final 1" or name == "Semi Final 2" %}
-                <p class="{% if performance.passed %} qualified {% else %} unqualified {% endif %}">{{ performance.participant.country }}</p>
-            {% else %}
-                <p>{{ performance.participant.country }} - {{ performance.jury }} - {{ performance.votes }}</p>
-            {% endif %}
+    {% for name, performance_data in data %}
+        <h2>{{ name }}</h2>
+
+        {% for performance, votes_or_grade in performance_data %}
+            <div style="margin-bottom: 10px; display: flex;">
+                <img width="25px" src="{% static 'img/hearts/' %}{{ performance.participant.country }}.svg" alt="">
+
+                {% if name == "Semi Final 1" or name == "Semi Final 2" %}
+                    <p class="{% if performance.passed %}qualified{% else %}unqualified{% endif %}">
+                        {{ performance.participant.country }}
+                    </p>
+
+                    <p>
+                        {% if votes_or_grade == 0 %}
+                        Your prediction: Qualified
+                        {% elif votes_or_grade == 1 %}
+                        Your prediction: Not Qualified
+                        {% else %}
+                        {% endif %}
+                    </p>
+
+                {% else %}
+                    <p>
+                        {{ performance.participant.country }} — Jury: {{ performance.jury }} — Public votes: {{ performance.votes }}
+                    </p>
+                    <p>
+                        <strong>Your grade:</strong> {{ votes_or_grade }} / 36
+                    </p>
+                {% endif %}
+            </div>
         {% endfor %}
     {% endfor %}
-
 {% endblock %}
