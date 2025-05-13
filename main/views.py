@@ -34,24 +34,32 @@ def index(request):
 
 @login_required
 def results(request):
+    user = request.user
     state = GlobalSettings.objects.get(id=1).state.id
     if state == 1:
         return redirect("index")
     context = {}
     show_names = []
     performances = []
+    user_votes = []
     if state == 2:
         show_names = ["Semi Final 1"]
-        performances = [Performance.objects.filter(show__id__in=[1])]
+        perf_qs = Performance.objects.filter(show__id=1)
+        performances = [perf_qs]
+        user_votes = [Vote.objects.filter(performance__in=perf_qs, user=user)]
     if state == 3:
         performances_all = Performance.objects.filter(show__id__in=[1,2])
         show_names = ["Semi Final 2", "Semi Final 1" ]
-        performances = [performances_all.filter(show__id=2), performances_all.filter(show__id=1)]
+        perf_qs1 = performances_all.filter(show__id=2)
+        perf_qs2 = performances_all.filter(show__id=1)
+        performances = [perf_qs1, perf_qs2]
+        user_votes = [Vote.objects.filter(performance__in=perf_qs1, user=user), Vote.objects.filter(performance__in=perf_qs2, user=user)]
     if state == 4:
         performances = Performance.objects.filter(show__id__in=[3])
         show_names = ["Grand Final"]
         performances = [performances]
+        user_votes = [Vote.objects.filter(performance__in=performances, user=user)]
 
-    data = zip(show_names, performances)
+    data = zip(show_names, performances, user_votes)
     context['data'] = data
     return render(request, "results.html", context)
