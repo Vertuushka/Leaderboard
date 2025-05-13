@@ -1,0 +1,45 @@
+main {
+    height: 100%;
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: minmax(256px, 512px);
+    grid-template-rows: repeat(2, max-content) max-content repeat(2, 1fr) max-content;
+    justify-content: center;
+}
+
+.controllerFeed {
+    grid-column: 1;
+    grid-row: 4 /span 3;
+
+    box-sizing: border-box;
+
+    max-height: 100%;
+
+    overflow-y: scroll;
+}
+
+.scrollable {
+    overflow-y: auto; /* Enables vertical scrollbar when content overflows */
+    max-height: 512px;
+}
+
+.dataRow {
+    width: 100%;
+    height: max-content;
+    padding: var(--medium) var(--large);
+
+    border-top: 1px solid var(--primary);
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+}
+
+.controllerBtnWrapper {
+    padding: var(--medium);
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+}

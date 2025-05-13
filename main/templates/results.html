@@ -2,42 +2,62 @@
 {% load static %}
 
 {% block style %}
+    <link rel="stylesheet" href="{% static 'css/results.css' %}">
     <link rel="stylesheet" href="{% static 'css/btn.css' %}">
 {% endblock %}
 
 {% block content %}
-    <h1>Results</h1>
-
+<main>
     {% for name, performance_data in data %}
-        <h2>{{ name }}</h2>
+        <h1 class="title">Results <span class="title">-</span> {{ name }}</h1>
+
+        {% if name == "Semi Final 1" or name == "Semi Final 2" %}
+            <div class="row sfRow rowHeader">
+                <p class="">Country</p>
+                <p class="">Your guess</p>
+
+        {% else %}
+            <div class="row gfRow rowHeader">
+                <p class="">Country</p>
+                <p class="">Your grade</p>
+                <p class="">Jury</p>
+                <p class="">Public votes</p>
+
+        {% endif %}
+        </div>
 
         {% for performance, votes_or_grade in performance_data %}
-            <div style="margin-bottom: 10px; display: flex;">
-                <img width="25px" src="{% static 'img/hearts/' %}{{ performance.participant.country }}.svg" alt="">
-
-                {% if name == "Semi Final 1" or name == "Semi Final 2" %}
-                    <p class="{% if performance.passed %}qualified{% else %}unqualified{% endif %}">
-                        {{ performance.participant.country }}
-                    </p>
+            {% if name == "Semi Final 1" or name == "Semi Final 2" %}
+                <div class="row sfRow">
+                    <div class="wrapper gapLarge center">
+                        <img width="25px" src="{% static 'img/hearts/' %}{{ performance.participant.country }}.svg" alt="">
+                        <p class="gc2 {% if performance.passed %}qualified{% else %}unqualified{% endif %}">
+                            {{ performance.participant.country }}
+                        </p>
+                    </div>
 
                     <p>
                         {% if votes_or_grade == 0 %}
-                        Your prediction: Qualified
-                        {% elif votes_or_grade == 1 %}
-                        Your prediction: Not Qualified
-                        {% else %}
+                            Will Qualify
+                            {% elif votes_or_grade == 1 %}
+                            Will not Qualify
+                            {% else %}
                         {% endif %}
                     </p>
-
+                    
                 {% else %}
-                    <p>
-                        {{ performance.participant.country }} — Jury: {{ performance.jury }} — Public votes: {{ performance.votes }}
-                    </p>
-                    <p>
-                        <strong>Your grade:</strong> {{ votes_or_grade }} / 36
-                    </p>
+                    <div class="row gfRow">
+                        <div class="wrapper gapMedium center">
+                            <img width="25px" src="{% static 'img/hearts/' %}{{ performance.participant.country }}.svg" alt="">
+                            <p>{{ performance.participant.country }}</p>
+                        </div>
+
+                        <p>{{ votes_or_grade }} / 36</p>
+                        <p>{{ performance.jury }}</p>
+                        <p>{{ performance.votes }}</p>
                 {% endif %}
             </div>
         {% endfor %}
     {% endfor %}
+</main>
 {% endblock %}
