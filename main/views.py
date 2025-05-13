@@ -58,7 +58,17 @@ def results(request):
         performances = Performance.objects.filter(show__id__in=[3])
         show_names = ["Grand Final"]
         performances = [performances]
-        user_votes = [Vote.objects.filter(performance__in=performances, user=user)]
+        u_votes = Vote.objects.filter(performance__in=performances, user=user)
+        for performance in performances:
+            grade = 0
+            for i in range(2, 5):
+                try:
+                    vote = Vote.objects.get(performance=performance, criteria=i)
+                    grade += vote.grade
+                except:
+                    pass
+            user_votes.append([grade])
+            
 
     data = zip(show_names, performances, user_votes)
     context['data'] = data
