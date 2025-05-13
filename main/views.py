@@ -11,6 +11,8 @@ def index(request):
     context = defaultdict(lambda: None)
     try:
         show = GlobalSettings.objects.get(id=1).state
+        if (show.name == "N"):
+            return redirect("results")
         context['show'] = show
         context['performances'] = Performance.objects.filter(show=show)
         context['participants'] = Participant.objects.filter(performance__show=show).distinct()
