@@ -5,7 +5,7 @@ import * as tools from "./live.js";
 
 function createOnlineListElement(username) {
     const el = document.createElement("div");
-    el.classList.add("wrapper", "gapMedium", "playerVote");
+    el.classList.add("wrapper", "gapMedium", "playerVote", "onlineListChild");
     el.id = `online_list_user_${username}`;
     /* CHANGE THIS TO GRAND FINAL CHECK */
     el.innerHTML = `

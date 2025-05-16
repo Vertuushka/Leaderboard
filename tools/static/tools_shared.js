@@ -43,3 +43,7 @@ function init() {
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
+window.addEventListener("visibilitychange", () => {
+    window.location.reload();
+})

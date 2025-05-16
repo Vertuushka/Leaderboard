@@ -4,6 +4,7 @@
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/live.css' %}">
     <link rel="stylesheet" href="{% static 'css/btn.css' %}">
+    <meta http-equiv="Cache-Control" content="no-store" />
 {% endblock %}
 
 {% block content %}
@@ -27,11 +28,13 @@
             <p class="footnote" id="song_name"></p>
         </div>
     </header>
-    
-    <div class="wrapper scoreboard gridSpan" id="online_list">
-        <p class="playerVote onlineListChild" id="online_list_dummy">No users connected.</p>
-    </div>
 
+    <div class="wrapper scoreboard gridSpan" id="online_list_wrapper">
+        <div class="wrapper" id="online_list">
+            <p class="playerVote" id="online_list_dummy">No users connected.</p>
+        </div>
+    </div>
+    
     <div class="content">
         <div class="container gapSmall forms hidden" id="countdown">
             <section class="container gapLarge">

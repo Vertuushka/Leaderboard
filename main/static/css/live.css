@@ -136,24 +136,26 @@ section {
 }
 
 
-#online_list {
+#online_list_wrapper {
     overflow: hidden;
-    position: relative;
+    /* position: relative;
+    width: 100%;
+    height: auto; */
+  }
+  
+#online_list {
+    display:flex;
+    width: 100%;
+    /* white-space: nowrap; */
+    /* position: relative; */
+    animation: scroll-left 15s linear infinite;
 }
 
-.onlineListChild {
-    display: inline-block;
-    white-space: nowrap;
-    animation: marquee 10s linear infinite;
-    padding-left: 100%;
-    box-sizing: content-box;
+@keyframes scroll-left {
+0% {
+    transform: translateX(100%);
 }
-
-@keyframes marquee {
-    0% {
-      transform: translateX(0%);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
+100% {
+    transform: translateX(-100%);
+}
 }
