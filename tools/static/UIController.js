@@ -11,9 +11,9 @@ function createOnlineListElement(username) {
     el.innerHTML = `
         <p class="username">${username}</p>
         ${controller.LIVE.getShowName() === "GF" ? `
-            <p class="grade-criteria-2"></p>
-            <p class="grade-criteria-3"></p>
-            <p class="grade-criteria-4"></p>` : `
+            <p class="grade-criteria-2">0</p>
+            <p class="grade-criteria-3">0</p>
+            <p class="grade-criteria-4">0</p>` : `
             <p class="grade-criteria-1"></p>                              
             `}        
         `;
@@ -35,7 +35,7 @@ export class UIUtils {
         controller.ELEMENTS.song_name.setText(participants.data[key].song);
         controller.ELEMENTS.country_name.setText(participants.data[key].country);
         controller.ELEMENTS.artist_name.setText(participants.data[key].name);
-        controller.ELEMENTS.participantImg.setImg(constants.bg_url + participants.data[key].country + ".jpg");
+        controller.ELEMENTS.participantImg.setImg(constants.bg_url + participants.data[key].country + ".webp");
         controller.ELEMENTS.heartImg.setImg(constants.hearts_url + participants.data[key].country + ".svg");
         if (controller.LIVE.getShowName() !== "GF") {
             if (controller.ELEMENTS.SFVoteContainer!== undefined && participants.data[key].passed === true) {

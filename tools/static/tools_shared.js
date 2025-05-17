@@ -20,7 +20,7 @@ function updatePerformanceInfo() {
     ELEMENTS.song_name.setText(data[0].song);
     ELEMENTS.country_name.setText(data[0].country);
     ELEMENTS.artist_name.setText(data[0].name);
-    ELEMENTS.participantImg.setImg(constants.bg_url + data[0].country + ".jpg");
+    ELEMENTS.participantImg.setImg(constants.bg_url + data[0].country + ".webp");
     ELEMENTS.heartImg.setImg(constants.hearts_url + data[0].country + ".svg");
 }
 

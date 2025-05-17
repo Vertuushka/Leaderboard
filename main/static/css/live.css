@@ -1,0 +1,124 @@
+#app {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--small);
+}
+
+header {
+    padding: var(--medium);
+
+    display: grid;
+    grid-template-columns: repeat(4, minmax(24px, 1fr));
+    gap: var(--small);
+}
+
+.cover {
+    grid-column: 1 /span 3;
+
+    aspect-ratio: 1;
+
+    border-radius: var(--small);
+
+    overflow: hidden;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+nav {
+    grid-column: 4;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.navBtn {
+    height: 100%;
+    
+    border-radius: var(--small);
+    background-color: var(--primary);
+
+    display: grid;
+    place-items: center;
+}
+
+.content {
+    height: 100%;
+}
+
+.forms {
+    flex-grow: 1;
+
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+}
+
+.forms::-webkit-scrollbar {
+    display: none;
+}
+
+section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+
+    min-width: 100%;
+    padding: var(--medium);
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+section div {
+    flex: 1;
+}
+
+.heart {
+    aspect-ratio: 1;
+    width: 32px;
+}
+
+.gradient {
+    height: 100%;
+    box-sizing: border-box;
+
+    background: rgba(0, 0, 0, 10.01);
+    background: radial-gradient(circle, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.64) 100%);
+}
+
+.playerVote {
+    padding-left: var(--large);
+    border-left: 1px solid var(--primary);
+}
+
+.playerVote:first-child  {
+    border-left: none;
+}
+
+.coverBody {
+    padding-bottom: var(--small);
+    border-bottom: 1px solid var(--primary);
+}
+
+.countdown {
+    height: 100%;
+    padding: var(--medium);
+}
+
+.countdown div {
+    height: 100%;
+    padding: var(--medium);
+
+    border-radius: var(--small);
+    border: 1px dashed var(--primary);
+
+    display: grid;
+    place-content: center;
+    justify-items: center;
+}
