@@ -30,15 +30,3 @@
         transform: translateX(-100%);
     }
 }
-
-.qualified {
-    color: var(--10);
-}
-
-.unqualified {
-    color: var(--1);
-}
-
-.auto_qualified {
-    opacity: 0.5;
-}
