@@ -5,6 +5,19 @@ from tools.models import *
 from . models import GlobalSettings
 import json
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
+import os
+from django.http import FileResponse
+from django.conf import settings
+
+@staff_member_required
+def download_db(request):
+    db_path = os.path.join(settings.BASE_DIR, 'db.sqlite3')
+    if os.path.exists(db_path):
+        response = FileResponse(open(db_path, 'rb'), as_attachment=True, filename='db.sqlite3')
+        return response
+    else:
+        return HttpResponseNotFound('Database file not found.')
 
 @login_required
 def index(request):
