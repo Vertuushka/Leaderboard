@@ -1,7 +1,7 @@
-@import url('gambarino.css');
+@import url('satoshi.css');
 
 :root {
-    --bg: hsl(0, 0%, 4%);
+    --bg: hsl(200, 6%, 6%);
     --primary: hsla(0, 0%, 100%, 6%);
 
     --text-primary: hsl(0, 0%, 96%);
@@ -11,9 +11,6 @@
     --small: 6px;
     --medium: 12px;
     --large: 24px;
-
-    --maxWidth: 512px;
-    --minWidth: 256px;
 
     --1: #FF3B30;
     --1-hover: #FF3B3024;
@@ -49,48 +46,29 @@
 * {
     margin: 0;
     padding: 0;
+
+    border: none;
+
     box-sizing: border-box;
 
-    font-family: "Roboto", sans-serif;
+    font-family: Satoshi-Variable;
     font-optical-sizing: auto;
-    font-weight: 400;
-    font-size: 14px;
     font-style: normal;
-    font-variation-settings: "wdth" 100;
+    font-variation-settings: "wdth" 400;
 }
 
 body {
-    box-sizing: border-box;
-    overflow: hidden;
+    max-width: 512px;
+    height: 100svh;
 
-    display: flex;
-    flex-direction: column;
+    margin: 0 auto;
 
-    display: grid;
-    grid-template-columns: minmax(256px, 512px);
-    justify-content: center
-}
-
-.title {
-    font-family: Gambarino-Regular;
-    font-size: 20px;
-}
-
-.regular {
-    font-size: 14px;
     color: var(--text-primary);
-}
-
-.footnote {
-    font-size: 14px;
-    color: var(--text-secondary);
-}
-
-body {
     background-color: var(--bg);
-    color: var(--text-primary);
 }
 
+
+/* layout */
 .wrapper {
     display: flex;
 }
@@ -124,27 +102,10 @@ body {
     align-items: center;
 }
 
-.fadeTransition {
-    transition: opacity 0.3s ease;
-    opacity: 1;
-  }
-  
-.fadeOut {
-    opacity: 0;
+.spacing {
+    justify-content: space-between;
 }
 
 .hidden {
     display: none !important;
-}
-
-.qualified {
-    color: var(--10);
-}
-
-.unqualified {
-    color: var(--1);
-}
-
-.auto_qualified {
-    opacity: 0.5;
 }

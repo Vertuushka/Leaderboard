@@ -1,33 +1,32 @@
-main {
-    height: 100%;
-    padding: var(--large);
+body {
+    height: 100dvh;
+
+    overflow: hidden;
 
     display: grid;
-    grid-template-columns: minmax(256px, 512px);
-    grid-template-rows: 1fr max-content;
-    justify-content: center;
+    align-items: center;
 }
 
 form {
-    padding: var(--minimal);
-    height: max-content;
-
-    border-radius: var(--large);
-    border: 1px solid var(--primary);
+    height: 100%;
 
     display: grid;
-    grid-template-columns: 1fr max-content;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr max-content 1fr;
     justify-items: center;
     align-items: center;
-    gap: var(--minimal);
+    gap: var(--small);
 }
 
 input {
-    padding: var(--medium) var(--large);
-    width: 100%;
+    grid-row: 2;
 
-    box-sizing: border-box;
-    border: none;
+    width: 100%;
+    
+    font-size: 24px;
+    font-weight: 600;
+
+    text-align: center;
 
     color: var(--text);
     background: none;
@@ -35,8 +34,6 @@ input {
 
 input:focus {
     outline: none;
-    border-radius: var(--large);
-    background: var(--primary);
 }
 
 span {
@@ -63,10 +60,13 @@ span {
     width: 100%;
     padding: var(--medium) var(--large);
 
-    border-radius: var(--large);
+    border-radius: var(--small);
 
     text-decoration: none;
     text-align: center;
+
+    font-size: 16px;
+    font-weight: 500;
 
     color: var(--bg);
     background-color: var(--text-primary);
@@ -78,4 +78,20 @@ span {
 
 .bad {
     color: var(--1);
+}
+
+.link {
+    grid-row: 3;
+    align-self: end;
+
+    padding: var(--large);
+
+    width: max-content;
+    
+    font-size: 14px;
+    font-weight: 500;
+
+    text-decoration: none;
+
+    color: var(--text-primary);
 }

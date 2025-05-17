@@ -5,7 +5,7 @@ import * as tools from "./live.js";
 
 function createOnlineListElement(username) {
     const el = document.createElement("div");
-    el.classList.add("wrapper", "gapMedium", "playerVote");
+    el.classList.add("wrapper", "gapMedium", "playerVote", "onlineListChild");
     el.id = `online_list_user_${username}`;
     /* CHANGE THIS TO GRAND FINAL CHECK */
     el.innerHTML = `
@@ -162,14 +162,16 @@ export class UIUtils {
         }
     }
     static ScrollToCriteria(caller) {
-        // if(controller.ELEMENTS.voting !== undefined) {
-        //     if (caller === controller.ELEMENTS.voteCriteria1.element) {
-        //         controller.ELEMENTS.voteCriteria2.element.scrollIntoView({behavior: "smooth", block: "center"})
-        //     }
-        //     if (caller === controller.ELEMENTS.voteCriteria2.element) {
-        //         controller.ELEMENTS.voteCriteria3.element.scrollIntoView({behavior: "smooth", block: "center"})
-        //     }
-        // }
-        
+        if(controller.ELEMENTS.voting !== undefined) {
+            if (caller === controller.ELEMENTS.voteCriteria1.element) {
+                controller.ELEMENTS.voteCriteria2.element.scrollIntoView({behavior: "smooth", block: "center"})
+            }
+            if (caller === controller.ELEMENTS.voteCriteria2.element) {
+                controller.ELEMENTS.voteCriteria3.element.scrollIntoView({behavior: "smooth", block: "center"})
+            }
+            if (caller === controller.ELEMENTS.voteCriteria3.element) {
+                controller.ELEMENTS.voteCriteria1.element.scrollIntoView({behavior: "smooth", block: "center"})
+            }
+        }
     }
 }

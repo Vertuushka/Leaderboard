@@ -6,17 +6,15 @@
     <link rel="stylesheet" href="{% static 'css/btn.css' %}">
 {% endblock %}
 
-{% block content %}
-<main class="gapLarge">
-    <h1 class="title"><span class="title">Enter your</span><br>login code!</h1>
+{% block title %}Login code{% endblock %}
 
+{% block content %}
     <form action="{% url 'new_session' %}" method="post">
         {% csrf_token %}
         {% for message in messages %}
             <input type="hidden" name="username" id="" value="{{ message }}">
         {% endfor %}
-        <input type="text" name="pass_code" id="" placeholder="Press to enter a login code">
-        <button class="btn" type="submit">Get in</button>
+        <input type="text" name="pass_code" id="" placeholder="Enter your login code" required minlength="2">
+        <a class="link" href="{% url 'login' %}">I dont have an account</a>
     </form>
-</main>
 {% endblock %}
