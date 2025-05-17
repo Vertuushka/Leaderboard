@@ -1,45 +1,107 @@
-main {
-    height: 100%;
-    box-sizing: border-box;
+header {
+    padding: 0 var(--medium);
+    grid-template-columns: repeat(2, 1fr);
+}
 
-    display: grid;
-    grid-template-columns: minmax(256px, 512px);
-    grid-template-rows: repeat(2, max-content) max-content repeat(2, 1fr) max-content;
-    justify-content: center;
+.cover {
+    grid-column: 1;
+}
+
+nav {
+    grid-column: 2;
+}
+
+nav>button {
+    padding: var(--small);
 }
 
 .controllerFeed {
-    grid-column: 1;
-    grid-row: 4 /span 3;
-
-    box-sizing: border-box;
-
-    max-height: 100%;
+    height: 100%;
+    padding: var(--medium);
 
     overflow-y: scroll;
 }
 
-.scrollable {
-    overflow-y: auto; /* Enables vertical scrollbar when content overflows */
-    max-height: 512px;
+.ctrlCon {
+    height: 100%;
+}
+
+.ctrlBtn {
+    height: 100%;
+    border-radius: var(--small);
+}
+
+.start_live {
+    color: var(--12);
+    background-color: var(--12-hover);
+}
+
+.end_live {
+    color: var(--1);
+    background-color: var(--1-hover);
+}
+
+#scoreBoardMode {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--large);
 }
 
 .dataRow {
     width: 100%;
     height: max-content;
-    padding: var(--medium) var(--large);
+}
 
-    border-top: 1px solid var(--primary);
+.toolInput {
+    width: 100%;
+    padding: var(--medium);
 
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    align-items: center;
+    border-radius: var(--small);
+    border: 1px solid var(--primary);
+
+    color: var(--text-secondary);
+    background-color: var(--primary);
+}
+
+.toolInput:focus {
+    outline: none;
+    border-color: var(--text-primary);
+}
+
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Optional: Remove up/down arrows in Microsoft Edge (legacy) */
+input[type="number"] {
+  appearance: textfield; /* fallback for modern browsers */
 }
 
 .controllerBtnWrapper {
-    padding: var(--medium);
-
+    padding: 0 var(--medium);
+    
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    justify-items: center;
+
+}
+
+.controllerBtnWrapper>button {
+    width: 100%;
+    height: 100%;
+    padding: var(--medium);
+
+    background-color: var(--primary);
+    border-radius: var(--small);
+}
+
+.scoreboard {
+    padding: var(--medium) 0;
 }

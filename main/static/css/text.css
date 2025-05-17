@@ -1,0 +1,15 @@
+h2 {
+    font-size: 23px;
+}
+
+p {
+    font-size: 14.5px;
+}
+
+.textCon {
+    padding: var(--medium);
+}
+
+.secondary {
+    color: var(--text-secondary);
+}
