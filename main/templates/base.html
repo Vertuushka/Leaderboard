@@ -5,17 +5,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <meta name="theme-color" content="#0E1010">
 
     <!-- style -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/text.css' %}">
     {% block style %}{% endblock %}
 
-    <title>Document</title>
+    <title>{% block title %}Euro Vision Song Contest{% endblock %}</title>
 </head>
 <body>
     {% block content %}{% endblock %}
-    <script src="{% static 'js/main.js' %}"></script>
     {% block script %}{% endblock %}
 </body>
 </html>

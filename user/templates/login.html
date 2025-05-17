@@ -2,18 +2,19 @@
 {% load static %}
 
 {% block style %}
-    <link rel="stylesheet" href="{% static 'css/boarding.css' %}">
-    <link rel="stylesheet" href="{% static 'css/btn.css' %}">
+<link rel="stylesheet" href="{% static 'css/boarding.css' %}">
+<link rel="stylesheet" href="{% static 'css/btn.css' %}">
 {% endblock %}
 
-{% block content %}
-<main class="gapLarge">
-    <h1 class="title">Welcome!</h1>
+{% block title %}Login{% endblock %}
 
-    <form action="{% url 'create' %}" method="post">
-        {% csrf_token %}
-        <input type="text" name="username" id="" placeholder="Press to enter a username">
-        <button class="btn" type="submit">Next</button>
-    </form>
-</main>
+{% block content %}
+<form action="{% url 'create' %}" method="post" autocomplete="off" id="usernameForm">
+    {% csrf_token %}
+    <input type="text" name="username" id="usernameInput" placeholder="Enter a username" required minlength="1" maxlength="16">
+</form>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'boarding.js' %}"></script>
 {% endblock %}

@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="{% static 'css/btn.css' %}">
 {% endblock %}
 
+{% block title %}Get started{% endblock %}
+
 {% block content %}
 <div class="gapLarge codeView">
     <h1 class="title">Login code<br><span class="title">for</span> {{ request.user.username }}</h1>
