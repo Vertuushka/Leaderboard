@@ -2,6 +2,7 @@ import * as controller from './live.js';
 import * as participants from './tools_shared.js';
 import { UIUtils } from './UIController.js';
 import {data} from './tools_shared.js';
+import { results_url } from './shared_constants.js';
 
 export class StartHandler{
     handle(message){
@@ -146,7 +147,14 @@ export class UserShareScoreHandler {
 
 export class ScoreHandler {
     handle(message) {
+        console.log(message);
         UIUtils.C_Confetti(message.performance);
+    }
+}
+
+export class ShowResultsHandler {
+    handle(message){
+        window.location.href = results_url;
     }
 }
 

@@ -27,6 +27,11 @@ def register_handlers():
     register_handler("LIVE: switch_mode_play", SwitchModeHandler(CONTROLLER))
     register_handler("USER: rank", UserScoreHandler(CONTROLLER))
     register_handler("LIVE: stop", StopHandler(CONTROLLER))
+    register_handler("LIVE: show_result", ShowResultHandler(CONTROLLER))
+
+class ShowResultHandler(ProtectedHandler):
+    def handle_protected(self, consumer, data):
+        consumer.broadcast_message("LIVE: show_result", {})
 
 class StopHandler(ProtectedHandler):
     def handle_protected(self, consumer, data):
@@ -75,15 +80,29 @@ class ScoreHandler(ProtectedHandler):
         if not show:
             return
         try:
-            _id = data["performance"]
+            _id = int(data["performance"])
             performance = Performance.objects.get(id=_id)
-            if (show != "Grand Final"):
+            if (show.name != "GF"):
                 performance.passed = True if data["score"] == "on" else False
                 performance.save()  
+            else:
+                criteria = int(data["criteria"])
+                if criteria == 2:
+                    performance.jury = int(data["score"])
+                    performance.save()
+                if criteria == 3:
+                    performance.votes = int(data["score"])
+                    performance.points = performance.jury + int(data["score"])
+                    performance.save()
             msg = {
                 "performance": performance.id,
-                "passed": performance.passed,
+                "passed": performance.passed or False,
+                "jury": performance.jury,
+                "votes": performance.votes,
+                "points": performance.points
             }
+            self.controller.current_performance = performance.order - 1
+            consumer.broadcast_message("LIVE: performance", self.controller.current_performance)
             consumer.broadcast_message("LIVE: score", msg)
         except Exception as e:
             consumer.send_error(build_error(e))
@@ -197,7 +216,7 @@ class SocketController:
             self.handlers = {}
             self.state = "LIVE_MODE: stop"
             self.live = False
-            self.show = GlobalSettings.objects.get(id=1).state
+            self.show = None
             self.performances = []
             self.current_performance = 0
             self.connected_users = []

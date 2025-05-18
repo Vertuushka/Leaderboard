@@ -1,5 +1,6 @@
 export const bg_url = "/static/img/";
 export const hearts_url = "/static/img/hearts/";
+export const results_url = `${window.location.origin}/results/`;
 export const SHOW_NAMES = {
     "SF1": "Semi Final 1",
     "SF2": "Semi Final 2",
@@ -39,8 +40,8 @@ export const svgCheck = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" v
 export const svgCrossMark = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FF3B30"><path d="M480-437.85 277.08-234.92q-8.31 8.3-20.89 8.5-12.57.19-21.27-8.5-8.69-8.7-8.69-21.08 0-12.38 8.69-21.08L437.85-480 234.92-682.92q-8.3-8.31-8.5-20.89-.19-12.57 8.5-21.27 8.7-8.69 21.08-8.69 12.38 0 21.08 8.69L480-522.15l202.92-202.93q8.31-8.3 20.89-8.5 12.57-.19 21.27 8.5 8.69 8.7 8.69 21.08 0 12.38-8.69 21.08L522.15-480l202.93 202.92q8.3 8.31 8.5 20.89.19 12.57-8.5 21.27-8.7 8.69-21.08 8.69-12.38 0-21.08-8.69L480-437.85Z"/></svg>`;
 
 const SF1_Time = new Date("2025-05-13T19:00:00Z").getTime();
-const SF2_Time = new Date("May 15 2025 19:00:00Z").getTime();
-const GF_Time = new Date("May 17 2025 19:00:00Z").getTime();
+const SF2_Time = new Date("2025-05-15T19:00:00Z").getTime();
+const GF_Time = new Date("2025-05-17T19:00:00Z").getTime();
 
 export const timer = {
     "SF1": SF1_Time,

@@ -47,7 +47,7 @@
     {
         "country": "Ukraine",
         "show_name": "SF1",
-        "order": 5,
+        "order": 6,
         "points": 0,
         "passed": false,
         "jury": 0,
@@ -56,7 +56,7 @@
     {
         "country": "Sweden",
         "show_name": "SF1",
-        "order": 6,
+        "order": 7,
         "points": 0,
         "passed": false,
         "jury": 0,
@@ -65,7 +65,7 @@
     {
         "country": "Portugal",
         "show_name": "SF1",
-        "order": 7,
+        "order": 8,
         "points": 0,
         "passed": false,
         "jury": 0,
@@ -74,7 +74,7 @@
     {
         "country": "Norway",
         "show_name": "SF1",
-        "order": 8,
+        "order": 9,
         "points": 0,
         "passed": false,
         "jury": 0,
@@ -83,7 +83,7 @@
     {
         "country": "Belgium",
         "show_name": "SF1",
-        "order": 9,
+        "order": 10,
         "points": 0,
         "passed": false,
         "jury": 0,
@@ -92,7 +92,7 @@
     {
         "country": "Italy",
         "show_name": "SF1",
-        "order": -10,
+        "order": -11,
         "points": 0,
         "passed": true,
         "jury": 0,
@@ -101,7 +101,7 @@
     {
         "country": "Azerbaijan",
         "show_name": "SF1",
-        "order": 10,
+        "order": 12,
         "points": 0,
         "passed": false,
         "jury": 0,
@@ -110,7 +110,7 @@
     {
         "country": "San Marino",
         "show_name": "SF1",
-        "order": 11,
+        "order": 13,
         "points": 0,
         "passed": false,
         "jury": 0,
@@ -119,7 +119,7 @@
     {
         "country": "Albania",
         "show_name": "SF1",
-        "order": 12,
+        "order": 14,
         "points": 0,
         "passed": false,
         "jury": 0,
@@ -128,7 +128,7 @@
     {
         "country": "Netherlands",
         "show_name": "SF1",
-        "order": 13,
+        "order": 15,
         "points": 0,
         "passed": false,
         "jury": 0,
@@ -137,7 +137,7 @@
     {
         "country": "Croatia",
         "show_name": "SF1",
-        "order": 14,
+        "order": 16,
         "points": 0,
         "passed": false,
         "jury": 0,
@@ -146,7 +146,7 @@
     {
         "country": "Switzerland",
         "show_name": "SF1",
-        "order": -15,
+        "order": -17,
         "points": 0,
         "passed": true,
         "jury": 0,
@@ -155,7 +155,7 @@
     {
         "country": "Cyprus",
         "show_name": "SF1",
-        "order": 15,
+        "order": 18,
         "points": 0,
         "passed": false,
         "jury": 0,

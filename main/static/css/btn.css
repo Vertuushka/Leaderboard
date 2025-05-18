@@ -1,74 +1,28 @@
-.btn {
-    padding: var(--medium) var(--large);
-
-    border: none;
-    border-radius: var(--large);
-
+button {
     color: var(--text-primary);
-    background: none;
-    
+    background-color: var(--bg);
     cursor: pointer;
-
-    display: flex;
-    align-items: center;
 }
 
-.btn:hover {
-    background-color: var(--primary);
-}
 
-.btnIconOnly {
-    padding: var(--medium);
-
-    aspect-ratio: 1;
-
-    border-radius: 100%;
-
-    display: grid;
-    place-content: center;
-}
+/* 
+    Live View 
+*/
 
 .btnGrid {
-    width: 100%;
-    box-sizing: border-box;
-
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-}
-
-.btnWrapper {
-    width: 100%;
-    height: 64px;
-
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    justify-items: center;
-}
-
-.btnWrapper button {
-    height: 100%;
-    display: grid;
-    place-content: center;
 }
 
 .voteBtn {
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-    aspect-ratio: 1;
+    padding: 12px;
+    border-radius: var(--small);
+    border: 1px solid;
 
-    padding: var(--small);
-
-    border-radius: 100%;
-    border: 1px solid var(--primary);
-
-    cursor: pointer;
-
-    font-size: 18px;
-    font-weight: 600;
-
-    color: var(--text);
-    background: none;
+    font-size: 16px;
+    font-weight: bold;
 }
+
 
 .btn1 {
     border-color: var(--1);

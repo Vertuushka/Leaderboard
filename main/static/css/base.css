@@ -1,0 +1,123 @@
+@import url('satoshi.css');
+
+:root {
+    --bg: hsl(200, 6%, 6%);
+    --primary: hsla(0, 0%, 100%, 6%);
+
+    --text-primary: hsl(0, 0%, 96%);
+    --text-secondary: hsla(0, 0%, 96%, 64%);
+
+    --minimal: 2px;
+    --small: 6px;
+    --medium: 12px;
+    --large: 24px;
+
+    --1: #FF3B30;
+    --1-hover: #FF3B3024;
+  
+    --2: #FF5E3A;
+    --2-hover: #FF5E3A24;
+  
+    --3: #FF7635;
+    --3-hover: #FF763524;
+  
+    --4: #FF9633;
+    --4-hover: #FF963324;
+  
+    --5: #FFB82E;
+    --5-hover: #FFB82E24;
+  
+    --6: #FFD52B;
+    --6-hover: #FFD52B24;
+  
+    --7: #D4E12B;
+    --7-hover: #D4E12B24;
+  
+    --8: #A6DB2B;
+    --8-hover: #A6DB2B24;
+  
+    --10: #7DD622;
+    --10-hover: #7DD62224;
+  
+    --12: #34C759;
+    --12-hover: #34C75924;  
+}
+
+* {
+    margin: 0;
+    padding: 0;
+
+    border: none;
+
+    box-sizing: border-box;
+
+    font-family: Satoshi-Variable;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "wdth" 400;
+}
+
+body {
+    max-width: 512px;
+    height: 100svh;
+
+    margin: 0 auto;
+
+    color: var(--text-primary);
+    background-color: var(--bg);
+}
+
+
+/* layout */
+.wrapper {
+    display: flex;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.gapMinimal {
+    gap: var(--minimal);
+}
+
+.gapSmall {
+    gap: var(--small);
+}
+
+.gapMedium {
+    gap: var(--medium); 
+}
+
+.gapLarge {
+    gap: var(--large);
+}
+
+.grow {
+    flex-grow: 1;
+}
+
+.center {
+    align-items: center;
+}
+
+.spacing {
+    justify-content: space-between;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.qualified {
+    color: var(--10);
+}
+
+.unqualified {
+    color: var(--1);
+}
+
+.auto_qualified {
+    opacity: 0.5;
+}

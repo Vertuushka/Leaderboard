@@ -4,53 +4,71 @@
 {% block style %}
     <link rel="stylesheet" href="{% static 'css/live.css' %}">
     <link rel="stylesheet" href="{% static 'css/btn.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animations.css' %}">
 {% endblock %}
 
+{% block title %}Live voting{% endblock %}
+
 {% block content %}
-<main>
-    <div class="headerImg" id="participantImg">
-        <div class="gradient"></div>
-    </div>
-
-    <header class="container gapLarge">
-        <div class="wrapper gapLarge headerContent grow">
-            <div class="container gapMinimal grow">
-                <p class="footnote" id="current_show_label">{{ show }}</p>
-                <h2 class="title" id="country_name"></h2>
-            </div>
-
-            <img class="heart" id="heartImg" src="{% static 'img/hearts/Switzerland.svg' %}" alt="">
-        </div>
-
-        <div class="wrapper gapLarge headerContent">
-            <p class="footnote grow" id="artist_name"></p>
-            <p class="footnote" id="song_name"></p>
-        </div>
-    </header>
-    
-    <div class="wrapper scoreboard gridSpan" id="online_list">
-        <p class="playerVote" id="online_list_dummy">No users connected.</p>
-    </div>
-
-    <div class="content">
-        <div class="container gapSmall forms hidden" id="countdown">
-            <section class="container gapLarge">
-                <div class="container gapSmall center">
-                    <h2 class="title grow">Coming soon!</h2>
-                    <p class="footnote">This live will be available in:</p>
-                    <p class ="title"><span class ="title" id="hours">99</span>:<span class ="title" id="minutes">99</span>:<span class ="title" id="seconds">99</span></p>
+<div id="app">
+    <header>
+        <div class="container cover" id="participantImg">
+            <div class="container gapSmall spacing textCon gradient">
+                <div class="wrapper gapSmall spacing">
+                    <p class="secondary shadow" id="current_show_label">{{ show }}</p>
                 </div>
-            </section>
+
+                <div class="container gapSmall">
+                    <div class="wrapper gapSmall spacing coverBody">
+                        <h2 class="shadow" id="country_name">Country</h2>
+                        <img class="heart" id="heartImg" src="{% static 'img/hearts/Switzerland.svg' %}" alt="flag">
+                    </div>
+        
+                    <div class="wrapper gapSmall spacing">
+                        <p class="secondary shadow" id="artist_name"></p>
+                        <p class="secondary shadow" id="song_name"></p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="container gapSmall forms hidden" id="voting">
+
+        <nav class="container gapSmall">
+            <button class="navBtn" id="C_Previous">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff"><path d="M798-281 550-447q-9-6-13.5-14.5T532-480q0-10 4.5-18.5T550-513l248-166q5-4 11-5t11-1q16 0 28 11t12 29v330q0 18-12 29t-28 11q-5 0-11-1t-11-5Zm-400 0L150-447q-9-6-13.5-14.5T132-480q0-10 4.5-18.5T150-513l248-166q5-4 11-5t11-1q16 0 28 11t12 29v330q0 18-12 29t-28 11q-5 0-11-1t-11-5Z"/></svg>
+            </button>
+            <button class="navBtn hidden" id="C_Live">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff"><path d="M148-560q0 55 18.5 109.5T221-350q9 11 9 25.5T220-300q-10 10-24.5 9T172-303q-46-57-69-122T80-560q0-70 23-135t69-122q9-11 23.5-12t24.5 9q10 10 10 24.5t-9 25.5q-36 46-54.5 100.5T148-560Zm132 0q0 29 9 59t29 56q8 11 8 25t-10 24q-10 10-24 9.5T269-398q-28-36-42.5-77.5T212-560q0-43 14.5-84.5T269-722q9-11 23-11.5t24 9.5q10 10 9.5 24t-8.5 25q-19 25-28 54.5t-9 60.5Zm107 400-18 54q-4 11-14 18.5T333-80q-20 0-31-15.5t-5-34.5l118-355q-16-14-25.5-33t-9.5-42q0-42 29-71t71-29q42 0 71 29t29 71q0 23-9.5 42T545-485l118 355q6 18-4.5 34T628-80q-12 0-22.5-7T591-106l-17-54H387Zm26-80h134l-67-200-67 200Zm267-320q0-29-9-59t-29-56q-8-11-8-25t10-24q10-10 24.5-9.5T691-722q27 36 41 77.5t16 84.5q0 43-14.5 84.5T691-398q-9 11-23 11.5t-24-9.5q-10-10-9.5-24t8.5-25q19-25 28-54.5t9-60.5Zm132 0q0-55-18.5-109.5T739-770q-9-11-9-25.5t10-24.5q10-10 24.5-9t23.5 12q46 57 69 122t23 135q0 70-21.5 135T789-303q-10 11-24 12.5t-25-9.5q-10-10-10-24.5t9-25.5q36-46 54.5-100.5T812-560Z"/></svg>
+            </button>
+            <button class="navBtn" id="C_Next">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff"><path d="M100-315v-330q0-18 12-29t28-11q5 0 11 1t11 5l248 166q9 6 13.5 14.5T428-480q0 10-4.5 18.5T410-447L162-281q-5 4-11 5t-11 1q-16 0-28-11t-12-29Zm400 0v-330q0-18 12-29t28-11q5 0 11 1t11 5l248 166q9 6 13.5 14.5T828-480q0 10-4.5 18.5T810-447L562-281q-5 4-11 5t-11 1q-16 0-28-11t-12-29Z"/></svg>
+            </button>
+        </nav>
+    </header>
+
+    <div class="wrapper scoreboard center" id="online_list_wrapper">
+        <div class="wrapper center" id="online_list">
+            <p class="playerVote" id="online_list_dummy">No other users connected</p>
+        </div>
+    </div>
+    
+    <div class="container content">
+        <div class="container gapSmall countdown hidden" id="countdown">
+            <div class="container gapSmall">
+                <h2><span id="hours">99</span>:<span id="minutes">99</span>:<span id="seconds">99</span></h2>
+                <p class="secondary">Until live starts</p>
+            </div>
+        </div>
+
+        <div class="wrapper gapSmall forms hidden" id="voting">
             {% if show.name == "GF" %}
-                <section class="container gapLarge" action="" id="voteCriteria1">
-                    <div class="container gapSmall center">
-                        <h2 class="title grow">Musical Quality</h2>
-                        <p class="footnote">Song, vocal, arrangement, melody, lyrics</p>
+                <section class="gapSmall" action="" id="voteCriteria1">
+                    <div class="container gapSmall spacing textCon">
+                        <p class="secondary">1 of 3</p>
+                        <h2>Musical<br>Quality</h2>
+                        <p class="secondary">Song, vocal, melody<br>& lyrics</p>
                     </div>
     
-                    <div class="btnGrid gapMedium" data-criteria="2">
+                    <div class="btnGrid gapSmall" data-criteria="2">
                         <button class="voteBtn btn1" data-grade="1">1</button>
                         <button class="voteBtn btn2" data-grade="2">2</button>
                         <button class="voteBtn btn3" data-grade="3">3</button>
@@ -64,13 +82,14 @@
                     </div>
                 </section>
     
-                <section class="container gapLarge" action="" id="voteCriteria2">
-                    <div class="container gapSmall center">
-                        <h2 class="title grow">Stage Performance</h2>
-                        <p class="footnote">Artist’s charisma, delivery</p>
+                <section class="gapSmall" action="" id="voteCriteria2">
+                    <div class="container gapSmall spacing textCon">
+                        <p class="secondary">2 of 3</p>
+                        <h2>Stage<br>Performance</h2>
+                        <p class="secondary">Artist’s charisma<br>& delivery</p>
                     </div>
     
-                    <div class="btnGrid gapMedium" data-criteria="3">
+                    <div class="btnGrid gapSmall" data-criteria="3">
                         <button class="voteBtn btn1" data-grade="1">1</button>
                         <button class="voteBtn btn2" data-grade="2">2</button>
                         <button class="voteBtn btn3" data-grade="3">3</button>
@@ -84,13 +103,14 @@
                     </div>
                 </section>
     
-                <section class="container gapLarge" action="" id="voteCriteria3">
-                    <div class="container gapSmall center">
-                        <h2 class="title grow">Visual Presentation</h2>
-                        <p class="footnote">Stage setup, lighting, costumes, graphics</p>
+                <section class="gapSmall" action="" id="voteCriteria3">
+                    <div class="container gapSmall spacing textCon">
+                        <p class="secondary">3 of 3</p>
+                        <h2>Visual<br>Presentation</h2>
+                        <p class="secondary">Stage, lighting, costumes<br>& graphics</p>
                     </div>
                     
-                    <div class="btnGrid gapMedium" data-criteria="4">
+                    <div class="btnGrid gapSmall" data-criteria="4">
                         <button class="voteBtn btn1" data-grade="1">1</button>
                         <button class="voteBtn btn2" data-grade="2">2</button>
                         <button class="voteBtn btn3" data-grade="3">3</button>
@@ -122,20 +142,7 @@
             {% endif %}
         </div>
     </div>
-
-    <nav class="wrapper gapLarge">
-        <button class="btn btnIconOnly" id="C_Previous">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff"><path d="m418.15-480 162.93 162.92q8.3 8.31 8.5 20.89.19 12.57-8.5 21.27-8.7 8.69-21.08 8.69-12.38 0-21.08-8.69L359.15-454.69q-5.61-5.62-7.92-11.85-2.31-6.23-2.31-13.46t2.31-13.46q2.31-6.23 7.92-11.85l179.77-179.77q8.31-8.3 20.89-8.5 12.57-.19 21.27 8.5 8.69 8.7 8.69 21.08 0 12.38-8.69 21.08L418.15-480Z"/></svg>
-        </button>
-        <button class="wrapper gapSmall btn hidden" id="C_Live">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff"><path d="M148-560q0 59.92 20.65 114.46 20.66 54.54 58.97 99.93 7.46 8.69 7.65 19.42.19 10.73-7.88 18.8-8.08 8.08-19.31 7.39-11.23-.69-18.69-9.39-45-52.46-69.5-116.8-24.5-64.35-24.5-133.81 0-69.46 24.5-133.81 24.5-64.34 69.5-116.8 7.46-8.7 18.69-9.39 11.23-.69 19.31 7.39 8.07 8.07 7.88 18.8-.19 10.73-7.65 19.42-38.31 45.39-58.97 99.93Q148-619.92 148-560Zm132 0q0 33.54 10.15 64.27 10.16 30.73 30.08 57.12 6.85 8.69 7.04 19.92.19 11.23-7.88 19.3-8.08 8.08-18.81 7.7-10.73-.39-17.58-9.08-27-33.46-41.31-74.42-14.3-40.96-14.3-84.81t14.3-84.81Q256-685.77 283-719.23q6.85-8.69 17.58-9.08 10.73-.38 18.81 7.7 8.07 8.07 7.88 19.3-.19 11.23-7.04 19.92-19.92 26.39-30.08 57.12Q280-593.54 280-560Zm170 392.31v-309.54q-26.23-8.92-42.35-31.62-16.11-22.69-16.11-51.15 0-37 25.73-62.73Q443-648.46 480-648.46t62.73 25.73Q568.46-597 568.46-560q0 28.46-16.11 51.15-16.12 22.7-42.35 31.62v309.54q0 12.77-8.62 21.38-8.61 8.62-21.38 8.62t-21.38-8.62q-8.62-8.61-8.62-21.38ZM680-560q0-33.54-10.15-64.27-10.16-30.73-30.08-57.12-6.85-8.69-7.04-19.92-.19-11.23 7.88-19.3 8.08-8.08 18.81-7.7 10.73.39 17.58 9.08 27 33.46 41.31 74.42 14.3 40.96 14.3 84.81t-14.3 84.81Q704-434.23 677-400.77q-6.85 8.69-17.58 9.08-10.73.38-18.81-7.7-8.07-8.07-7.88-19.3.19-11.23 7.04-19.92 19.92-26.39 30.08-57.12Q680-526.46 680-560Zm132 0q0-59.92-20.65-114.46-20.66-54.54-58.97-99.93-7.46-8.69-7.65-19.42-.19-10.73 7.88-18.8 8.08-8.08 19.31-7.39 11.23.69 18.69 9.39 45 52.46 69.5 116.8 24.5 64.35 24.5 133.81 0 69.46-24.5 133.81-24.5 64.34-69.5 116.8-7.46 8.7-18.69 9.39-11.23.69-19.31-7.39-8.07-8.07-7.88-18.8.19-10.73 7.65-19.42 38.31-45.39 58.97-99.93Q812-500.08 812-560Z"/></svg>
-            <span>Live</span>
-        </button>
-        <button class="btn btnIconOnly" id="C_Next">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff"><path d="M517.85-480 354.92-642.92q-8.3-8.31-8.5-20.89-.19-12.57 8.5-21.27 8.7-8.69 21.08-8.69 12.38 0 21.08 8.69l179.77 179.77q5.61 5.62 7.92 11.85 2.31 6.23 2.31 13.46t-2.31 13.46q-2.31 6.23-7.92 11.85L397.08-274.92q-8.31 8.3-20.89 8.5-12.57.19-21.27-8.5-8.69-8.7-8.69-21.08 0-12.38 8.69-21.08L517.85-480Z"/></svg>
-        </button>
-    </nav>
-</main>
+</div>
 {% endblock %}
 
 {% block script %}

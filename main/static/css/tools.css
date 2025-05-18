@@ -1,0 +1,107 @@
+header {
+    padding: 0 var(--medium);
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.cover {
+    grid-column: 1;
+}
+
+nav {
+    grid-column: 2;
+}
+
+nav>button {
+    padding: var(--small);
+}
+
+.controllerFeed {
+    height: 100%;
+    padding: var(--medium);
+
+    overflow-y: scroll;
+}
+
+.ctrlCon {
+    height: 100%;
+}
+
+.ctrlBtn {
+    height: 100%;
+    border-radius: var(--small);
+}
+
+.start_live {
+    color: var(--12);
+    background-color: var(--12-hover);
+}
+
+.end_live {
+    color: var(--1);
+    background-color: var(--1-hover);
+}
+
+#scoreBoardMode {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--large);
+}
+
+.dataRow {
+    width: 100%;
+    height: max-content;
+}
+
+.toolInput {
+    width: 100%;
+    padding: var(--medium);
+
+    border-radius: var(--small);
+    border: 1px solid var(--primary);
+
+    color: var(--text-secondary);
+    background-color: var(--primary);
+}
+
+.toolInput:focus {
+    outline: none;
+    border-color: var(--text-primary);
+}
+
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Optional: Remove up/down arrows in Microsoft Edge (legacy) */
+input[type="number"] {
+  appearance: textfield; /* fallback for modern browsers */
+}
+
+.controllerBtnWrapper {
+    padding: 0 var(--medium);
+    
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+}
+
+.controllerBtnWrapper>button {
+    width: 100%;
+    height: 100%;
+    padding: var(--medium);
+
+    background-color: var(--primary);
+    border-radius: var(--small);
+}
+
+.scoreboard {
+    padding: var(--medium) 0;
+}

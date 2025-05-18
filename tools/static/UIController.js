@@ -5,15 +5,15 @@ import * as tools from "./live.js";
 
 function createOnlineListElement(username) {
     const el = document.createElement("div");
-    el.classList.add("wrapper", "gapMedium", "playerVote");
+    el.classList.add("wrapper", "gapMedium", "playerVote", "onlineListChild");
     el.id = `online_list_user_${username}`;
     /* CHANGE THIS TO GRAND FINAL CHECK */
     el.innerHTML = `
         <p class="username">${username}</p>
         ${controller.LIVE.getShowName() === "GF" ? `
-            <p class="grade-criteria-2"></p>
-            <p class="grade-criteria-3"></p>
-            <p class="grade-criteria-4"></p>` : `
+            <p class="grade-criteria-2">0</p>
+            <p class="grade-criteria-3">0</p>
+            <p class="grade-criteria-4">0</p>` : `
             <p class="grade-criteria-1"></p>                              
             `}        
         `;
@@ -35,7 +35,7 @@ export class UIUtils {
         controller.ELEMENTS.song_name.setText(participants.data[key].song);
         controller.ELEMENTS.country_name.setText(participants.data[key].country);
         controller.ELEMENTS.artist_name.setText(participants.data[key].name);
-        controller.ELEMENTS.participantImg.setImg(constants.bg_url + participants.data[key].country + ".jpg");
+        controller.ELEMENTS.participantImg.setImg(constants.bg_url + participants.data[key].country + ".webp");
         controller.ELEMENTS.heartImg.setImg(constants.hearts_url + participants.data[key].country + ".svg");
         if (controller.LIVE.getShowName() !== "GF") {
             if (controller.ELEMENTS.SFVoteContainer!== undefined && participants.data[key].passed === true) {
@@ -58,25 +58,27 @@ export class UIUtils {
         }
         
         const performance = controller.LIVE.getClientPerformance();
+        if (controller.ELEMENTS["voteBtn1"] !== undefined) {
 
-        if (controller.grades[performance]!== undefined) {
-            if (controller.LIVE.getShowName() === "GF") {
-                for (let i in constants.grand_final_criteria) {
-                    let criteria = constants.grand_final_criteria[i];
-                    if (controller.grades[performance][criteria]!== undefined) {
-                        let grade = controller.grades[performance][criteria];
-                        if (controller.grades[performance][criteria] === 10)
-                            grade = 9;
-                        if (controller.grades[performance][criteria] === 12)
-                            grade = 10;
-                        controller.ELEMENTS[`voteBtn${grade + 10 * (criteria - 2) - 1}`].element.classList.add("active");
+            if (controller.grades[performance]!== undefined) {
+                if (controller.LIVE.getShowName() === "GF") {
+                    for (let i in constants.grand_final_criteria) {
+                        let criteria = constants.grand_final_criteria[i];
+                        if (controller.grades[performance][criteria]!== undefined) {
+                            let grade = controller.grades[performance][criteria];
+                            if (controller.grades[performance][criteria] === 10)
+                                grade = 9;
+                            if (controller.grades[performance][criteria] === 12)
+                                grade = 10;
+                            controller.ELEMENTS[`voteBtn${grade + 10 * (criteria - 2) - 1}`].element.classList.add("active");
+                        }
                     }
+                } else {
+                    let grade = controller.grades[performance][constants.criteria_passed]
+                    controller.ELEMENTS[`voteBtn${grade}`].element.classList.add("active");
                 }
-            } else {
-                let grade = controller.grades[performance][constants.criteria_passed]
-                controller.ELEMENTS[`voteBtn${grade}`].element.classList.add("active");
-            }
-        } 
+            } 
+        }
         const users = controller.ONLINE_LIST.getUsers();
         for (let i in users) {
             const username = users[i];
@@ -160,14 +162,16 @@ export class UIUtils {
         }
     }
     static ScrollToCriteria(caller) {
-        // if(controller.ELEMENTS.voting !== undefined) {
-        //     if (caller === controller.ELEMENTS.voteCriteria1.element) {
-        //         controller.ELEMENTS.voteCriteria2.element.scrollIntoView({behavior: "smooth", block: "center"})
-        //     }
-        //     if (caller === controller.ELEMENTS.voteCriteria2.element) {
-        //         controller.ELEMENTS.voteCriteria3.element.scrollIntoView({behavior: "smooth", block: "center"})
-        //     }
-        // }
-        
+        if(controller.ELEMENTS.voting !== undefined) {
+            if (caller === controller.ELEMENTS.voteCriteria1.element) {
+                controller.ELEMENTS.voteCriteria2.element.scrollIntoView({behavior: "smooth", block: "center"})
+            }
+            if (caller === controller.ELEMENTS.voteCriteria2.element) {
+                controller.ELEMENTS.voteCriteria3.element.scrollIntoView({behavior: "smooth", block: "center"})
+            }
+            if (caller === controller.ELEMENTS.voteCriteria3.element) {
+                controller.ELEMENTS.voteCriteria1.element.scrollIntoView({behavior: "smooth", block: "center"})
+            }
+        }
     }
 }

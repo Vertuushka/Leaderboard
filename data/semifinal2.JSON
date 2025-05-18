@@ -65,7 +65,7 @@
     {
         "country": "Greece",
         "show_name": "SF2",
-        "order": 7,
+        "order": 8,
         "points": 0,
         "passed": false,
         "jury": 0,
@@ -74,7 +74,7 @@
     {
         "country": "Lithuania",
         "show_name": "SF2",
-        "order": 8,
+        "order": 9,
         "points": 0,
         "passed": false,
         "jury": 0,
@@ -83,7 +83,7 @@
     {
         "country": "Malta",
         "show_name": "SF2",
-        "order": 9,
+        "order": 10,
         "points": 0,
         "passed": false,
         "jury": 0,
@@ -92,7 +92,7 @@
     {
         "country": "Georgia",
         "show_name": "SF2",
-        "order": 10,
+        "order": 11,
         "points": 0,
         "passed": false,
         "jury": 0,
@@ -101,7 +101,7 @@
     {
         "country": "France",
         "show_name": "SF2",
-        "order": -11,
+        "order": -12,
         "points": 0,
         "passed": true,
         "jury": 0,
@@ -110,7 +110,7 @@
     {
         "country": "Denmark",
         "show_name": "SF2",
-        "order": 11,
+        "order": 13,
         "points": 0,
         "passed": false,
         "jury": 0,
@@ -119,7 +119,7 @@
     {
         "country": "Czechia",
         "show_name": "SF2",
-        "order": 12,
+        "order": 14,
         "points": 0,
         "passed": false,
         "jury": 0,
@@ -128,7 +128,7 @@
     {
         "country": "Luxembourg",
         "show_name": "SF2",
-        "order": 13,
+        "order": 15,
         "points": 0,
         "passed": false,
         "jury": 0,
@@ -137,7 +137,7 @@
     {
         "country": "Israel",
         "show_name": "SF2",
-        "order": 14,
+        "order": 16,
         "points": 0,
         "passed": false,
         "jury": 0,
@@ -146,7 +146,7 @@
     {
         "country": "Germany",
         "show_name": "SF2",
-        "order": -15,
+        "order": -17,
         "points": 0,
         "passed": true,
         "jury": 0,
@@ -155,7 +155,7 @@
     {
         "country": "Serbia",
         "show_name": "SF2",
-        "order": 15,
+        "order": 18,
         "points": 0,
         "passed": false,
         "jury": 0,
@@ -164,7 +164,7 @@
     {
         "country": "Finland",
         "show_name": "SF2",
-        "order": 15,
+        "order": 19,
         "points": 0,
         "passed": false,
         "jury": 0,

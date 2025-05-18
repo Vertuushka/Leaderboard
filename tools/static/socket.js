@@ -1,6 +1,7 @@
 import * as receiver from './receive_handlers.js';
 
-const ENDPOINT = `ws://${window.location.host}/ws/socket-server/`;
+const websocketProtocol = window.location.protocol === "https:" ? "wss" : "ws";
+const ENDPOINT = `${websocketProtocol}://${window.location.host}/ws/socket-server/`;
 const HANDLERS = {};
 
 function registerHandler(prefix, handler) {
@@ -19,6 +20,7 @@ function registerAllHandlers() {
     registerHandler("USER: share_score", new receiver.UserShareScoreHandler());
     registerHandler("LIVE: stop", new receiver.StopHandler());
     registerHandler("LIVE: score", new receiver.ScoreHandler());
+    registerHandler("LIVE: show_result", new receiver.ShowResultsHandler())
 }
 
 class Dispatcher {

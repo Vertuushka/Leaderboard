@@ -9,13 +9,14 @@ from django.contrib import messages
 # main login page
 def user_login(request):
     if request.user.is_authenticated:
-        return HttpResponse("User already logged in")
+        return redirect('index')
     return render(request,'login.html')
 
 # this function handles user creation
 def user_create(request):
     if request.user.is_authenticated:
-        return HttpResponse("User already logged in")
+        return redirect('index')
+
     if request.method == "POST":
         username = request.POST.get('username')
         try:
@@ -51,7 +52,7 @@ def new_session(request):
             login(request, user)
             return redirect("index")
         except:
-             return HttpResponse("Invalid passcode/username")
+            return redirect('login')
     else:
         return render(request, 'getin.html')
         # return HttpResponse("Enter your pass code here: ")
